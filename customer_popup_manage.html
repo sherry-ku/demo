@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8"/>
+  <title>客戶跳訊管理</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="common.css"/>
+  <style>
+    .form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}
+    .tool-row{display:flex;justify-content:flex-end;gap:10px}
+    .text-red{color:#e74c3c;font-weight:bold}
+    .pagination-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin:12px 0}
+    .pages{display:flex;gap:8px}
+    .pages a{color:#007bff;text-decoration:none}
+    .pages a.active{font-weight:bold;text-decoration:underline}
+    .per-page{margin-left:14px;display:flex;align-items:center;gap:6px}
+    .btn-mini{padding:2px 6px;font-size:12px;border-radius:4px}
+    td.left{text-align:left}
+
+    /* 與客戶標籤管理一致的 badge 樣式（覆蓋 common.css 以確保一致） */
+    .badge { display:inline-block; padding:2px 8px; border-radius:12px; font-size:12px; color:#fff; font-weight:bold; }
+    .badge-green { background-color:#28a745; }
+    .badge-red { background-color:#dc3545; }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <div>登入者：005566 陳小華</div>
+    <div>登入角色：客服人員</div>
+    <div>公司別：116 中嘉數位</div>
+    <div>登入時間：18:44:11</div>
+  </div>
+  <div class="header-right">
+    <button class="btn">訊息中心</button>
+    <button class="btn">暫存訂單</button>
+    <button class="btn">登出</button>
+  </div>
+</div>
+
+<div class="main">
+  <!-- Sidebar -->
+<div class="sidebar" id="sidebar"></div>
+
+
+  <!-- Content -->
+  <div class="content">
+    <h2>客戶跳訊管理</h2>
+
+    <!-- 查詢條件 -->
+    <div class="section">
+      <div class="section-title">
+        查詢條件
+        <button class="toggle-btn" id="btnToggle">縮合 ▼</button>
+      </div>
+      <div id="searchBlock">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>家戶編號</label>
+            <input class="form-control" id="q_home"  type="text"/>
+            </div>
+            <div class="form-group">
+            <label>申請人姓名</label>
+            <input class="form-control" id="q_applicant"  type="text"/>
+            </div>
+            <div class="form-group">
+            <label>服務別</label>
+            <select class="form-control" id="q_service">
+            <option value="">全選</option>
+            <option>Internet</option>
+            <option>CATV</option>
+            </select>
+            </div>
+            <div class="form-group">
+            <label>客戶服務編號</label>
+            <input class="form-control" id="q_home"  type="text"/>
+            </div>
+          </div>
+        
+        <div class="form-row">  
+        <div class="form-group">
+        <label><span style="color:red;">＊</span>跳訊管道</label>
+        <select class="form-control" id="q_category">
+        <option value="">全選</option>
+        <option>標籤跳訊</option>
+        <option>申告跳訊</option>
+        </select>
+        </div>
+        <div class="form-group">
+          <label><span style="color:red;">＊</span>跳訊名稱</label>
+          <select class="form-control" id="q_name">
+            <option value="">全選</option>
+            <option>立流A跳訊</option>
+            <option>618標籤跳訊</option>
+            <option>資料不齊全跳訊</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>跳訊編號</label>
+          <input class="form-control" id="q_home"  type="text"/>
+        </div>
+        </div>  
+        
+        <div class="form-row">      
+        <div class="form-group">
+          <label><span style="color:red;">＊</span>有效狀態</label>
+          <select class="form-control" id="q_valid">
+            <option value="">全選</option>
+            <option value="Y">有效</option>
+            <option value="N">無效</option>
+          </select>
+        </div>
+        <div class="form-group">
+        <label>有效起日</label>
+        <input class="form-control" id="q_start" type="date" />
+        </div>
+        <div class="form-group">
+        <label>有效迄日</label>
+        <input class="form-control" id="q_start_end" type="date" />
+        </div>
+        </div>  
+
+
+      <div class="form-actions">
+        <button class="btn btn-secondary" type="button" id="btnClear">清除</button>
+        <button class="btn btn-primary" type="button" id="btnSearch">送出</button>
+      </div>
+    </div>
+  </div>
+    <!-- 查詢結果工具列（與標籤管理一致） -->
+    <div class="section" style="padding:10px;">
+      <div class="tool-row">
+        <button class="btn" id="btnDisableAll" type="button">全部停用</button>
+      </div>
+    </div>
+
+    <!-- 查詢結果 -->
+    <div class="section">
+      <div class="section-title">查詢結果</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>項次</th>
+            <th>家戶編號</th>
+            <th>申請人姓名</th>
+            <th>客戶服務編號</th>
+            <th>服務別</th>            
+            <th>跳訊管道</th>
+            <th>跳訊代碼</th>
+            <th>跳訊名稱</th>
+            <th>跳訊標題</th>
+            <th style="min-width:220px;">跳訊內容</th>
+            <th>標籤有效起日</th>
+            <th>標籤有效迄日</th>
+            <th>有效狀態</th>
+            <th>停用</th>
+          </tr>
+        </thead>
+        <tbody id="resultBody">
+          <tr>
+            <td>1</td>
+            <td>CA001</td>
+            <td>陳小花</td>
+            <td>-</td>
+            <td>-</td>
+            <td>標籤跳訊</td>
+            <td>JJCC001</td>
+            <td>立流A跳訊</td>
+            <td class="left">銷售溝通重點</td>
+            <td class="left">用戶詢拆請積極防守<br/>
+              *寬頻戶請優先推[拆挽原約續約贈2M]，至R1啟動，接續推010寬頻拆挽案<br/>
+              *單C戶請優先推[單C附掛贈2月]，至R1啟動，接續推003 CATV拆挽案
+              </td>
+              <td>2025/8/16</td>
+              <td>2025/8/26</td>
+            <td class="text-red"><span class="badge badge-red">停用</span></td>
+            <td><button class="btn btn-mini btn-secondary" type="button" onclick="toggleDisable(this)">啟用</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>CA001</td>
+            <td>陳小花</td>
+            <td>S0001</td>
+            <td>Internet</td>
+            <td>標籤跳訊</td>
+            <td>JJPP003</td>
+            <td>618標籤跳訊</td>
+            <td class="left">銷售溝通重點</td>
+            <td class="left">*短期促銷續約特案,依行銷公告限定日期區間適用<br/>
+              *符合續約資格：請推009續約指定方案：續約-C+1G $1199搭SoundBox+Disney+標準方案<br/>
+              或 續約-C+1G $1249搭SoundBox+Disney+高級方案。
+              </td>
+            <td>2025/1/3</td>
+            <td>2025/1/23</td>
+            <td><span class="badge badge-green">有效</span></td>
+            <td><button class="btn btn-mini btn-secondary" type="button" onclick="toggleDisable(this)">停用</button></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>CA001</td>
+            <td>陳小花</td>
+            <td>-</td>
+            <td>-</td>            
+            <td>申告跳訊</td>
+            <td>JJJ001</td>
+            <td>資料不齊全跳訊</td>
+            <td class="left">其他提醒事項</td>
+            <td class="left">用戶資料不完全需修正</td>
+            <td>2025/8/12</td>
+            <td>2025/8/30</td>
+            <td><span class="badge badge-green">有效</span></td>
+            <td><button class="btn btn-mini btn-secondary" type="button" onclick="toggleDisable(this)">停用</button></td>
+          </tr>
+         
+        </tbody>
+      </table>
+
+      <!-- 分頁（與標籤管理一致） -->
+      <div class="pagination-bar">
+        <button class="btn btn-secondary" id="prevPage">上一頁</button>
+        <div class="pages" id="pages">
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">5</a>
+          <a href="#">6</a>
+          <a href="#">7</a>
+          <a href="#">8</a>
+          <a href="#">9</a>
+          <a href="#">10</a>
+        </div>
+        <button class="btn btn-secondary" id="nextPage">下一頁</button>
+        <div class="per-page">
+          <span>每頁顯示數</span>
+          <select id="pageSize">
+            <option>20</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// 縮合/展開查詢區
+const btnToggle = document.getElementById('btnToggle');
+const searchBlock = document.getElementById('searchBlock');
+btnToggle.addEventListener('click', () => {
+  const isHidden = getComputedStyle(searchBlock).display === 'none';
+  searchBlock.style.display = isHidden ? 'block' : 'none';
+  btnToggle.textContent = isHidden ? '縮合 ▼' : '展開 ▽';
+});
+
+// 清除
+document.getElementById('btnClear').addEventListener('click', () => {
+  document.querySelectorAll('.section .form-row input, .section .form-row select').forEach(el => {
+    el.value = '';
+  });
+});
+
+// 送出（示意）
+document.getElementById('btnSearch').addEventListener('click', () => {
+  alert('查詢送出（示意）');
+});
+
+// 與客戶標籤管理一致：切換停用狀態（示意）
+function toggleDisable(btn){
+  const statusCell = btn.parentElement.previousElementSibling;
+  const badge = statusCell.querySelector('.badge');
+  if(badge && badge.classList.contains('badge-green')){
+    badge.classList.remove('badge-green');
+    badge.classList.add('badge-red');
+    badge.textContent = '停用';
+    btn.textContent = '啟用';
+  }else{
+    if(!badge){
+      // 若不存在 badge，建立一個（保險起見）
+      statusCell.innerHTML = '<span class="badge badge-green">有效</span>';
+    }else{
+      badge.classList.remove('badge-red');
+      badge.classList.add('badge-green');
+      badge.textContent = '有效';
+    }
+    btn.textContent = '停用';
+  }
+}
+
+// 全部停用（示意）
+document.getElementById('btnDisableAll').addEventListener('click', () => {
+  document.querySelectorAll('#resultBody td:nth-child(11)').forEach(td => {
+    const span = td.querySelector('.badge');
+    if(span){
+      span.classList.remove('badge-green');
+      span.classList.add('badge-red');
+      span.textContent = '停用';
+    }else{
+      td.innerHTML = '<span class="badge badge-red">停用</span>';
+    }
+  });
+  document.querySelectorAll('#resultBody td:nth-child(12) .btn').forEach(b => b.textContent = '啟用');
+  alert('已批次停用（示意）。實作時請改為呼叫後端 API。');
+});
+</script>
+<script src="sidebar.js"></script>
+<script>
+  document.getElementById('sidebar').innerHTML = sidebarHTML;
+</script>
+
+</body>
+</html>

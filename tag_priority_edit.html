@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<title>標籤管理－重要性編輯</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="common.css"/>
+<style>
+  .form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:12px}
+  .hint{font-size:12px;color:#666;margin-top:8px}
+  .selector{display:flex;align-items:center;gap:10px;margin:10px 0 6px}
+  .selector label{font-weight:bold}
+  input.param-input{
+    width:100px;padding:4px 6px;border:1px solid #ccc;border-radius:4px;font-size:13px;text-align:right;
+  }
+  td.name{text-align:left}
+</style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <div>登入者：005566 陳小華</div>
+    <div>登入角色：客服人員</div>
+    <div>公司別：116 中嘉數位</div>
+    <div>登入時間：18:44:11</div>
+  </div>
+  <div class="header-right">
+    <button class="btn">訊息中心</button>
+    <button class="btn">暫存訂單</button>
+    <button class="btn">登出</button>
+  </div>
+</div>
+
+<div class="main">
+  <!-- Sidebar -->
+ <div class="sidebar" id="sidebar"></div>
+
+
+  <!-- Content -->
+  <div class="content">
+    <h2>重要性編輯</h2>
+
+    <div class="section">
+      <div class="selector">
+        <label for="category">標籤類別</label>
+        <select id="category">
+          <option>流失風險標籤</option>
+        </select>
+      </div>
+
+      <table id="priorityTable">
+        <thead>
+          <tr>
+            <th>標籤類別</th>
+            <th>標籤名稱</th>
+            <th>排序用參數</th>
+            <th>重要性排序</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 由 JS 產生 -->
+        </tbody>
+      </table>
+
+      <div class="hint">
+        註：請填寫「排序用參數」，系統將依據此欄位判斷「重要性順序」。數值愈小，重要性愈高（排名愈前）。
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-secondary" onclick="location.href='tag_search_list.html'">取消</button>
+        <button class="btn btn-primary" id="btnSubmit">送出</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/** 假資料（可改成後端帶入） */
+const seed = {
+  '流失風險標籤': [
+    {code:'CR-101', name:'立流A',  param:100},
+    {code:'CR-102', name:'立流B',  param:200},
+    {code:'CR-103', name:'特維A',  param:300},
+    {code:'CR-104', name:'特維B',  param:400}
+  ]
+};
+
+const categoryEl = document.getElementById('category');
+const tbody = document.querySelector('#priorityTable tbody');
+
+function renderTable() {
+  const cat = categoryEl.value;
+  const rows = (seed[cat] || []).map((x, idx) => {
+    return `
+      <tr data-code="${x.code}">
+        <td>${cat}</td>
+        <td class="name">${x.name}</td>
+        <td><input class="param-input" type="number" step="1" min="0" value="${x.param ?? ''}" /></td>
+        <td class="rank"></td>
+      </tr>
+    `;
+  }).join('');
+  tbody.innerHTML = rows;
+  recalcRank();
+}
+
+/** 依「排序用參數」重算排名（小到大＝1、2、3…；空值排最後） */
+function recalcRank() {
+  const trs = Array.from(tbody.querySelectorAll('tr'));
+  const items = trs.map(tr => {
+    const val = tr.querySelector('.param-input').value;
+    const num = val === '' ? Number.POSITIVE_INFINITY : Number(val);
+    return { tr, num };
+  });
+  items
+    .sort((a,b)=> a.num - b.num)
+    .forEach((it, i)=> {
+      const rankCell = it.tr.querySelector('.rank');
+      rankCell.textContent = Number.isFinite(it.num) ? (i+1) : '';
+    });
+}
+
+/** 綁定事件：即時重算 */
+tbody.addEventListener('input', e => {
+  if (e.target.classList.contains('param-input')) recalcRank();
+});
+
+/** 切換類別時重新渲染 */
+categoryEl.addEventListener('change', renderTable);
+
+/** 送出（示意） */
+document.getElementById('btnSubmit').addEventListener('click', () => {
+  const cat = categoryEl.value;
+  const data = Array.from(tbody.querySelectorAll('tr')).map(tr => ({
+    code: tr.dataset.code,
+    name: tr.children[1].textContent.trim(),
+    sort_param: tr.querySelector('.param-input').value === '' ? null : Number(tr.querySelector('.param-input').value),
+    priority: tr.querySelector('.rank').textContent ? Number(tr.querySelector('.rank').textContent) : null
+  }));
+  console.table(data); // 開發用
+  alert('已送出（示意）。實作時請改為呼叫後端 API。');
+});
+
+renderTable();
+</script>
+<script src="sidebar.js"></script>
+<script>
+  document.getElementById('sidebar').innerHTML = sidebarHTML;
+</script>
+
+</body>
+</html>

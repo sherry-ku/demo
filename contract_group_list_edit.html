@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8"/>
+  <title>合約管理－編輯同綁合約清單</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="common.css"/>
+  <style>
+    .info-box {
+      background-color: #e8f5fb;
+      border-left: 4px solid #0b6fa4;
+      padding: 8px 12px;
+      margin: 10px 0;
+      color: #0b6fa4;
+      font-size: 14px;
+    }
+    .btn-blue {
+      background-color: #0b6fa4;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 6px;
+      text-align: center;
+      font-size: 13px;
+    }
+    table th {
+      background-color: #0b6fa4;
+      color: #fff;
+    }
+    .link-view {
+      color: #007bff;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .btn-edit {
+      background-color: #f0ad4e;
+      color: #fff;
+      border: none;
+      padding: 2px 8px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    .btn-delete {
+      background-color: #d9534f;
+      color: #fff;
+      border: none;
+      padding: 2px 8px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+    .note-box {
+      background-color: #ffebd7;
+      padding: 8px 12px;
+      margin-top: 15px;
+      color: #d35400;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="content">
+      <div class="step-tabs">
+        <div class="step-tab" onclick="goToStep('contract_edit_step2.html')">合約簽約內容</div>
+        <div class="step-tab" onclick="goToStep('contract_parent_project_edit.html')">合約母戶專案內容</div>
+        <div class="step-tab" onclick="goToStep('contract_child_project_edit.html')">合約子戶專案內容</div>
+        <div class="step-tab" onclick="goToStep('contract_address_create.html')">合約涵蓋地址</div>
+        <div class="step-tab active">同綁合約清單</div>
+      </div>
+
+      <div class="info-box">
+        提示文字：若業務簽約時，同時簽訂多個服務，務必新增同綁合約
+      </div>
+
+      <button class="btn-blue" onclick="addNewBoundContract()">新增同綁合約</button>
+      <button class="btn btn-success" onclick="saveData()" style="margin-left: 10px;">儲存</button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>合約編號</th>
+            <th>合約名稱</th>
+            <th>服務別</th>
+            <th>建物名稱</th>
+            <th>負責人員</th>
+            <th>建立時間</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="boundContractTableBody">
+          <tr>
+            <td>P-001</td>
+            <td>XXX套房合約 - I</td>
+            <td>Internet</td>
+            <td>國美瑞光</td>
+            <td>王業務</td>
+            <td>2024-12-20</td>
+            <td>
+              <span class="link-view" onclick="viewContract('P-001')">查看合約</span>
+              <button class="btn-edit" onclick="editContract('P-001')">編輯</button>
+              <button class="btn-delete" onclick="deleteContract(this)">解除同綁</button>
+            </td>
+          </tr>
+          <tr>
+            <td>P-002</td>
+            <td>XXX套房合約 - C</td>
+            <td>CATV</td>
+            <td>國美瑞光</td>
+            <td>王業務</td>
+            <td>2024-12-20</td>
+            <td>
+              <span class="link-view" onclick="viewContract('P-002')">查看合約</span>
+              <button class="btn-edit" onclick="editContract('P-002')">編輯</button>
+              <button class="btn-delete" onclick="deleteContract(this)">解除同綁</button>
+            </td>
+          </tr>
+          <tr>
+            <td>P-003</td>
+            <td>XXX套房合約 - D</td>
+            <td>CATV</td>
+            <td>國美瑞光</td>
+            <td>王業務</td>
+            <td>2024-12-20</td>
+            <td>
+              <span class="link-view" onclick="viewContract('P-003')">查看合約</span>
+              <button class="btn-edit" onclick="editContract('P-003')">編輯</button>
+              <button class="btn-delete" onclick="deleteContract(this)">解除同綁</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 按鈕區 -->
+      <div class="form-row" style="justify-content: flex-end; gap: 10px; margin-top: 20px;">
+        <button class="btn btn-secondary" type="button" onclick="goToStep('contract_child_project_edit.html')">上一步</button>
+        <button class="btn btn-primary" type="button" onclick="finishEdit()">完成編輯</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="sidebar.js"></script>
+  <script>
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+    
+    function goToStep(url) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const contractNo = urlParams.get('contractNo');
+      location.href = contractNo ? `${url}?contractNo=${encodeURIComponent(contractNo)}` : url;
+    }
+
+    function addNewBoundContract() {
+      // 模擬新增同綁合約的功能
+      alert('導向新增同綁合約頁面');
+      // 實際實作時可以開啟彈窗或導向其他頁面
+    }
+
+    function viewContract(contractNo) {
+      alert(`查看合約：${contractNo}`);
+      // 實際實作時可以開啟合約詳細資料彈窗或新頁面
+    }
+
+    function editContract(contractNo) {
+      // 導向編輯合約頁面
+      location.href = `contract_edit_step2.html?contractNo=${encodeURIComponent(contractNo)}`;
+    }
+
+    function deleteContract(btn) {
+      if (confirm('確定要解除同綁這個合約嗎？')) {
+        btn.closest('tr').remove();
+        alert('已解除同綁合約');
+      }
+    }
+
+    function saveData() {
+      try {
+        console.log('同綁合約清單已儲存');
+        alert('同綁合約清單已儲存');
+        return true;
+      } catch (error) {
+        console.error('儲存失敗:', error);
+        alert('儲存失敗，請重試');
+        return false;
+      }
+    }
+
+    function finishEdit() {
+      if (saveData()) {
+        alert('合約編輯完成！');
+        // 可以導向合約查詢結果頁面或其他頁面
+        location.href = 'contract_search_result.html';
+      }
+    }
+
+    // 從URL參數載入合約編號
+    document.addEventListener("DOMContentLoaded", function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const contractNo = urlParams.get('contractNo');
+      if (contractNo) {
+        console.log('編輯合約編號:', contractNo);
+      }
+    });
+  </script>
+
+</body>
+</html>

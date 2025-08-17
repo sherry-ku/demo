@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="utf-8" />
+  <title>合約管理－新增合約（步驟一：選擇申請人與建物）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    .inline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .w-220 {
+      max-width: 220px;
+    }
+
+    .btn-mini {
+      padding: 2px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+    }
+
+    .form-block-title .step {
+      font-weight: normal;
+      color: #666;
+      margin-left: 8px;
+      font-size: 12px;
+    }
+
+    .picked {
+      padding: 6px 10px;
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    td.left {
+      text-align: left;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="content">
+      <h2>新增合約－步驟一：選擇簽約人與建物</h2>
+
+      <!-- 已選擇摘要 -->
+      <div class="form-block">
+        <div class="form-block-title">目前選擇</div>
+        <div class="form-row">
+          <div class="picked" id="pickedCustomer">尚未選擇簽約人</div>
+          <div class="picked" id="pickedBuilding">尚未選擇建物</div>
+        </div>
+      </div>
+
+      <!-- 簽約人查詢 -->
+      <div class="form-block">
+        <div class="form-block-title">一、選擇簽約人</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>身分證號/統編</label>
+            <input type="text" id="q_id" class="w-220" />
+          </div>
+          <div class="form-group">
+            <label>客戶姓名</label>
+            <input type="text" id="q_name" class="w-220" />
+          </div>
+          <div class="form-group">
+            <label>手機號碼</label>
+            <input type="text" id="q_mobile" class="w-220" />
+          </div>
+          <div class="form-group">
+            <label>客戶編號</label>
+            <input type="text" id="q_custno" class="w-220" />
+          </div>
+        </div>
+        <div class="form-row" style="justify-content: flex-end; gap: 10px;">
+          <button class="btn btn-secondary" type="button" id="btnCustClear">清除</button>
+          <button class="btn btn-primary" type="button" id="btnCustSearch">查詢</button>
+        </div>
+
+        <!-- 查詢結果：申請人 -->
+        <div id="custTableWrapper" class="hidden">
+          <table>
+            <thead>
+              <tr>
+                <th>選取</th>
+                <th>客戶編號</th>
+                <th>申請人</th>
+                <th>手機</th>
+                <th>縣市</th>
+                <th>行政區</th>
+                <th>地址</th>
+                <th>查看</th>
+              </tr>
+            </thead>
+            <tbody id="custResult">
+              <tr>
+                <td><input type="radio" name="custPick" value="CA0001|王曉明" /></td>
+                <td>CA0001</td>
+                <td>王曉明</td>
+                <td>0912****89</td>
+                <td>台北市</td>
+                <td>信義區</td>
+                <td class="left">忠孝東路四段12巷1弄5樓101號</td>
+                <td><button class="btn btn-mini" onclick="location.href='detail_final_CA003.html'">查看</button></td>
+              </tr>
+              <tr>
+                <td><input type="radio" name="custPick" value="CA0002|陳小五" /></td>
+                <td>CA0002</td>
+                <td>陳小五</td>
+                <td>0920****11</td>
+                <td>新北市</td>
+                <td>板橋區</td>
+                <td class="left">文化路一段100號10樓</td>
+                <td><button class="btn btn-mini" onclick="location.href='detail_final_CA001.html'">查看</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 建物查詢 -->
+      <div class="form-block">
+        <div class="form-block-title">二、選擇建物</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>建物名稱</label>
+            <input type="text" id="b_name" class="w-220" />
+          </div>
+          <div class="form-group">
+            <label>縣(市)</label>
+            <select id="citySelect" class="w-220">
+              <option value="">縣市</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>行政區</label>
+            <select id="districtSelect" class="w-220">
+              <option value="">請先選擇縣市</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>路(街)</label>
+            <input type="text" id="b_road" class="w-220" />
+          </div>
+        </div>
+        <div class="form-row" style="justify-content: flex-end; gap: 10px;">
+          <button class="btn btn-secondary" type="button" id="btnBldgClear">清除</button>
+          <button class="btn btn-primary" type="button" id="btnBldgSearch">查詢</button>
+        </div>
+
+        <!-- 查詢結果：建物 -->
+        <div id="bldgTableWrapper" class="hidden">
+          <table>
+            <thead>
+              <tr>
+                <th>選取</th>
+                <th>建物編號</th>
+                <th>建物名稱</th>
+                <th>縣市</th>
+                <th>行政區</th>
+                <th>地址</th>
+                <th>大樓等級</th>
+                <th>競爭狀況</th>
+              </tr>
+            </thead>
+            <tbody id="bldgResult">
+              <tr>
+                <td><input type="radio" name="bldgPick" value="MDU100|國際名紳" /></td>
+                <td>MDU100</td>
+                <td>國際名紳</td>
+                <td>台北市</td>
+                <td>大安區</td>
+                <td class="left">和平東路三段</td>
+                <td>雙線大樓</td>
+                <td>中競爭</td>
+              </tr>
+              <tr>
+                <td><input type="radio" name="bldgPick" value="MDU256|新光名人巷" /></td>
+                <td>MDU256</td>
+                <td>新光名人巷</td>
+                <td>台北市</td>
+                <td>信義區</td>
+                <td class="left">松仁路199號</td>
+                <td>單線大樓</td>
+                <td>低競爭</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 進行下一步 -->
+      <div class="form-row" style="justify-content: flex-end; gap: 10px; margin-top: 10px;">
+        <button class="btn btn-secondary" type="button" onclick="location.href='contract_search.html'">取消返回</button>
+        <button class="btn btn-primary" type="button" id="btnNext">下一步：填寫合約內容</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('btnCustSearch').addEventListener('click', function () {
+      document.getElementById('custTableWrapper').classList.remove('hidden');
+    });
+
+    document.getElementById('btnBldgSearch').addEventListener('click', function () {
+      document.getElementById('bldgTableWrapper').classList.remove('hidden');
+    });
+
+    document.getElementById('btnNext').addEventListener('click', function () {
+      location.href = 'contract_create_step2.html?contractNo=C123456';
+    });
+  </script>
+
+  <script src="sidebar.js"></script>
+  <script>
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+  </script>
+<script>
+  // 監聽選取簽約人
+  document.querySelectorAll('input[name="custPick"]').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      const selected = this.value.split('|');
+      document.getElementById('pickedCustomer').textContent = `簽約人：${selected[1]}（${selected[0]}）`;
+    });
+  });
+
+  // 監聽選取建物
+  document.querySelectorAll('input[name="bldgPick"]').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      const selected = this.value.split('|');
+      document.getElementById('pickedBuilding').textContent = `建物：${selected[1]}（${selected[0]}）`;
+    });
+  });
+</script>
+
+
+
+</body>
+
+</html>

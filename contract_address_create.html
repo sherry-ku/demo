@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="utf-8" />
+  <title>合約管理－新增合約（涵蓋地址）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    .form-block-title .step {
+      font-weight: normal;
+      color: #666;
+      margin-left: 8px;
+      font-size: 12px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      min-width: 180px;
+    }
+
+    label {
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    input,
+    select {
+      font-size: 13px;
+      padding: 4px 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    table th,
+    table td {
+      border: 1px solid #ccc;
+      padding: 6px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    table th {
+      background-color: #0b6fa4;
+      color: #fff;
+    }
+
+    .btn-add {
+      background-color: #2c9caf;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="content">
+      <div class="step-tabs">
+        <div class="step-tab" onclick="goToStep('contract_create_step2.html')">合約簽約內容</div>
+        <div class="step-tab" onclick="goToStep('contract_parent_project.html')">合約母戶專案內容</div>
+        <div class="step-tab" onclick="goToStep('contract_child_project.html')">合約子戶專案內容</div>
+        <div class="step-tab active">合約涵蓋地址</div>
+        <div class="step-tab" onclick="goToStep('contract_group_list.html')">同綁合約清單</div>
+      </div>
+
+
+      <!-- 新增涵蓋地址 -->
+      <div class="form-block">
+        <div class="form-block-title">新增涵蓋地址</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>合約涵蓋地址編號</label>
+            <input type="text" name="addressId" value="0001" readonly />
+          </div>
+          <div class="form-group">
+            <label>合約編號</label>
+            <input type="text" name="contractNo" value="5566" readonly />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>縣(市)</label>
+            <select name="city">
+              <option>請選擇</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>行政區</label>
+            <select name="district">
+              <option>行政區</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>里別</label>
+            <select name="village">
+              <option>請先選擇行政區</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>路(街)</label>
+            <input type="text" name="road" />
+          </div>
+
+          <div class="form-group">
+            <label>巷</label>
+            <input type="text" name="lane" />
+          </div>
+          <div class="form-group">
+            <label>弄</label>
+            <input type="text" name="alley" />
+          </div>
+          <div class="form-group">
+            <label>起始號</label>
+            <input type="text" name="startNo" />
+          </div>
+          <div class="form-group">
+            <label>結束號</label>
+            <input type="text" name="endNo" />
+          </div>
+          <div class="form-group">
+            <label>單雙號</label>
+            <select name="oddEven">
+              <option value="">全部</option>
+              <option value="odd">單號</option>
+              <option value="even">雙號</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>樓</label>
+            <input type="text" name="floor" />
+          </div>
+          <div class="form-group">
+            <label>樓之</label>
+            <input type="text" name="floorSub" />
+          </div>
+          <div class="form-group">
+            <label>室</label>
+            <input type="text" name="room" />
+          </div>
+        </div>
+
+
+        <div class="form-row" style="justify-content: flex-end; gap: 10px; margin-top: 10px;">
+          <button class="btn-add" type="button" id="btnAdd">新增</button>
+          <button class="btn-save" type="button" id="btnSave" style="display:none;">儲存</button>
+        </div>
+
+
+      </div>
+
+
+      <!-- 下方表格 -->
+      <!-- 表格 -->
+      <table>
+        <thead>
+          <tr>
+            <th>合約涵蓋地址編號</th>
+            <th>合約編號</th>
+            <th>縣市</th>
+            <th>行政區</th>
+            <th>地址</th>
+            <th>編輯</th>
+          </tr>
+        </thead>
+        <tbody id="addressTableBody">
+          <tr>
+            <td>0001</td>
+            <td>5566</td>
+            <td>台北市</td>
+            <td>信義區</td>
+            <td>松隆里松山路12巷3弄 1號~20號 (單號)</td>
+            <td>
+              <button type="button" class="btn-edit" onclick="editRow(this)">編輯</button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+      <script>
+        document.getElementById("btnAdd").addEventListener("click", function () {
+          const addressId = document.querySelector("[name='addressId']").value;
+          const contractNo = document.querySelector("[name='contractNo']").value;
+          const city = document.querySelector("[name='city']").value;
+          const district = document.querySelector("[name='district']").value;
+          const village = document.querySelector("[name='village']").value;
+          const road = document.querySelector("[name='road']").value;
+          const lane = document.querySelector("[name='lane']").value;
+          const alley = document.querySelector("[name='alley']").value;
+          const number = document.querySelector("[name='number']").value;
+          const floor = document.querySelector("[name='floor']").value;
+          const floorSub = document.querySelector("[name='floorSub']").value;
+          const room = document.querySelector("[name='room']").value;
+          const startNo = document.querySelector("[name='startNo']").value;
+          const endNo = document.querySelector("[name='endNo']").value;
+          const oddEven = document.querySelector("[name='oddEven']").value;
+
+          // 組合完整地址
+          let fullAddress = `${village}${road}`;
+          if (lane) fullAddress += `${lane}巷`;
+          if (alley) fullAddress += `${alley}弄`;
+          if (number) fullAddress += `${number}號`;
+          if (floor) fullAddress += `${floor}樓`;
+          if (floorSub) fullAddress += `之${floorSub}`;
+          if (room) fullAddress += `${room}室`;
+
+          // 新增列
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+      <td>${addressId}</td>
+      <td>${contractNo}</td>
+      <td>${city}</td>
+      <td>${district}</td>
+      <td>${fullAddress}</td>
+      <td>
+        <img src="images/edit-icon.png" alt="編輯" style="cursor:pointer;width:16px;height:16px;" onclick="editRow(this)">
+      </td>
+    `;
+          document.getElementById("addressTableBody").appendChild(tr);
+        });
+
+        function editRow(img) {
+          alert("編輯功能待實作");
+        }
+      </script>
+
+      </script>
+      <script src="sidebar.js"></script>
+      <script>
+        document.getElementById('sidebar').innerHTML = sidebarHTML;
+      </script>
+      <script>
+        const locationData = {
+          "台北市": {
+            "信義區": ["松隆里", "永春里"],
+            "大安區": ["龍安里", "仁愛里"]
+          },
+          "新北市": {
+            "板橋區": ["海山里", "四川里"],
+            "新店區": ["中興里", "安康里"]
+          }
+        };
+
+        const citySelect = document.querySelector("[name='city']");
+        const districtSelect = document.querySelector("[name='district']");
+        const villageSelect = document.querySelector("[name='village']");
+
+        // 初始化縣市
+        Object.keys(locationData).forEach(city => {
+          const opt = document.createElement("option");
+          opt.value = city;
+          opt.textContent = city;
+          citySelect.appendChild(opt);
+        });
+
+        // 選縣市 → 帶出行政區
+        citySelect.addEventListener("change", function () {
+          districtSelect.innerHTML = "<option>請選擇行政區</option>";
+          villageSelect.innerHTML = "<option>請先選擇行政區</option>";
+          if (locationData[this.value]) {
+            Object.keys(locationData[this.value]).forEach(dist => {
+              const opt = document.createElement("option");
+              opt.value = dist;
+              opt.textContent = dist;
+              districtSelect.appendChild(opt);
+            });
+          }
+        });
+
+        // 選行政區 → 帶出里別
+        districtSelect.addEventListener("change", function () {
+          villageSelect.innerHTML = "<option>請選擇里別</option>";
+          const city = citySelect.value;
+          if (locationData[city] && locationData[city][this.value]) {
+            locationData[city][this.value].forEach(vil => {
+              const opt = document.createElement("option");
+              opt.value = vil;
+              opt.textContent = vil;
+              villageSelect.appendChild(opt);
+            });
+          }
+        });
+      </script>
+
+
+      <script>
+        let editingRow = null;
+
+        function editRow(button) {
+          const row = button.closest("tr");
+          editingRow = row;
+
+          // 取得欄位值
+          const addressId = row.cells[0].textContent;
+          const contractNo = row.cells[1].textContent;
+          const city = row.cells[2].textContent;
+          const district = row.cells[3].textContent;
+          const address = row.cells[4].textContent;
+
+          // 解析地址中的其他欄位（簡單示範，可再加強）
+          const numberMatch = address.match(/(\d+)號~(\d+)號/);
+          const oddEvenMatch = address.match(/\((單號|雙號)\)/);
+
+          document.querySelector("[name='addressId']").value = addressId;
+          document.querySelector("[name='contractNo']").value = contractNo;
+          document.querySelector("[name='city']").value = city;
+          document.querySelector("[name='district']").value = district;
+          document.querySelector("[name='startNo']").value = numberMatch ? numberMatch[1] : "";
+          document.querySelector("[name='endNo']").value = numberMatch ? numberMatch[2] : "";
+          document.querySelector("[name='oddEven']").value = oddEvenMatch ? (oddEvenMatch[1] === "單號" ? "odd" : "even") : "";
+
+          // 切換按鈕為「儲存」
+          document.getElementById("btnAdd").style.display = "none";
+          document.getElementById("btnSave").style.display = "inline-block";
+        }
+
+        document.getElementById("btnSave").addEventListener("click", function () {
+          if (!editingRow) return;
+
+          const addressId = document.querySelector("[name='addressId']").value;
+          const contractNo = document.querySelector("[name='contractNo']").value;
+          const city = document.querySelector("[name='city']").value;
+          const district = document.querySelector("[name='district']").value;
+          const village = document.querySelector("[name='village']").value;
+          const road = document.querySelector("[name='road']").value;
+          const lane = document.querySelector("[name='lane']").value;
+          const alley = document.querySelector("[name='alley']").value;
+          const numberStart = document.querySelector("[name='startNo']").value;
+          const numberEnd = document.querySelector("[name='endNo']").value;
+          const oddEven = document.querySelector("[name='oddEven']").value;
+
+          let fullAddress = `${village}${road}`;
+          if (lane) fullAddress += `${lane}巷`;
+          if (alley) fullAddress += `${alley}弄`;
+          if (numberStart && numberEnd) {
+            fullAddress += ` ${numberStart}號~${numberEnd}號`;
+          }
+          if (oddEven) {
+            fullAddress += ` (${oddEven === "odd" ? "單號" : "雙號"})`;
+          }
+
+          // 更新列
+          editingRow.cells[0].textContent = addressId;
+          editingRow.cells[1].textContent = contractNo;
+          editingRow.cells[2].textContent = city;
+          editingRow.cells[3].textContent = district;
+          editingRow.cells[4].textContent = fullAddress;
+
+          // 還原按鈕狀態
+          editingRow = null;
+          document.getElementById("btnAdd").style.display = "inline-block";
+          document.getElementById("btnSave").style.display = "none";
+        });
+
+
+
+      </script>
+<script>
+  function goToStep(page) {
+    window.location.href = page;
+  }
+</script>
+
+
+</body>
+
+</html>

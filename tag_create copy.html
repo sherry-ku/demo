@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<title>標籤管理－新增標籤</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="common.css"/>
+<style>
+  .form-actions {
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:10px;
+  }
+  textarea {
+    width:100%;
+    min-height:80px;
+    resize:vertical;
+    padding:4px 6px;
+    border:1px solid #ccc;
+    border-radius:4px;
+    font-size:13px;
+    font-family:'Segoe UI', system-ui, -apple-system, Arial, 'Microsoft JhengHei', sans-serif;
+  }
+</style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <div>登入者：005566 陳小華</div>
+    <div>登入角色：客服人員</div>
+    <div>公司別：116 中嘉數位</div>
+    <div>登入時間：18:44:11</div>
+  </div>
+  <div class="header-right">
+    <button class="btn">訊息中心</button>
+    <button class="btn">暫存訂單</button>
+    <button class="btn">登出</button>
+  </div>
+</div>
+
+<div class="main">
+  <!-- Sidebar -->
+ <div class="sidebar" id="sidebar"></div>
+
+
+
+  <!-- Content -->
+  <div class="content">
+  <h2>新增標籤</h2>
+  <div class="form-block">
+    <div class="form-block-title">標籤資料</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label><span style="color:red;">＊</span>標籤類別</label>
+        <select>
+          <option>流失風險標籤</option>
+          <option>專案標籤</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label><span style="color:red;">＊</span>標籤名稱</label>
+        <input type="text" maxlength="10"/>
+      </div>
+      <div class="form-group">
+        <label>標籤代碼</label>
+        <input type="text" disabled value="系統自動產生"/>
+      </div>
+      <div class="form-group">
+        <label><span style="color:red;">＊</span>標籤生效天數</label>
+        <input type="text" maxlength="10"/>
+      </div>
+      <div class="form-group">
+        <label><span style="color:red;">＊</span>標籤狀態</label>
+        <select>
+          <option value="ENABLE">啟用</option>
+          <option value="DISABLE">停用</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label><span style="color:red;">＊</span>是否跳訊</label>
+        <select id="popupSelect">
+          <option value="Y">是</option>
+          <option value="N">否</option>
+        </select>
+      </div>
+      <div class="form-group" style="flex: 1 1 100%;">
+        <label><span style="color:red;">＊</span>跳訊內容</label>
+        <textarea id="popupContent" maxlength="50"></textarea>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-secondary" onclick="location.href='tag_search_list.html'">取消</button>
+      <button class="btn btn-primary" onclick="location.href='tag_search_list.html'">儲存並返回</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('popupSelect').addEventListener('change', function(){
+  const contentField = document.getElementById('popupContent');
+  if(this.value === 'N'){
+    contentField.value = '';
+    contentField.disabled = true;
+  }else{
+    contentField.disabled = false;
+  }
+});
+</script>
+<script src="sidebar.js"></script>
+<script>
+  document.getElementById('sidebar').innerHTML = sidebarHTML;
+</script>
+
+</body>
+</html>

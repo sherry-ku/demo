@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8"/>
+  <title>合約管理－同綁合約清單</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="common.css"/>
+  <style>
+    .info-box {
+      background-color: #e8f5fb;
+      border-left: 4px solid #0b6fa4;
+      padding: 8px 12px;
+      margin: 10px 0;
+      color: #0b6fa4;
+      font-size: 14px;
+    }
+    .btn-blue {
+      background-color: #0b6fa4;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 6px;
+      text-align: center;
+      font-size: 13px;
+    }
+    table th {
+      background-color: #0b6fa4;
+      color: #fff;
+    }
+    .link-view {
+      color: #007bff;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .note-box {
+      background-color: #ffebd7;
+      padding: 8px 12px;
+      margin-top: 15px;
+      color: #d35400;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="sidebar" id="sidebar"></div>
+
+
+    <div class="content">
+      <div class="step-tabs">
+        <div class="step-tab" onclick="goToStep('contract_create_step2.html')">合約簽約內容</div>
+        <div class="step-tab" onclick="goToStep('contract_parent_project.html')">合約母戶專案內容</div>
+        <div class="step-tab" onclick="goToStep('contract_child_project.html')">合約子戶專案內容</div>
+        <div class="step-tab" onclick="goToStep('contract_address_create.html')">合約涵蓋地址</div>
+        <div class="step-tab active">同綁合約清單</div>
+      </div>
+
+      <div class="info-box">
+        提示文字：若業務簽約時，同時簽訂多個服務，務必新增同綁合約
+      </div>
+
+      <button class="btn-blue" onclick="alert('導向新增同綁合約頁面')">新增同綁合約</button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>合約編號</th>
+            <th>合約名稱</th>
+            <th>服務別</th>
+            <th>建物名稱</th>
+            <th>負責人員</th>
+            <th>建立時間</th>
+            <th>編輯</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>P-001</td>
+            <td>XXX套房合約 - I</td>
+            <td>Internet</td>
+            <td>國美瑞光</td>
+            <td>王業務</td>
+            <td>2024-12-20</td>
+            <td><span class="link-view">查看合約</span></td>
+          </tr>
+          <tr>
+            <td>P-002</td>
+            <td>XXX套房合約 - C</td>
+            <td>CATV</td>
+            <td>國美瑞光</td>
+            <td>王業務</td>
+            <td>2024-12-20</td>
+            <td><span class="link-view">查看合約</span></td>
+          </tr>
+          <tr>
+            <td>P-003</td>
+            <td>XXX套房合約 - D</td>
+            <td>CATV</td>
+            <td>國美瑞光</td>
+            <td>王業務</td>
+            <td>2024-12-20</td>
+            <td><span class="link-view">查看合約</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+     
+    </div>
+  </div>
+
+<script>
+  function goToStep(url) {
+    location.href = url;
+  }
+</script>
+<script src="sidebar.js"></script>
+<script>
+  document.getElementById('sidebar').innerHTML = sidebarHTML;
+</script>
+
+</body>
+</html>

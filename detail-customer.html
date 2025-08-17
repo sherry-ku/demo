@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+<html class="readonly" lang="zh-TW">
+
+<head>
+  <meta charset="utf-8" />
+  <title>客戶與大樓資料 - 客戶資料查詢結果</title>
+  <link href="common.css" rel="stylesheet" />
+</head>
+
+<body class="detail-page">
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+  <div class="main">
+    <!-- 側邊選單 (Sidebar) -->
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="content">
+
+      <div id="customerInfoHeaderContainer"></div>
+      <!-- 第一層 Tab -->
+      <div>
+        <div class="tabs" id="mainTabs">
+          <div class="tab active">
+            <a href="detail-customer.html" style="text-decoration: none; color: inherit;">客戶與大樓資料</a>
+          </div>
+          <div class="tab">
+            <a href="detail-product.html" style="text-decoration: none; color: inherit;">產品與申辦歷程</a>
+          </div>
+          <div class="tab">
+            <a href="detail-billing.html" style="text-decoration: none; color: inherit;">帳務與發票</a>
+          </div>
+          <div class="tab">
+            <a href="detail-engineering.html" style="text-decoration: none; color: inherit;">工務與設備</a>
+          </div>
+          <div class="tab">
+            <a href="detail-contact.html" style="text-decoration: none; color: inherit;">客戶聯絡歷程</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-tab-content" id="main1">
+        <div class="sub-tabs" id="subTabs1">
+          <div class="sub-tab active" data-sub="sub1">基本資料</div>
+          <div class="sub-tab" data-sub="sub2">大樓資訊</div>
+          <div class="sub-tab" data-sub="sub3">支付帳號資訊</div>
+        </div>
+        <!-- 基本資料 + 聯絡資料 -->
+        <div class="sub-content" id="sub1Content">
+
+
+          <!-- 專案標籤彈窗 -->
+          <div id="tagModal" class="modal" style="display: none;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>專案標籤詳細資訊</h3>
+                <span class="close" onclick="closeTagModal()">&times;</span>
+              </div>
+              <div class="modal-body">
+                <table class="table">
+                  <thead>
+                    <tr style="background-color: #4a90e2; color: white;">
+                      <th style="width: 60px;">順次</th>
+                      <th style="width: 100px;">標籤代碼</th>
+                      <th style="width: 200px;">標籤名稱</th>
+                      <th style="width: 100px;">客戶服務編號</th>
+                      <th style="width: 80px;">服務別</th>
+                      <th style="width: 120px;">標籤有效起日</th>
+                      <th style="width: 120px;">標籤有效迄日</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>CP-004</td>
+                      <td>MKT_RT_CATV_02 單C用戶促案C+D套餐</td>
+                      <td>S0001</td>
+                      <td>CATV</td>
+                      <td>2024/12/16</td>
+                      <td>2024/12/31</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>CP-002</td>
+                      <td>高風險</td>
+                      <td>S0001</td>
+                      <td>Internet</td>
+                      <td>2025/1/3</td>
+                      <td>2025/1/23</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>CP-003</td>
+                      <td>品質不滿</td>
+                      <td>S0002</td>
+                      <td>CATV</td>
+                      <td>2025/1/15</td>
+                      <td>2025/2/15</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <style>
+            /* 彈窗樣式 */
+            .modal {
+              position: fixed;
+              z-index: 1000;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0, 0, 0, 0.5);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .modal-content {
+              background-color: white;
+              border-radius: 8px;
+              box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+              max-width: 90%;
+              max-height: 80%;
+              overflow: auto;
+              animation: modalSlideIn 0.3s ease-out;
+            }
+
+            @keyframes modalSlideIn {
+              from {
+                opacity: 0;
+                transform: translateY(-50px);
+              }
+
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+
+            .modal-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 15px 20px;
+              border-bottom: 1px solid #ddd;
+              background-color: #f8f9fa;
+            }
+
+            .modal-header h3 {
+              margin: 0;
+              color: #333;
+            }
+
+            .close {
+              color: #aaa;
+              font-size: 24px;
+              font-weight: bold;
+              cursor: pointer;
+              width: 30px;
+              height: 30px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+              transition: all 0.3s;
+            }
+
+            .close:hover {
+              color: #000;
+              background-color: #e9ecef;
+            }
+
+            .modal-body {
+              padding: 20px;
+            }
+
+            .modal .table {
+              margin: 0;
+              font-size: 14px;
+            }
+
+            .modal .table th,
+            .modal .table td {
+              padding: 8px 10px;
+              white-space: nowrap;
+            }
+
+            .tag-label {
+              display: inline-block;
+              border-radius: 16px;
+              padding: 6px 14px;
+              margin: 3px 6px 3px 0;
+              font-size: 13px;
+              font-weight: 600;
+              border: 1px solid;
+              vertical-align: middle;
+              transition: all 0.2s ease;
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+          </style>
+
+
+
+          <div class="section">
+            <div class="section-title">客戶資料與聯絡資料</div>
+            <div class="form-grid">
+              <!-- 基本資料 -->
+              <div class="form-item">
+                <div class="form-label">姓名：</div>
+                <div class="form-value">李曉明</div>
+                <div class="form-input"><input type="text" value="王曉明" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">性別：</div>
+                <div class="form-value">男</div>
+                <div class="form-input"><input type="text" value="男" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">證件編號：</div>
+                <div class="form-value">A123456789</div>
+                <div class="form-input"><input type="text" value="A123456789" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">客戶分類：</div>
+                <div class="form-value">個人戶</div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">會員載具：</div>
+                <div class="form-value">1000000265581</div>
+                <div class="form-input"><input type="text" value="1000000265581" /></div>
+              </div>
+              <div class="form-item" style="grid-column:1 / -1;">
+                <div class="form-label">戶籍地址：</div>
+                <div class="form-value">台北市大安區和平東路三段320號10樓</div>
+                <div class="form-input"><input type="text" value="台北市大安區和平東路三段320號10樓" /></div>
+              </div>
+              <div class="form-item" style="grid-column:1 / -1;">
+                <div class="form-label">裝機地址：</div>
+                <div class="form-value">台北市大安區和平東路三段312號9樓</div>
+                <div class="form-input"><input type="text" value="台北市大安區和平東路三段312號9樓" /></div>
+              </div>
+
+              <!-- 聯絡資料 -->
+              <div class="form-item">
+                <div class="form-label">主要連絡電話：</div>
+                <div class="form-value">0912123123 <span class="note-icon" title="電話1">ℹ️</span></div>
+                <div class="form-input"><input type="text" value="0912123123" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">電話2：</div>
+                <div class="form-value">02-2722-1288 <span class="note-icon" title="晚上請撥打此電話">ℹ️</span></div>
+                <div class="form-input"><input type="text" value="" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">電話3：</div>
+                <div class="form-value"></div>
+                <div class="form-input"><input type="text" value="" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">手機1：</div>
+                <div class="form-value">0912123123</div>
+                <div class="form-input"><input type="text" value="" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">手機2：</div>
+                <div class="form-value"></div>
+                <div class="form-input"><input type="text" value="" /></div>
+              </div>
+              <div class="form-item" style="grid-column:1 / -1;">
+                <div class="form-label">電子郵件：</div>
+                <div class="form-value">chi.hsu@gmail.com</div>
+                <div class="form-input"><input type="text" value="chi.hsu@gmail.com" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">第一證件類別：</div>
+                <div class="form-value">身分證</div>
+                <div class="form-input"><input type="text" value="身分證" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">第一證件編號：</div>
+                <div class="form-value">A123456789</div>
+                <div class="form-input"><input type="text" value="A123456789" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">第二證件類別：</div>
+                <div class="form-value">健保卡</div>
+                <div class="form-input"><input type="text" value="健保卡" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">第二證件編號：</div>
+                <div class="form-value">0000 1234 5671</div>
+                <div class="form-input"><input type="text" value="0000 1234 5671" /></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 家戶其他聯絡人 -->
+          <div class="section">
+            <div class="section-title">家戶其他聯絡人</div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>聯絡人姓名</th>
+                  <th>關係</th>
+                  <th>手機</th>
+                  <th>市話</th>
+                  <th>備註</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="table-value">王大太</span><span class="table-input"><input type="text"
+                        value="王大太" /></span>
+                  </td>
+                  <td><span class="table-value">配偶</span><span class="table-input"><input type="text"
+                        value="配偶" /></span></td>
+                  <td><span class="table-value">0912345671</span><span class="table-input"><input type="text"
+                        value="0912345671" /></span></td>
+                  <td><span class="table-value">02-21234567</span><span class="table-input"><input type="text"
+                        value="02-21234567" /></span></td>
+                  <td><span class="table-value"></span><span class="table-input"><input type="text" /></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 大樓資訊 -->
+        <div class="sub-content" id="sub2Content" style="display:none;">
+          <div class="section">
+            <div class="section-title">建物基本資料</div>
+            <div class="form-grid">
+
+              <div class="form-item">
+                <div class="form-label">建物編號：</div>
+                <div class="form-value">MDU1001</div>
+                <div class="form-input"><input type="text" value="MDU100" /></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">建物名稱：</div>
+                <div class="form-value">瑞豐大廈</div>
+                <div class="form-input"><input type="text" value="永春大樓" /></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">業務人員：</div>
+                <div class="form-value">003728 林小明</div>
+                <div class="form-input"><input type="text" />003728 林小明</div>
+              </div>
+
+
+              <div class="form-item">
+                <div class="form-label">建戶數：</div>
+                <div class="form-value">10</div>
+                <div class="form-input"><input type="text" value="10" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">棟數：</div>
+                <div class="form-value">1</div>
+                <div class="form-input"><input type="text" value="1" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">樓層：</div>
+                <div class="form-value">5</div>
+                <div class="form-input"><input type="text" value="5" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">電梯數：</div>
+                <div class="form-value">1</div>
+                <div class="form-input"><input type="text" value="1" /></div>
+              </div>
+
+              <div class="form-item" style="grid-column: 1 / -1;">
+                <div class="form-label">洽談地址：</div>
+                <div class="form-value">台北市大安區和平東路三段</div>
+                <div class="form-input"><input type="text" value="台北市大安區和平東路三段" /></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">建置進度：</div>
+                <div class="form-value">建置完成</div>
+                <div class="form-input"><input type="text" value="建置完成" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">竣工日：</div>
+                <div class="form-value">2024-1-10</div>
+                <div class="form-input"><input type="text" value="2024-10-10" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">合約啟用日：</div>
+                <div class="form-value">2024-10-10</div>
+                <div class="form-input"><input type="text" value="2024-10-10" /></div>
+              </div>
+
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-title">建築與網路型態</div>
+            <div class="form-grid">
+
+              <div class="form-item">
+                <div class="form-label">建物等級：</div>
+                <div class="form-value">雙線大樓</div>
+                <div class="form-input"><input type="text" value="雙線大樓" /></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">管委型態：</div>
+                <div class="form-value">有管有委</div>
+                <div class="form-input"><input type="text" value="有管有委" /></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">建築型態：</div>
+                <div class="form-value">套房</div>
+                <div class="form-input"><input type="text" value="套房" /></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">房屋類別：</div>
+                <div class="form-value">華廈</div>
+                <div class="form-input"><input type="text" value="華廈" /></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">建物類別：</div>
+                <div class="form-value"></div>
+                <div class="form-input"><input type="text" value="" /></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">大樓類別：</div>
+                <div class="form-value"></div>
+                <div class="form-input"><input type="text" value="" /></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">管線類別：</div>
+                <div class="form-value">明線</div>
+                <div class="form-input"><input type="text" value="明線" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">網路：</div>
+                <div class="form-value">雙向</div>
+                <div class="form-input"><input type="text" value="雙向" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">可提供服務：</div>
+                <div class="form-value">CATV,CM</div>
+                <div class="form-input"><input type="text" value="CATV,CM" /></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">競爭狀況與銷售提示</div>
+            <div class="form-grid">
+
+              <div class="form-item">
+                <div class="form-label">競業等級：</div>
+                <div class="form-value">A3競業進線已納入管委會議程</div>
+                <div class="form-input"><input type="text" value="A3競業進線已納入管委會議程" /></div>
+              </div>
+              <div class="form-item">
+                <div class="form-label">競爭狀況：</div>
+                <div class="form-value">中競爭</div>
+                <div class="form-input"><input type="text" value="中競爭" /></div>
+              </div>
+              <div class="form-item " style="grid-column: 1 / -1;">
+                <div class="form-label">跳訊提示：</div>
+                <div class="form-value">這是指定大樓跳訊說明​</div>
+                <div class="form-input"><input type="text" value="這是指定大樓跳訊說明​" /></div>
+              </div>
+              <div class="form-item " style="grid-column: 1 / -1;">
+                <div class="form-label">備註：</div>
+                <div class="form-value">​</div>
+                <div class="form-input"><input type="text" value="​" /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 支付帳號資訊 -->
+        <div class="sub-content" id="sub3Content" style="display:none;">
+          <div class="section">
+            <div class="section-title">
+              帳戶 ID：
+              <select id="accountSelect">
+                <option value="B0001">B0001</option>
+                <option value="B0002">B0002</option>
+              </select>
+            </div>
+            <div class="form-grid">
+
+              <div class="form-item">
+                <div class="form-label">帳務性質：</div>
+                <div class="form-value" id="billingNature">產單不寄單</div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">繳費通路：</div>
+                <div class="form-value" id="channel"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">收費方式：</div>
+                <div class="form-value" id="method"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">帳戶證號：</div>
+                <div class="form-value" id="accountNumber"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">發卡銀行：</div>
+                <div class="form-value" id="issuingBank"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">ACH承辦銀行：</div>
+                <div class="form-value" id="achBank"></div>
+                <div class="form-input"><input id="achBankInput" type="text" /></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">卡別：</div>
+                <div class="form-value" id="cardType"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">收受銀行：</div>
+                <div class="form-value" id="recipientBank"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">卡號：</div>
+                <div class="form-value" id="cardNumber"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">收受銀行帳號：</div>
+                <div class="form-value" id="recipientAccount"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">紙本帳單：</div>
+                <div class="form-value" id="paperBill"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">帳單收件人：</div>
+                <div class="form-value" id="billRecipient"></div>
+              </div>
+
+              <div class="form-item" style="grid-column: 1 / -1;">
+                <div class="form-label">帳寄地址：</div>
+                <div class="form-value" id="billAddress"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">列印電子發票：</div>
+                <div class="form-value" id="printInvoice"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">發票抬頭：</div>
+                <div class="form-value" id="invoiceTitle"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">發票統編：</div>
+                <div class="form-value" id="invoiceTaxId"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">會員載具：</div>
+                <div class="form-value" id="memberCarrier"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">共通性載具：</div>
+                <div class="form-value" id="commonCarrier"></div>
+              </div>
+
+              <div class="form-item">
+                <div class="form-label">捐贈碼：</div>
+                <div class="form-value" id="donationCode"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- 標籤管理彈窗 -->
+  <div id="tagModal" style="
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;">
+    <div style="
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      width: 500px;
+      max-width: 90%;
+      max-height: 80%;
+      overflow-y: auto;">
+      <h3>客戶標籤管理</h3>
+      <div style="margin-bottom: 15px;">
+        <label>新增標籤：</label>
+        <input type="text" placeholder="輸入標籤名稱" style="margin-left: 10px; padding: 5px;">
+        <button class="btn" style="margin-left: 10px;">新增</button>
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label>現有標籤：</label>
+        <div style="margin-top: 10px;">
+          <span class="badge badge-red">VIP <span style="cursor: pointer; margin-left: 5px;">×</span></span>
+          <span class="badge badge-orange">高價值客戶 <span style="cursor: pointer; margin-left: 5px;">×</span></span>
+          <span class="badge badge-green">續約客戶 <span style="cursor: pointer; margin-left: 5px;">×</span></span>
+        </div>
+      </div>
+      <div style="text-align: right;">
+        <button class="btn" onclick="closeTagModal()">關閉</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 第二層 tab 切換（客戶資料）
+    document.querySelectorAll('#subTabs1 .sub-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('#subTabs1 .sub-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelectorAll('#main1 .sub-content').forEach(c => c.style.display = 'none');
+        document.getElementById(tab.dataset.sub + 'Content').style.display = 'block';
+      });
+    });
+
+    // 支付帳號資料
+    const accountData = {
+      B0001: {
+        channel: "A123456789",
+        method: "ACH",
+        accountNumber: "A123456789",
+        issuingBank: "",
+        achBank: "國泰世華",
+        cardType: "",
+        recipientBank: "台新銀行",
+        cardNumber: "",
+        recipientAccount: "123456789874",
+        billRecipient: "王曉明",
+        billAddress: "台北市內湖區瑞光路999號99樓",
+        paperBill: "是",
+        printInvoice: "否",
+        invoiceTitle: "",
+        invoiceTaxId: "",
+        invoiceAddress: "台北市內湖區瑞光路999號99樓",
+        memberCarrier: "1000000265581",
+        commonCarrier: "",
+        donationCode: ""
+      },
+      B0002: {
+        channel: "B987654321",
+        method: "Credit Card",
+        accountNumber: "B987654321",
+        issuingBank: "玉山銀行",
+        achBank: "",
+        cardType: "Visa",
+        recipientBank: "中國信託",
+        cardNumber: "4111111111111111",
+        recipientAccount: "987654321000",
+        billRecipient: "李小華",
+        billAddress: "新北市板橋區文化路1段88號",
+        paperBill: "否",
+        printInvoice: "是",
+        invoiceTitle: "小華公司",
+        invoiceTaxId: "12345678",
+        invoiceAddress: "新北市板橋區文化路1段88號",
+        memberCarrier: "2000000456789",
+        commonCarrier: "AA1234567890",
+        donationCode: "12345"
+      }
+    };
+
+    function updateFormFields(data) {
+      for (let key in data) {
+        const element = document.getElementById(key);
+        if (element) {
+          element.textContent = data[key];
+        }
+      }
+    }
+
+
+
+    document.getElementById('accountSelect').addEventListener('change', function () {
+      updateFormFields(accountData[this.value]);
+    });
+
+    // 預設載入第一個帳戶
+    updateFormFields(accountData["B0001"]);
+
+    // 開啟標籤彈窗
+    function openTagModal(tagCode) {
+      // 根據 tagCode 顯示對應的標籤詳細資訊
+      if (tagCode) {
+        // 可以在這裡根據 tagCode 載入特定標籤的詳細資料
+        console.log('查看標籤：', tagCode);
+      }
+      document.getElementById('tagModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    // 關閉標籤彈窗
+    function closeTagModal() {
+      document.getElementById('tagModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // 點擊彈窗外部區域關閉彈窗
+    document.getElementById('tagModal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeTagModal();
+      }
+    });
+
+    // ESC 鍵關閉彈窗
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.getElementById('tagModal').style.display === 'flex') {
+        closeTagModal();
+      }
+    });
+
+  </script>
+
+  <script src="customerInfoHeader.js"></script>
+  <script src="sidebar.js"></script>
+  <script>
+    document.getElementById('customerInfoHeaderContainer').innerHTML = customerInfoHeaderHTML;
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+  </script>
+
+
+
+
+
+</body>
+
+</html>

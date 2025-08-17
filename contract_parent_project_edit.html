@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="utf-8" />
+  <title>合約管理－編輯合約（母戶專案內容）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    .form-block-title .step {
+      font-weight: normal;
+      color: #666;
+      margin-left: 8px;
+      font-size: 12px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      min-width: 180px;
+    }
+
+    label {
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    input,
+    select {
+      font-size: 13px;
+      padding: 4px 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    table th,
+    table td {
+      border: 1px solid #ccc;
+      padding: 6px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    table th {
+      background-color: #0b6fa4;
+      color: #fff;
+    }
+
+    .btn-add {
+      background-color: #2c9caf;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .btn-edit {
+      background-color: #f0ad4e;
+      color: #fff;
+      border: none;
+      padding: 2px 8px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .btn-delete {
+      background-color: #d9534f;
+      color: #fff;
+      border: none;
+      padding: 2px 8px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="content">
+      <div class="step-tabs">
+        <div class="step-tab" onclick="goToStep('contract_edit_step2.html')">合約簽約內容</div>
+        <div class="step-tab active">合約母戶專案內容</div>
+        <div class="step-tab" onclick="goToStep('contract_child_project_edit.html')">合約子戶專案內容</div>
+        <div class="step-tab" onclick="goToStep('contract_address_create.html')">合約涵蓋地址</div>
+        <div class="step-tab" onclick="goToStep('contract_group_list_edit.html')">同綁合約清單</div>
+      </div>
+
+      <!-- 上方輸入區 -->
+      <div class="form-block">
+        <div class="form-block-title">母戶專案資料</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>合約編號</label>
+            <input id="contractNo" name="contractNo" type="text" value="55667788" readonly style="background-color: #f5f5f5;" />
+          </div>
+          <div class="form-group">
+            <label>進件公司別</label>
+            <select name="company">
+              <option selected>數位天空</option>
+              <option>新高公司</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>專案名稱</label>
+            <input name="projectName" type="text" value="統收合約" />
+          </div>
+          <div class="form-group">
+            <label>產品名稱</label>
+            <select name="productName">
+              <option selected>1G/50M</option>
+              <option>500M/50M</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>合約總價</label>
+            <input name="totalPrice" type="number" value="9990" />
+          </div>
+          <div class="form-group">
+            <label>簽約戶數</label>
+            <input name="houseCount" type="number" value="10" />
+          </div>
+          <div class="form-group">
+            <label>簽約月額</label>
+            <input name="monthPrice" type="number" value="999" />
+          </div>
+          <div class="form-group">
+            <label>繳別</label>
+            <input name="cableType" type="text" />
+          </div>
+        </div>
+        <div style="margin-top:10px;">
+          <button class="btn-add" type="button" id="btnAdd">新增</button>
+          <button class="btn btn-success" type="button" onclick="saveData()" style="margin-left: 10px;">儲存</button>
+        </div>
+      </div>
+
+      <!-- 下方表格 -->
+      <table>
+        <thead>
+          <tr>
+            <th>合約編號</th>
+            <th>進件公司別</th>
+            <th>專案名稱</th>
+            <th>產品名稱</th>
+            <th>合約總價</th>
+            <th>簽約戶數</th>
+            <th>簽約月額</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="parentTableBody">
+          <tr>
+            <td>55667788</td>
+            <td>數位天空</td>
+            <td>統收合約</td>
+            <td>1G/50M</td>
+            <td>9990</td>
+            <td>10</td>
+            <td>999</td>
+            <td>
+              <button class="btn-edit" onclick="editRow(this)">編輯</button>
+              <button class="btn-delete" onclick="deleteRow(this)">刪除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- 按鈕區 -->
+      <div class="form-row" style="justify-content: flex-end; gap: 10px; margin-top: 20px;">
+        <button class="btn btn-secondary" type="button" onclick="goToStep('contract_edit_step2.html')">上一步</button>
+        <button class="btn btn-primary" type="button" onclick="saveAndNext()">儲存並下一步</button>
+      </div>
+    </div>
+  </div>
+      
+  <script src="sidebar.js"></script>
+  <script>
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+    
+    function goToStep(url) {
+      const contractNo = document.getElementById('contractNo')?.value || '';
+      location.href = contractNo ? `${url}?contractNo=${encodeURIComponent(contractNo)}` : url;
+    }
+
+    function saveData() {
+      try {
+        console.log('母戶專案資料已儲存');
+        alert('母戶專案資料已儲存');
+        return true;
+      } catch (error) {
+        console.error('儲存失敗:', error);
+        alert('儲存失敗，請檢查輸入內容');
+        return false;
+      }
+    }
+
+    function saveAndNext() {
+      if (saveData()) {
+        goToStep('contract_child_project_edit.html');
+      }
+    }
+
+    function editRow(btn) {
+      const row = btn.closest('tr');
+      const cells = row.querySelectorAll('td');
+      
+      // 簡單的編輯實作 - 可以根據需求擴展
+      const newValue = prompt('請輸入新的專案名稱:', cells[2].textContent);
+      if (newValue !== null && newValue.trim() !== '') {
+        cells[2].textContent = newValue;
+      }
+    }
+
+    function deleteRow(btn) {
+      if (confirm('確定要刪除這筆資料嗎？')) {
+        btn.closest('tr').remove();
+      }
+    }
+
+    // 新增資料到表格
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("btnAdd").addEventListener("click", function () {
+        const contractNo = document.querySelector("[name='contractNo']").value;
+        const company = document.querySelector("[name='company']").value;
+        const projectName = document.querySelector("[name='projectName']").value;
+        const productName = document.querySelector("[name='productName']").value;
+        const totalPrice = document.querySelector("[name='totalPrice']").value;
+        const houseCount = document.querySelector("[name='houseCount']").value;
+        const monthPrice = document.querySelector("[name='monthPrice']").value;
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${contractNo}</td>
+          <td>${company}</td>
+          <td>${projectName}</td>
+          <td>${productName}</td>
+          <td>${totalPrice}</td>
+          <td>${houseCount}</td>
+          <td>${monthPrice}</td>
+          <td>
+            <button class="btn-edit" onclick="editRow(this)">編輯</button>
+            <button class="btn-delete" onclick="deleteRow(this)">刪除</button>
+          </td>
+        `;
+        document.getElementById("parentTableBody").appendChild(tr);
+      });
+      
+      // 從URL參數載入合約編號
+      const urlParams = new URLSearchParams(window.location.search);
+      const contractNo = urlParams.get('contractNo');
+      if (contractNo) {
+        document.getElementById('contractNo').value = contractNo;
+      }
+    });
+  </script>
+      
+</body>
+      
+</html>

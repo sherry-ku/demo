@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8"/>
+  <title>客戶管理－首頁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="common.css"/>
+  <style>
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .module-card {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .module-card:hover {
+      background: #f5faff;
+      border-color: #0e79d8;
+    }
+    .module-card h3 {
+      margin-bottom: 10px;
+      color: #0e79d8;
+    }
+    .module-card p {
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="content">
+      <h2>客戶管理首頁</h2>
+      <p>請選擇您要使用的客戶管理功能：</p>
+
+      <div class="module-grid">
+        <div class="module-card" onclick="location.href='customer_search_input_fixed.html'">
+          <h3>客戶資料查詢</h3>
+          <p>查詢客戶的基本資料與服務狀況。</p>
+        </div>
+        <div class="module-card" onclick="location.href='#'">
+          <h3>合約管理</h3>
+          <p>統收及企業合約管理功能。</p>
+        </div>
+        <div class="module-card" onclick="location.href='building_search.html'">
+          <h3>建物管理</h3>
+          <p>區域大樓經營管理功能。</p>
+        </div>
+        <div class="module-card" onclick="location.href='tag_search_list.html'">
+          <h3>標籤管理</h3>
+          <p>管理客戶的標籤與分類資訊。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="sidebar.js"></script>
+  <script>
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+  </script>
+</body>
+</html>

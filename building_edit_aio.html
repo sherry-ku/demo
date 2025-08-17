@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <title>編輯建物主檔</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="common.css" rel="stylesheet" />
+  <style>
+    .tab-buttons {
+      display: flex;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+
+    .tab-buttons button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: #f8f9fa;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .tab-buttons button.active {
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小明</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+
+
+  <!-- Main -->
+  <div class="main">
+        <div class="sidebar" id="sidebar"></div>
+    <div class="content">
+      <h2>編輯建物主檔</h2>
+
+      <!-- 標籤按鈕 -->
+      <div class="tab-buttons">
+        <button class="active" data-tab="tab1">建物基本資料</button>
+        <button data-tab="tab2">建物涵蓋地址列表</button>
+      </div>
+
+      <!-- Tab1 基本資料 -->
+      <div id="tab1" class="tab-content active">
+        <div class="form-block">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="buildingCode">建物編號</label>
+              <input type="text" id="buildingCode" name="buildingCode" value="B00123" />
+            </div>
+            <div class="form-group">
+              <label for="buildingName">建物名稱</label>
+              <input type="text" id="buildingName" name="buildingName" value="信義大樓" />
+            </div>
+            <div class="form-group">
+              <label for="businessStaff">業務人員</label>
+              <select id="businessStaff" name="businessStaff">
+                <option value="">請選擇</option>
+                <option value="A001" selected>王小明</option>
+                <option value="A002">李大華</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="totalFloors">建戶數</label>
+              <input type="text" id="totalFloors" name="totalFloors" value="120" />
+            </div>
+            <div class="form-group">
+              <label for="floorCount">棟數</label>
+              <input type="text" id="floorCount" name="floorCount" value="2" />
+            </div>
+            <div class="form-group">
+              <label for="floors">樓層</label>
+              <input type="text" id="floors" name="floors" value="15" />
+            </div>
+            <div class="form-group">
+              <label for="elevatorCount">電梯數</label>
+              <input type="text" id="elevatorCount" name="elevatorCount" value="4" />
+            </div>
+
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="constructionProgress">建置進度</label>
+              <select id="constructionProgress" name="constructionProgress">
+                <option value="">請選擇</option>
+                <option value="done" selected>已完成</option>
+                <option value="doing">施工中</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contractStartDate">合約啟用日</label>
+              <input type="date" id="contractStartDate" name="contractStartDate" value="2024-06-01" />
+            </div>
+            <div class="form-group">
+              <label for="completionDate">竣工日</label>
+              <input type="date" id="completionDate" name="completionDate" value="2024-05-15" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 主要地址 -->
+        <div class="form-block">
+          <div class="form-block-title">主要洽談地址</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mainCounty">縣(市)</label>
+              <select id="mainCounty" name="mainCounty">
+                <option value="">請選擇</option>
+                <option value="台北市" selected>台北市</option>
+                <option value="新北市">新北市</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="mainDistrict">行政區</label>
+              <select id="mainDistrict" name="mainDistrict">
+                <option value="">行政區</option>
+                <option value="信義區" selected>信義區</option>
+                <option value="中正區">中正區</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="mainVillage">里別</label>
+              <select id="mainVillage" name="mainVillage">
+                <option value="">請先選擇行政區</option>
+                <option value="松里" selected>松里</option>
+                <option value="信義里">信義里</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="mainRoad">路(街)</label>
+              <select id="mainRoad" name="mainRoad">
+                <option value="">請先選擇行政區</option>
+                <option value="松隆路" selected>松隆路</option>
+                <option value="信義路">信義路</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mainSection">段</label>
+              <input type="text" id="mainSection" name="mainSection" value="1" />
+            </div>
+            <div class="form-group">
+              <label for="mainLane">弄</label>
+              <input type="text" id="mainLane" name="mainLane" value="5" />
+            </div>
+            <div class="form-group">
+              <label for="mainAlley">街</label>
+              <input type="text" id="mainAlley" name="mainAlley" value="2" />
+            </div>
+            <div class="form-group">
+              <label for="mainStartNumber">起始號</label>
+              <input type="text" id="mainStartNumber" name="mainStartNumber" value="94" />
+            </div>
+            <div class="form-group">
+              <label for="mainEndNumber">結束號</label>
+              <input type="text" id="mainEndNumber" name="mainEndNumber" value="116" />
+            </div>
+            <div class="form-group">
+              <label for="mainOddEven">單雙號</label>
+              <input type="text" id="mainOddEven" name="mainOddEven" value="單號" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mainBuilding">棟</label>
+              <input type="text" id="mainBuilding" name="mainBuilding" value="A" />
+            </div>
+            <div class="form-group">
+              <label for="mainFloor">樓之</label>
+              <input type="text" id="mainFloor" name="mainFloor" value="8" />
+            </div>
+            <div class="form-group">
+              <label for="mainRoom">室</label>
+              <input type="text" id="mainRoom" name="mainRoom" value="801" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 建築與網路型態 -->
+        <div class="form-block">
+          <div class="form-block-title">建築與網路型態</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="buildingForm">建物等級</label>
+              <select id="buildingForm" name="buildingForm">
+                <option value="">請選擇</option>
+                <option value="A" selected>高級</option>
+                <option value="B">一般</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="buildingCategory">管委型態</label>
+              <select id="buildingCategory" name="buildingCategory">
+                <option value="">請選擇</option>
+                <option value="A" selected>有管委會</option>
+                <option value="B">無管委會</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="buildingLevel">建築型態</label>
+              <select id="buildingLevel" name="buildingLevel">
+                <option value="">請選擇</option>
+                <option value="A" selected>電梯大樓</option>
+                <option value="B">公寓</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="houseCategory">房屋類別</label>
+              <select id="houseCategory" name="houseCategory">
+                <option value="">請選擇</option>
+                <option value="A" selected>住宅</option>
+                <option value="B">商用</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="architectureForm">建物類別</label>
+              <select id="architectureForm" name="architectureForm">
+                <option value="">請選擇</option>
+                <option value="A" selected>鋼筋混凝土</option>
+                <option value="B">磚造</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="buildingProperty">大樓類別</label>
+              <select id="buildingProperty" name="buildingProperty">
+                <option value="">請選擇</option>
+                <option value="A" selected>住宅大樓</option>
+                <option value="B">辦公大樓</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="pipeline">管線類別</label>
+              <select id="pipeline" name="pipeline">
+                <option value="">請選擇</option>
+                <option value="A" selected>地下管線</option>
+                <option value="B">明管</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="network">網路</label>
+              <select id="network" name="network">
+                <option value="">請選擇</option>
+                <option value="A" selected>光纖</option>
+                <option value="B">有線</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="builder">可提供服務</label>
+              <select id="builder" name="builder">
+                <option value="">請選擇</option>
+                <option value="A" selected>MOD</option>
+                <option value="B">寬頻</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- 備註 -->
+        <div class="form-block">
+          <div class="form-block-title">競爭狀況與銷售提示</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dedicationLevel">大樓競業等級</label>
+              <select id="dedicationLevel" name="dedicationLevel">
+                <option value="">請選擇</option>
+                <option value="A" selected>高</option>
+                <option value="B">低</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="competitionStatus">競爭狀況</label>
+              <input type="text" id="competitionStatus" name="competitionStatus" value="競爭激烈" />
+            </div>
+            <div class="form-group" style="flex: 1 1 100%;">
+              <label for="remarks">備註</label>
+              <textarea id="remarks" name="remarks" rows="3" style="width:100%;">此建物交通便利，住戶素質高。</textarea>
+            </div>
+            <div class="form-group" style="flex: 1 1 100%;">
+              <label for="popupHint">跳訊提示</label>
+              <textarea id="popupHint" name="popupHint" rows="3" style="width:100%;">請注意施工時間，避免影響住戶。</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab2 涵蓋地址 -->
+      <div id="tab2" class="tab-content">
+        <div class="form-block">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="addrCity">縣(市)</label>
+              <select id="addrCity" name="addrCity">
+                <option value="">請選擇縣市</option>
+                <option value="台北市" selected>台北市</option>
+                <option value="新北市">新北市</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="addrDistrict">行政區</label>
+              <select id="addrDistrict" name="addrDistrict">
+                <option value="">請先選擇縣市</option>
+                <option value="信義區" selected>信義區</option>
+                <option value="中正區">中正區</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="addrVillage">里別</label>
+              <select id="addrVillage" name="addrVillage">
+                <option value="">請先選擇行政區</option>
+                <option value="松里" selected>松里</option>
+                <option value="信義里">信義里</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="addrRoad">路(街)</label>
+              <input type="text" id="addrRoad" name="addrRoad" value="松隆路" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="addrLane">巷</label>
+              <input type="text" id="addrLane" name="addrLane" value="5" />
+            </div>
+            <div class="form-group">
+              <label for="addrAlley">弄</label>
+              <input type="text" id="addrAlley" name="addrAlley" value="2" />
+            </div>
+            <div class="form-group">
+              <label for="addrStreet">街</label>
+              <input type="text" id="addrStreet" name="addrStreet" value="1" />
+            </div>
+            <div class="form-group">
+              <label for="addrStartNo">起始號</label>
+              <input type="text" id="addrStartNo" name="addrStartNo" value="94" />
+            </div>
+            <div class="form-group">
+              <label for="addrEndNo">結束號</label>
+              <input type="text" id="addrEndNo" name="addrEndNo" value="116" />
+            </div>
+            <div class="form-group">
+              <label for="addrSubNo">之號</label>
+              <input type="text" id="addrSubNo" name="addrSubNo" value="A" />
+            </div>
+            <div class="form-group">
+              <label for="addrOddEven">單雙號</label>
+              <input type="text" id="addrOddEven" name="addrOddEven" value="單號" />
+            </div>
+          </div>
+          <div class="form-row" style="justify-content:flex-end;gap:10px;">
+            <button type="button" class="btn" id="btnAddAddress">新增</button>
+            <button type="button" class="btn">查詢</button>
+          </div>
+        </div>
+
+        <!-- 地址列表 -->
+        <div class="section">
+          <table id="addressTable">
+            <thead>
+              <tr>
+                <th>縣(市)</th>
+                <th>行政區</th>
+                <th>里別</th>
+                <th>路(街)</th>
+                <th>巷</th>
+                <th>弄</th>
+                <th>街</th>
+                <th>起始號</th>
+                <th>結束號</th>
+                <th>之號</th>
+                <th>單雙號</th>
+                <th>編輯</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>台北市</td>
+                <td>信義區</td>
+                <td>松里</td>
+                <td>松隆路</td>
+                <td>5</td>
+                <td>2</td>
+                <td>1</td>
+                <td>94</td>
+                <td>116</td>
+                <td>A</td>
+                <td>單號</td>
+                <td><a href="#" class="delete-link" data-action="delete">刪除</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="sidebar.js"></script>
+  <script>
+  
+    // Tab 切換功能
+    function initTabs() {
+      const tabButtons = document.querySelectorAll('.tab-buttons button');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const targetTab = this.dataset.tab;
+
+          // 移除所有 active 類別
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+
+          // 添加 active 類別到當前選中的項目
+          this.classList.add('active');
+          const targetContent = document.getElementById(targetTab);
+          if (targetContent) {
+            targetContent.classList.add('active');
+          }
+        });
+      });
+    }
+
+    // 地區資料
+    const regionData = {
+      '台北市': {
+        '中正區': ['中正里', '城中里', '東門里', '文盛里', '幸市里', '幸福里', '建國里', '龍興里', '龍光里', '黎明里'],
+        '大同區': ['大有里', '大龍里', '建明里', '建功里', '蘭州里', '玉泉里', '重慶里', '至聖里', '順天里', '星明里'],
+        '中山區': ['中山里', '中原里', '正義里', '正得里', '朱崙里', '朱園里', '江山里', '江寧里', '行孝里', '行政里'],
+        '松山區': ['松山里', '松基里', '中正里', '中崙里', '民有里', '民生里', '復建里', '復盛里', '精忠里', '新聚里'],
+        '大安區': ['大安里', '大學里', '仁愛里', '古風里', '古莊里', '龍安里', '龍坡里', '龍門里', '建安里', '建倫里'],
+        '萬華區': ['萬華里', '萬壽里', '青山里', '青年里', '華中里', '華江里', '雙園里', '糖廍里', '忠德里', '忠貞里'],
+        '信義區': ['信義里', '松里', '松光里', '松隆里', '大道里', '大仁里', '正和里', '雅祥里', '富台里', '富信里'],
+        '士林區': ['福華里', '福德里', '福志里', '福林里', '福順里', '仁勇里', '義信里', '德行里', '德華里', '聖山里'],
+        '北投區': ['清江里', '清白里', '長安里', '溫泉里', '大同里', '大屯里', '奇岩里', '八仙里', '開明里', '東華里'],
+        '內湖區': ['內湖里', '內溝里', '紫雲里', '紫星里', '碧湖里', '石潭里', '秀湖里', '康樂里', '康寧里', '湖元里'],
+        '南港區': ['南港里', '中南里', '中研里', '玉成里', '重陽里', '聯成里', '鴻福里', '新富里', '東新里', '東明里'],
+        '文山區': ['文山里', '景美里', '景行里', '景慶里', '木柵里', '木新里', '興光里', '興安里', '指南里', '政大里']
+      },
+      '新北市': {
+        '板橋區': ['板橋里', '後埔里', '江子翠里', '新海里', '新埔里', '埔墘里', '莒光里', '中山里', '溪崑里', '港嘴里'],
+        '三重區': ['三重里', '永福里', '永豐里', '光榮里', '光明里', '重新里', '重陽里', '溪尾里', '大有里', '大安里'],
+        '中和區': ['中和里', '中山里', '中原里', '秀山里', '秀峰里', '秀景里', '景平里', '景新里', '景安里', '員山里'],
+        '永和區': ['永和里', '永利里', '永樂里', '光復里', '光明里', '智光里', '上溪里', '下溪里', '河濱里', '竹林里'],
+        '新莊區': ['新莊里', '中和里', '中港里', '中信里', '頭前里', '豐年里', '福營里', '福興里', '昌平里', '昌隆里'],
+        '樹林區': ['樹林里', '樹東里', '樹西里', '樹南里', '樹北里', '育德里', '育英里', '彭福里', '東昇里', '東園里'],
+        '鶯歌區': ['鶯歌里', '東鶯里', '西鶯里', '南鶯里', '北鶯里', '建德里', '建國里', '永昌里', '永吉里', '同慶里'],
+        '三峽區': ['三峽里', '八張里', '安溪里', '弘道里', '成福里', '添福里', '愛國里', '溪東里', '溪南里', '溪北里']
+      },
+      '桃園市': {
+        '桃園區': ['桃園里', '中山里', '中成里', '文中里', '永安里', '玉山里', '成功里', '西門里', '東門里', '南門里'],
+        '中壢區': ['中壢里', '中山里', '中正里', '中興里', '仁愛里', '仁德里', '光明里', '普忠里', '普強里', '新興里'],
+        '大溪區': ['大溪里', '中庄里', '仁善里', '仁武里', '內柵里', '田心里', '一心里', '福安里', '瑞興里', '瑞源里'],
+        '楊梅區': ['楊梅里', '上田里', '上湖里', '大平里', '水美里', '永寧里', '光華里', '紅梅里', '富岡里', '富豐里'],
+        '蘆竹區': ['蘆竹里', '上興里', '大竹里', '中福里', '五福里', '坑子里', '坑口里', '外社里', '山腳里', '新興里'],
+        '大園區': ['大園里', '三石里', '大海里', '內海里', '圳頭里', '田心里', '沙崙里', '竹圍里', '後厝里', '菓林里']
+      },
+      '台中市': {
+        '中區': ['中山里', '光復里', '公園里', '継光里', '柳川里', '綠川里'],
+        '東區': ['東門里', '合作里', '十甲里', '大智里', '大振里', '樂成里', '練武里', '振興里', '新庄里', '富仁里'],
+        '南區': ['南門里', '工學里', '和平里', '國光里', '樹德里', '福田里', '德義里', '長春里', '崇倫里', '積善里'],
+        '西區': ['西門里', '公正里', '公民里', '民龍里', '忠明里', '忠誠里', '後龍里', '土庫里', '大忠里', '大和里'],
+        '北區': ['北門里', '中華里', '中清里', '中友里', '光大里', '健行里', '國順里', '新北里', '賴旺里', '賴興里'],
+        '西屯區': ['西屯里', '大石里', '大河里', '大鵬里', '上石里', '上德里', '何安里', '何德里', '何福里', '協和里'],
+        '南屯區': ['南屯里', '三厝里', '大同里', '大業里', '大墩里', '文山里', '永春里', '田心里', '向心里', '豐樂里'],
+        '北屯區': ['北屯里', '三光里', '大坑里', '大德里', '平安里', '平田里', '平順里', '仁美里', '仁愛里', '軍功里']
+      },
+      '台南市': {
+        '中西區': ['中正里', '光賢里', '兌悅里', '赤嵌里', '小西門里', '大涼里', '大南里', '永福里', '西賢里', '西湖里'],
+        '東區': ['東門里', '大同里', '大福里', '大學里', '小東里', '成大里', '自強里', '忠孝里', '東聖里', '東安里'],
+        '南區': ['南門里', '大忠里', '大成里', '文南里', '金華里', '府南里', '省躬里', '明德里', '明興里', '新興里'],
+        '北區': ['北門里', '大光里', '大港里', '小北里', '文元里', '元寶里', '力行里', '成德里', '開元里', '和順里'],
+        '安平區': ['安平里', '石門里', '億載里', '華平里', '建平里', '平通里', '金城里', '漁光里', '國平里', '王城里'],
+        '安南區': ['安南里', '土城里', '大安里', '安東里', '安西里', '安慶里', '城東里', '城西里', '城南里', '城北里'],
+        '永康區': ['永康里', '大橋里', '大灣里', '三民里', '六合里', '西橋里', '東橋里', '蔦松里', '復華里', '復興里'],
+        '歸仁區': ['歸仁里', '大廟里', '七甲里', '八甲里', '歸南里', '歸北里', '媽廟里', '沙崙里', '紅瓦里', '看東里']
+      },
+      '高雄市': {
+        '新興區': ['新興里', '振成里', '振華里', '浩然里', '漢民里', '建華里', '建國里', '秋山里', '黎明里', '開平里'],
+        '前金區': ['前金里', '榮復里', '長城里', '長生里', '博愛里', '國民里', '後金里', '社東里', '社西里', '文西里'],
+        '苓雅區': ['苓雅里', '人和里', '五福里', '五權里', '日中里', '正心里', '正文里', '正大里', '正義里', '晴朗里'],
+        '鹽埕區': ['鹽埕里', '中山里', '江南里', '江西里', '河濱里', '南端里', '府北里', '新樂里', '新化里', '陸橋里'],
+        '鼓山區': ['鼓山里', '九如里', '內惟里', '山下里', '民族里', '平和里', '光化里', '河邊里', '哨船頭里', '桃源里'],
+        '旗津區': ['旗津里', '中洲里', '永安里', '安順里', '上竹里', '中興里', '復興里', '實踐里', '北汕里', '南汕里'],
+        '前鎮區': ['前鎮里', '仁愛里', '忠孝里', '忠誠里', '建隆里', '建國里', '明正里', '明義里', '明禮里', '明智里'],
+        '三民區': ['三民里', '安吉里', '安泰里', '安生里', '安康里', '安邦里', '安寧里', '鼎中里', '鼎西里', '鼎金里']
+      }
+    };
+
+    // 初始化地區下拉選單
+    function initRegionDropdowns() {
+      const citySelect = document.getElementById('addrCity');
+      const districtSelect = document.getElementById('addrDistrict');
+      const villageSelect = document.getElementById('addrVillage');
+
+      if (!citySelect || !districtSelect || !villageSelect) {
+        console.warn('地區下拉選單元素未找到');
+        return;
+      }
+
+      // 載入縣市選項
+      Object.keys(regionData).forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        citySelect.appendChild(option);
+      });
+
+      // 縣市選擇事件
+      citySelect.addEventListener('change', function () {
+        const selectedCity = this.value;
+
+        // 清空並重置行政區和里別
+        districtSelect.innerHTML = '<option value="">請選擇行政區</option>';
+        villageSelect.innerHTML = '<option value="">請先選擇行政區</option>';
+
+        if (selectedCity && regionData[selectedCity]) {
+          districtSelect.disabled = false;
+
+          // 載入行政區選項
+          Object.keys(regionData[selectedCity]).forEach(district => {
+            const option = document.createElement('option');
+            option.value = district;
+            option.textContent = district;
+            districtSelect.appendChild(option);
+          });
+        } else {
+          districtSelect.disabled = true;
+          villageSelect.disabled = true;
+        }
+      });
+
+      // 行政區選擇事件
+      districtSelect.addEventListener('change', function () {
+        const selectedCity = citySelect.value;
+        const selectedDistrict = this.value;
+
+        // 清空里別
+        villageSelect.innerHTML = '<option value="">請選擇里別</option>';
+
+        if (selectedCity && selectedDistrict && regionData[selectedCity] && regionData[selectedCity][selectedDistrict]) {
+          villageSelect.disabled = false;
+
+          // 載入里別選項
+          regionData[selectedCity][selectedDistrict].forEach(village => {
+            const option = document.createElement('option');
+            option.value = village;
+            option.textContent = village;
+            villageSelect.appendChild(option);
+          });
+        } else {
+          villageSelect.disabled = true;
+        }
+      });
+    }
+
+    // 涵蓋地址新增功能
+    function initAddressManagement() {
+      const btnAddAddress = document.getElementById('btnAddAddress');
+      const addressTable = document.getElementById('addressTable');
+
+      if (!btnAddAddress || !addressTable) {
+        console.warn('地址管理元素未找到');
+        return;
+      }
+
+      btnAddAddress.addEventListener('click', function () {
+        const addressData = {
+          city: document.getElementById('addrCity')?.value || '',
+          district: document.getElementById('addrDistrict')?.value || '',
+          village: document.getElementById('addrVillage')?.value || '',
+          road: document.getElementById('addrRoad')?.value.trim() || '',
+          lane: document.getElementById('addrLane')?.value.trim() || '',
+          alley: document.getElementById('addrAlley')?.value.trim() || '',
+          street: document.getElementById('addrStreet')?.value.trim() || '',
+          startNo: document.getElementById('addrStartNo')?.value.trim() || '',
+          endNo: document.getElementById('addrEndNo')?.value.trim() || '',
+          subNo: document.getElementById('addrSubNo')?.value.trim() || '',
+          oddEven: document.getElementById('addrOddEven')?.value.trim() || ''
+        };
+
+        // 驗證必填欄位
+        if (!addressData.city || !addressData.district || !addressData.road) {
+          alert('請選擇縣市、行政區，並輸入路(街)');
+          return;
+        }
+
+        // 新增到表格
+        const tbody = addressTable.querySelector('tbody');
+        if (tbody) {
+          const newRow = document.createElement('tr');
+          newRow.innerHTML = `
+                    <td>${addressData.city}</td>
+                    <td>${addressData.district}</td>
+                    <td>${addressData.village}</td>
+                    <td>${addressData.road}</td>
+                    <td>${addressData.lane}</td>
+                    <td>${addressData.alley}</td>
+                    <td>${addressData.street}</td>
+                    <td>${addressData.startNo}</td>
+                    <td>${addressData.endNo}</td>
+                    <td>${addressData.subNo}</td>
+                    <td>${addressData.oddEven}</td>
+                    <td><a href="#" class="delete-link" data-action="delete">刪除</a></td>
+                `;
+          tbody.appendChild(newRow);
+
+          // 重置表單
+          document.getElementById('addrCity').value = '';
+          document.getElementById('addrDistrict').innerHTML = '<option value="">請先選擇縣市</option>';
+          document.getElementById('addrDistrict').disabled = true;
+          document.getElementById('addrVillage').innerHTML = '<option value="">請先選擇行政區</option>';
+          document.getElementById('addrVillage').disabled = true;
+          document.getElementById('addrRoad').value = '';
+          document.getElementById('addrLane').value = '';
+          document.getElementById('addrAlley').value = '';
+          document.getElementById('addrStreet').value = '';
+          document.getElementById('addrStartNo').value = '';
+          document.getElementById('addrEndNo').value = '';
+          document.getElementById('addrSubNo').value = '';
+          document.getElementById('addrOddEven').value = '';
+        }
+      });
+
+      // 刪除功能
+      addressTable.addEventListener('click', function (e) {
+        if (e.target.classList.contains('delete-link')) {
+          e.preventDefault();
+          const row = e.target.closest('tr');
+          if (row && confirm('確定要刪除此地址嗎？')) {
+            row.remove();
+          }
+        }
+      });
+    }
+
+    // 表單驗證功能
+    function initFormValidation() {
+      const form = document.querySelector('.content');
+      if (!form) return;
+
+      // 為必填欄位添加驗證
+      const requiredFields = ['buildingCode', 'buildingName'];
+
+      requiredFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+          field.addEventListener('blur', function () {
+            if (!this.value.trim()) {
+              this.style.borderColor = '#dc3545';
+              this.style.backgroundColor = '#fff5f5';
+            } else {
+              this.style.borderColor = '';
+              this.style.backgroundColor = '';
+            }
+          });
+        }
+      });
+    }
+
+    // 初始化所有功能
+    document.addEventListener('DOMContentLoaded', function () {
+      initTabs();
+      initRegionDropdowns();  // 加入這行
+      initAddressManagement();
+      initFormValidation();
+    });
+  </script>
+  <script>
+    if (typeof sidebarHTML !== 'undefined') {
+      document.getElementById('sidebar').innerHTML = sidebarHTML;
+    }
+  </script>
+
+</body>
+
+</html>

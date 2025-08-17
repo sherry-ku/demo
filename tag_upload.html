@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8"/>
+  <title>標籤管理－名單上傳</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="common.css"/>
+  <style>
+    .form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:12px}
+    .notes{font-size:12px;color:#666;line-height:1.6;margin-top:6px}
+    .notes em{color:#e74c3c;font-style:normal}
+    .file-tip{font-size:12px;color:#444;margin-left:8px}
+    .w-220{max-width:220px}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+
+  <div class="main">
+  <!-- Sidebar -->
+<div class="sidebar" id="sidebar"></div>
+
+
+    <!-- Content -->
+    <div class="content">
+      <h2>標籤名單上傳</h2>
+
+      <div class="section">
+        <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
+          <!-- 標籤類別 -->
+          <div class="form-item">
+            <div class="form-label"><span style="color:red;">＊</span>標籤類別</div>
+            <div class="form-input">
+              <select id="tagCategory" class="w-220">
+                <option value="">請選擇</option>
+                <option value="流失風險等級">流失風險等級</option>
+                <option value="帳務告警">帳務告警</option>
+                <option value="設備異常">設備異常</option>
+              </select>
+            </div>
+          </div>
+          <!-- 標籤名稱 -->
+          <div class="form-item">
+            <div class="form-label"><span style="color:red;">＊</span>標籤名稱</div>
+            <div class="form-input">
+              <select id="tagName" class="w-220">
+                <option value="">請選擇</option>
+              </select>
+            </div>
+          </div>
+          <!-- 選擇檔案 -->
+          <div class="form-item" style="grid-column:1 / -1;">
+            <div class="form-label"><span style="color:red;">＊</span>選擇檔案</div>
+            <div class="form-input">
+              <input type="file" id="file" accept=".xls,.xlsx"/>
+              <span class="file-tip">僅接受 .xls、.xlsx</span>
+              <div class="notes">
+                註1：<em>檔案格式限 Excel（.xls／.xlsx）</em>。<br/>
+                註2：匯入後將檢核資料，若有任一筆資料發生錯誤，整份資料皆不會上傳系統，請修正後重新上傳。
+              </div>
+            </div>
+          </div>
+          <!-- 有效起日 -->
+          <div class="form-item">
+            <div class="form-label"><span style="color:red;">＊</span>有效起日</div>
+            <div class="form-input">
+              <input type="date" id="startDate" class="w-220"/>
+            </div>
+          </div>
+          <!-- 編輯人員（唯讀） -->
+          <div class="form-item">
+            <div class="form-label">編輯人員</div>
+            <div class="form-value">001234 陳小五</div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-secondary" type="button" onclick="location.href='tag_search_list.html'">取消</button>
+          <button class="btn btn-primary" id="btnSubmit" type="button">送出</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 依類別載入範例標籤清單（示意，可改成後端帶入）
+    const tagOptions = {
+      '流失風險等級': ['立流A','立流B','特維1','特維2','特維3'],
+      '帳務告警': ['連2期欠費','連3期欠費','停復頻繁'],
+      '設備異常': ['機上盒離線','光機斷訊']
+    };
+    const tagCategory = document.getElementById('tagCategory');
+    const tagName = document.getElementById('tagName');
+
+    tagCategory.addEventListener('change', () => {
+      const list = tagOptions[tagCategory.value] || [];
+      tagName.innerHTML = '<option value="">請選擇</option>' + list.map(n => `<option>${n}</option>`).join('');
+    });
+
+    // 送出檢核（前端示意）
+    document.getElementById('btnSubmit').addEventListener('click', () => {
+      const errs = [];
+      if (!tagCategory.value) errs.push('請選擇「標籤類別」');
+      if (!tagName.value) errs.push('請選擇「標籤名稱」');
+      const f = document.getElementById('file');
+      if (!f.files || f.files.length === 0) errs.push('請選擇上傳檔案');
+      const date = document.getElementById('startDate').value;
+      if (!date) errs.push('請選擇「有效起日」');
+
+      if (errs.length) {
+        alert(errs.join('\n'));
+        return;
+      }
+      alert('已送出（示意）。實作時請改為呼叫後端 API 上傳檔案。');
+    });
+  </script>
+  <script src="sidebar.js"></script>
+<script>
+  document.getElementById('sidebar').innerHTML = sidebarHTML;
+</script>
+
+</body>
+</html>

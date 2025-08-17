@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<html class="readonly" lang="zh-TW">
+
+<head>
+  <meta charset="utf-8" />
+  <title>客戶聯絡歷程 - 客戶資料查詢結果</title>
+  <link href="common.css" rel="stylesheet" />
+</head>
+
+<body class="detail-page">
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+  <!-- 新增：家戶編號 + 姓名 + 地址 -->
+  <div class="customer-info-bar" style="
+    padding: 8px 15px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;">
+    家戶編號：<span style="color:#007bff;">CA0001</span>
+    &emsp; 申請人姓名：<span style="color:#007bff;">李曉明</span>
+    &emsp; 裝機地址：<span style="color:#dc3545;">忠孝東路四段12巷1弄5樓101號</span>
+  </div>
+
+  <div class="main">
+    <!-- 側邊選單 (Sidebar) -->
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="content">
+
+      <div id="customerInfoHeaderContainer"></div>
+      <!-- 第一層 Tab -->
+      <div>
+        <div class="tabs" id="mainTabs">
+          <div class="tab">
+            <a href="detail-customer.html" style="text-decoration: none; color: inherit;">客戶與大樓資料</a>
+          </div>
+          <div class="tab">
+            <a href="detail-product.html" style="text-decoration: none; color: inherit;">產品與申辦歷程</a>
+          </div>
+          <div class="tab">
+            <a href="detail-billing.html" style="text-decoration: none; color: inherit;">帳務與發票</a>
+          </div>
+          <div class="tab">
+            <a href="detail-engineering.html" style="text-decoration: none; color: inherit;">工務與設備</a>
+          </div>
+          <div class="tab active">
+            <a href="detail-contact.html" style="text-decoration: none; color: inherit;">客戶聯絡歷程</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 客戶聯絡歷程 Tab Content -->
+      <div class="main-tab-content" id="main5">
+        <div class="section">
+          <div class="section-title">新增聯絡記錄</div>
+          <div class="form-grid" style="margin-bottom: 15px;">
+            <div class="form-item">
+              <label class="form-label">聯絡日期</label>
+              <div class="form-input">
+                <input type="date" value="2025-08-16" />
+              </div>
+            </div>
+            <div class="form-item">
+              <label class="form-label">聯絡時間</label>
+              <div class="form-input">
+                <input type="time" value="14:30" />
+              </div>
+            </div>
+            <div class="form-item">
+              <label class="form-label">聯絡方式</label>
+              <div class="form-input">
+                <select>
+                  <option>電話</option>
+                  <option>Email</option>
+                  <option>現場</option>
+                  <option>線上客服</option>
+                  <option>簡訊</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-item">
+              <label class="form-label">聯絡類型</label>
+              <div class="form-input">
+                <select>
+                  <option>客戶來電</option>
+                  <option>客服外撥</option>
+                  <option>技術支援</option>
+                  <option>帳務諮詢</option>
+                  <option>申訴處理</option>
+                  <option>行銷推廣</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-item">
+              <label class="form-label">處理人員</label>
+              <div class="form-input">
+                <input type="text" value="005566 陳小華" />
+              </div>
+            </div>
+            <div class="form-item">
+              <label class="form-label">處理狀態</label>
+              <div class="form-input">
+                <select>
+                  <option>已解決</option>
+                  <option>處理中</option>
+                  <option>待後續追蹤</option>
+                  <option>轉介其他部門</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-item" style="grid-column: span 3;">
+              <label class="form-label">聯絡主題</label>
+              <div class="form-input">
+                <input type="text" placeholder="請輸入聯絡主題..." />
+              </div>
+            </div>
+            <div class="form-item" style="grid-column: span 3;">
+              <label class="form-label">聯絡內容</label>
+              <div class="form-input">
+                <textarea placeholder="請詳細描述聯絡內容..." style="min-height: 100px;"></textarea>
+              </div>
+            </div>
+            <div class="form-item" style="grid-column: span 3;">
+              <label class="form-label">處理結果</label>
+              <div class="form-input">
+                <textarea placeholder="請描述處理結果..." style="min-height: 100px;"></textarea>
+              </div>
+            </div>
+            <div class="form-item" style="grid-column: span 3;">
+              <button class="btn" style="margin-right: 10px;">儲存記錄</button>
+              <button class="btn-secondary">清除內容</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">聯絡記錄查詢</div>
+          <div class="form-grid" style="grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-bottom:15px;">
+            <div class="form-item">
+              <label class="form-label">查詢期間</label>
+              <div class="form-input">
+                <input type="date" value="2025-01-01" />
+              </div>
+            </div>
+            <div class="form-item">
+              <label class="form-label">至</label>
+              <div class="form-input">
+                <input type="date" value="2025-12-31" />
+              </div>
+            </div>
+            <div class="form-item">
+              <label class="form-label">聯絡方式</label>
+              <div class="form-input">
+                <select>
+                  <option>全部</option>
+                  <option>電話</option>
+                  <option>Email</option>
+                  <option>現場</option>
+                  <option>線上客服</option>
+                  <option>簡訊</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-item">
+              <label class="form-label">聯絡類型</label>
+              <div class="form-input">
+                <select>
+                  <option>全部</option>
+                  <option>客戶來電</option>
+                  <option>客服外撥</option>
+                  <option>技術支援</option>
+                  <option>帳務諮詢</option>
+                  <option>申訴處理</option>
+                  <option>行銷推廣</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-item">
+              <label class="form-label">處理狀態</label>
+              <div class="form-input">
+                <select>
+                  <option>全部</option>
+                  <option>已解決</option>
+                  <option>處理中</option>
+                  <option>待後續追蹤</option>
+                  <option>轉介其他部門</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-item">
+              <button class="btn" style="margin-right:5px;">查詢</button>
+              <button class="btn">清除</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">聯絡記錄列表</div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>聯絡日期</th>
+                  <th>聯絡時間</th>
+                  <th>聯絡方式</th>
+                  <th>聯絡類型</th>
+                  <th>聯絡主題</th>
+                  <th>處理人員</th>
+                  <th>處理狀態</th>
+                  <th>建立時間</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025/08/15</td>
+                  <td>14:30</td>
+                  <td>電話</td>
+                  <td>技術支援</td>
+                  <td>網路訊號不穩定</td>
+                  <td>005566 陳小華</td>
+                  <td><span class="badge badge-orange">處理中</span></td>
+                  <td>2025/08/15 14:35</td>
+                  <td>
+                    <button class="btn-view" onclick="viewContactDetail(1)">查看詳情</button>
+                    <button class="btn-info">編輯記錄</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2025/08/10</td>
+                  <td>10:15</td>
+                  <td>線上客服</td>
+                  <td>帳務諮詢</td>
+                  <td>帳單金額確認</td>
+                  <td>007788 王小明</td>
+                  <td><span class="badge badge-green">已解決</span></td>
+                  <td>2025/08/10 10:25</td>
+                  <td>
+                    <button class="btn-view" onclick="viewContactDetail(2)">查看詳情</button>
+                    <button class="btn-info">編輯記錄</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2025/07/28</td>
+                  <td>16:45</td>
+                  <td>客服外撥</td>
+                  <td>行銷推廣</td>
+                  <td>新服務推薦</td>
+                  <td>009900 李小美</td>
+                  <td><span class="badge badge-green">已解決</span></td>
+                  <td>2025/07/28 17:00</td>
+                  <td>
+                    <button class="btn-view" onclick="viewContactDetail(3)">查看詳情</button>
+                    <button class="btn-info">編輯記錄</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2025/07/15</td>
+                  <td>09:30</td>
+                  <td>Email</td>
+                  <td>申訴處理</td>
+                  <td>服務品質投訴</td>
+                  <td>001122 張組長</td>
+                  <td><span class="badge badge-green">已解決</span></td>
+                  <td>2025/07/15 09:45</td>
+                  <td>
+                    <button class="btn-view" onclick="viewContactDetail(4)">查看詳情</button>
+                    <button class="btn-info">編輯記錄</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2025/06/05</td>
+                  <td>11:20</td>
+                  <td>現場</td>
+                  <td>客戶來電</td>
+                  <td>申請新服務</td>
+                  <td>005566 陳小華</td>
+                  <td><span class="badge badge-green">已解決</span></td>
+                  <td>2025/06/05 11:35</td>
+                  <td>
+                    <button class="btn-view" onclick="viewContactDetail(5)">查看詳情</button>
+                    <button class="btn-info">編輯記錄</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">客戶滿意度調查</div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>調查日期</th>
+                  <th>調查方式</th>
+                  <th>服務滿意度</th>
+                  <th>產品滿意度</th>
+                  <th>整體滿意度</th>
+                  <th>建議與回饋</th>
+                  <th>調查人員</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025/08/01</td>
+                  <td>電話訪問</td>
+                  <td><span class="badge badge-green">滿意</span></td>
+                  <td><span class="badge badge-green">滿意</span></td>
+                  <td><span class="badge badge-green">滿意</span></td>
+                  <td>服務品質良好，希望價格能更優惠</td>
+                  <td>002233 劉專員</td>
+                </tr>
+                <tr>
+                  <td>2025/06/15</td>
+                  <td>線上問卷</td>
+                  <td><span class="badge badge-orange">普通</span></td>
+                  <td><span class="badge badge-green">滿意</span></td>
+                  <td><span class="badge badge-orange">普通</span></td>
+                  <td>網路偶有斷線，希望改善穩定性</td>
+                  <td>系統自動</td>
+                </tr>
+                <tr>
+                  <td>2025/03/20</td>
+                  <td>簡訊調查</td>
+                  <td><span class="badge badge-green">滿意</span></td>
+                  <td><span class="badge badge-green">滿意</span></td>
+                  <td><span class="badge badge-green">滿意</span></td>
+                  <td>整體服務不錯</td>
+                  <td>系統自動</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 聯絡記錄詳情彈窗 -->
+  <div id="contactDetailModal" style="
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;">
+    <div style="
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      width: 600px;
+      max-width: 90%;
+      max-height: 80%;
+      overflow-y: auto;">
+      <h3>聯絡記錄詳情</h3>
+      <div id="contactDetailContent">
+        <!-- 詳情內容將動態載入 -->
+      </div>
+      <div style="text-align: right; margin-top: 20px;">
+        <button class="btn" onclick="closeContactDetailModal()">關閉</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 查看聯絡記錄詳情
+    function viewContactDetail(id) {
+      const details = {
+        1: {
+          date: '2025/08/15',
+          time: '14:30',
+          method: '電話',
+          type: '技術支援',
+          subject: '網路訊號不穩定',
+          handler: '005566 陳小華',
+          status: '處理中',
+          content: '客戶反映家中網路訊號不穩定，經常斷線。客戶表示問題從昨天開始發生，影響工作和娛樂使用。',
+          result: '已安排工程師於明日上午前往檢查設備和訊號品質，並告知客戶臨時解決方案。'
+        },
+        2: {
+          date: '2025/08/10',
+          time: '10:15',
+          method: '線上客服',
+          type: '帳務諮詢',
+          subject: '帳單金額確認',
+          handler: '007788 王小明',
+          status: '已解決',
+          content: '客戶對本期帳單金額有疑問，詢問為何比上期增加。',
+          result: '說明本期新增Friday影音服務費用149元，客戶了解並表示滿意。'
+        },
+        3: {
+          date: '2025/07/28',
+          time: '16:45',
+          method: '客服外撥',
+          type: '行銷推廣',
+          subject: '新服務推薦',
+          handler: '009900 李小美',
+          status: '已解決',
+          content: '主動聯絡客戶推薦Mesh WiFi 6服務，提升家中網路覆蓋。',
+          result: '客戶表示有興趣，已預約工程師到府評估。'
+        },
+        4: {
+          date: '2025/07/15',
+          time: '09:30',
+          method: 'Email',
+          type: '申訴處理',
+          subject: '服務品質投訴',
+          handler: '001122 張組長',
+          status: '已解決',
+          content: '客戶投訴網路服務品質不穩定，要求改善或退費。',
+          result: '經技術部門檢查，發現區域設備異常。已完成維修並補償客戶一個月服務費。'
+        },
+        5: {
+          date: '2025/06/05',
+          time: '11:20',
+          method: '現場',
+          type: '客戶來電',
+          subject: '申請新服務',
+          handler: '005566 陳小華',
+          status: '已解決',
+          content: '客戶到服務中心申請網路和有線電視服務。',
+          result: '已完成申請手續，安排工程師於6月4日進行安裝。'
+        }
+      };
+
+      const detail = details[id];
+      if (detail) {
+        document.getElementById('contactDetailContent').innerHTML = `
+          <div class="form-grid">
+            <div class="form-item">
+              <div class="form-label">聯絡日期：</div>
+              <div class="form-value">${detail.date}</div>
+            </div>
+            <div class="form-item">
+              <div class="form-label">聯絡時間：</div>
+              <div class="form-value">${detail.time}</div>
+            </div>
+            <div class="form-item">
+              <div class="form-label">聯絡方式：</div>
+              <div class="form-value">${detail.method}</div>
+            </div>
+            <div class="form-item">
+              <div class="form-label">聯絡類型：</div>
+              <div class="form-value">${detail.type}</div>
+            </div>
+            <div class="form-item">
+              <div class="form-label">處理人員：</div>
+              <div class="form-value">${detail.handler}</div>
+            </div>
+            <div class="form-item">
+              <div class="form-label">處理狀態：</div>
+              <div class="form-value">${detail.status}</div>
+            </div>
+            <div class="form-item" style="grid-column: span 3;">
+              <div class="form-label">聯絡主題：</div>
+              <div class="form-value">${detail.subject}</div>
+            </div>
+            <div class="form-item" style="grid-column: span 3;">
+              <div class="form-label">聯絡內容：</div>
+              <div class="form-value" style="min-height: 60px;">${detail.content}</div>
+            </div>
+            <div class="form-item" style="grid-column: span 3;">
+              <div class="form-label">處理結果：</div>
+              <div class="form-value" style="min-height: 60px;">${detail.result}</div>
+            </div>
+          </div>
+        `;
+        document.getElementById('contactDetailModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    // 關閉聯絡記錄詳情彈窗
+    function closeContactDetailModal() {
+      document.getElementById('contactDetailModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // 點擊彈窗外部區域關閉彈窗
+    document.getElementById('contactDetailModal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeContactDetailModal();
+      }
+    });
+
+    // ESC 鍵關閉彈窗
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.getElementById('contactDetailModal').style.display === 'flex') {
+        closeContactDetailModal();
+      }
+    });
+  </script>
+
+  <script src="customerInfoHeader.js"></script>
+  <script src="sidebar.js"></script>
+  <script>
+    document.getElementById('customerInfoHeaderContainer').innerHTML = customerInfoHeaderHTML;
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+  </script>
+</body>
+
+</html>

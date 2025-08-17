@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<title>貼標管理－查詢與結果</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="common.css"/>
+<style>
+  .form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}
+  .text-red{color:#e74c3c;font-weight:bold}
+  .link-download{color:#1a0dab;text-decoration:underline;cursor:pointer}
+  .pagination-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin:12px 0}
+  .pages{display:flex;gap:8px}
+  .pages a{color:#007bff;text-decoration:none}
+  .pages a.active{font-weight:bold;text-decoration:underline}
+  .per-page{margin-left:14px;display:flex;align-items:center;gap:6px}
+  td.left{text-align:left}
+</style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <div>登入者：005566 陳小華</div>
+    <div>登入角色：客服人員</div>
+    <div>公司別：116 中嘉數位</div>
+    <div>登入時間：18:44:11</div>
+  </div>
+  <div class="header-right">
+    <button class="btn">訊息中心</button>
+    <button class="btn">暫存訂單</button>
+    <button class="btn">登出</button>
+  </div>
+</div>
+
+<div class="main">
+  <!-- Sidebar -->
+ <div class="sidebar" id="sidebar"></div>
+
+
+  <!-- Content -->
+  <div class="content">
+    <h2>貼標管理</h2>
+
+    <!-- 查詢條件 -->
+    <div class="section">
+      <div class="section-title">
+        查詢條件
+        <button class="toggle-btn" id="btnToggle">縮合 ▼</button>
+      </div>
+
+      <div id="searchBlock">
+        <div class="form-row">
+          <div class="form-group">
+            <label><span style="color:red;">＊</span>標籤類別</label>
+            <select id="q_category" class="form-control">
+              <option value="">請選擇</option>
+              <option>流失風險標籤</option>
+              <option>專案標籤</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label><span style="color:red;">＊</span>標籤名稱</label>
+            <select id="q_name" class="form-control">
+              <option value="">全選</option>
+              <option>立流A</option>
+              <option>立流B</option>
+              <option>特維A</option>
+              <option>特維B</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>標籤代碼</label>
+            <input type="text" class="form-control" id="q_code" placeholder="如 CR-001"/>
+          </div>
+          <div class="form-group">
+            <label><span style="color:red;">＊</span>上傳結果</label>
+            <select id="q_result" class="form-control">
+              <option value="">全選</option>
+              <option value="SUCCESS">成功</option>
+              <option value="FAIL">失敗</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+        <button class="btn" id="btnUpload" type="button" onclick="location.href='tag_upload.html'">新增上傳</button>
+          <button class="btn btn-secondary" id="btnClear" type="button">清除</button>
+          <button class="btn btn-primary" id="btnSearch" type="button">查詢</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 查詢結果 -->
+    <div class="section">
+      <div class="section-title">查詢結果</div>
+      <table>
+        <thead>
+          <tr>
+            <th>項次</th>
+            <th>標籤類別</th>
+            <th>標籤代碼</th>
+            <th>標籤名稱</th>
+            <th>標籤生效期間</th>
+            <th>上傳結果</th>
+            <th>上傳成功筆數</th>
+            <th>上傳部門</th>
+            <th>上傳人員</th>
+            <th>上傳時間</th>
+            <th>下載</th>
+          </tr>
+        </thead>
+        <tbody id="resultBody">
+          <tr>
+            <td>1</td>
+            <td>流失風險標籤</td>
+            <td>MKT-RT-ANTI-CHURN-01</td>
+            <td>立流A</td>
+            <td>2025/8/14 – 2025/8/30</td>
+            <td>成功</td>
+            <td>15</td>
+            <td>用戶維繫暨<br/>加值服務部</td>
+            <td>001234<br/>陳小五</td>
+            <td>2025/8/14<br/>14:02</td>
+            <td><span class="link-download" data-type="ok">下載</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>專案標籤</td>
+            <td>MKT-RT-SB-618</td>
+            <td>續-短促SB-C+1G</td>
+            <td>2025/8/16 - 2025/8/26</td>
+            <td class="text-red">失敗</td>
+            <td class="text-red">0</td>
+            <td>用戶維繫暨<br/>加值服務部</td>
+            <td>001234<br/>陳小五</td>
+            <td>2025/8/14<br/>14:02</td>
+            <td><span class="link-download" data-type="err">下載</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 分頁 -->
+      <div class="pagination-bar">
+        <button class="btn btn-secondary" id="prevPage">上一頁</button>
+        <div class="pages" id="pages">
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">5</a>
+          <a href="#">6</a>
+          <a href="#">7</a>
+          <a href="#">8</a>
+          <a href="#">9</a>
+          <a href="#">10</a>
+        </div>
+        <button class="btn btn-secondary" id="nextPage">下一頁</button>
+        <div class="per-page">
+          <span>每頁顯示數</span>
+          <select id="pageSize">
+            <option>20</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// 縮合/展開查詢區
+const btnToggle = document.getElementById('btnToggle');
+const searchBlock = document.getElementById('searchBlock');
+btnToggle.addEventListener('click', () => {
+  const isHidden = getComputedStyle(searchBlock).display === 'none';
+  searchBlock.style.display = isHidden ? 'block' : 'none';
+  btnToggle.textContent = isHidden ? '縮合 ▼' : '展開 ▽';
+});
+
+// 清除
+document.getElementById('btnClear').addEventListener('click', () => {
+  ['q_category','q_name','q_valid','q_result'].forEach(id=>{
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+});
+
+// 送出（示意）
+document.getElementById('btnSearch').addEventListener('click', () => {
+  alert('查詢送出（示意）');
+});
+
+// 上傳
+document.getElementById('btnUpload').addEventListener('click', () => {
+  location.href = 'tag_upload.html';
+});
+
+// 下載
+document.querySelectorAll('.link-download').forEach(a => {
+  a.addEventListener('click', () => {
+    const type = a.dataset.type;
+    if(type === 'ok'){
+      alert('下載「成功上傳清單」示意。實作時請改成下載實際檔案。');
+    }else{
+      alert('下載「錯誤清單」示意。實作時請改成下載實際檔案。');
+    }
+  });
+});
+</script>
+<script src="sidebar.js"></script>
+<script>
+  document.getElementById('sidebar').innerHTML = sidebarHTML;
+</script>
+
+</body>
+</html>

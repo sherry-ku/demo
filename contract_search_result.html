@@ -1,0 +1,263 @@
+<!-- contract_search_result.html -->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8"/>
+  <title>合約管理－合約查詢結果</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="common.css"/>
+  <style>
+    .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
+    .inline { display: flex; align-items: center; gap: 8px; }
+    .w-220 { max-width: 220px; }
+    .btn-mini { padding: 2px 8px; font-size: 12px; border-radius: 4px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
+    .addr-hint { color: #0e9a00; font-weight: bold; margin: 6px 0 4px 4px; }
+    .dash { padding: 0 6px; }
+    .toolbar-right { display: flex; justify-content: flex-end; gap: 10px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: center; }
+    th { background-color: #0f6cbf; color: white; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+
+  <div class="main">
+  <div class="sidebar" id="sidebar"></div>
+  <div class="content">
+    <h2>合約查詢</h2>
+
+    <!-- 查詢條件 -->
+    <div class="form-block">
+      <div class="form-block-title">查詢條件</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>合約編號</label>
+          <input type="text" name="contract_id" />
+        </div>
+        <div class="form-group">
+          <label>合約名稱</label>
+          <div class="inline">
+            <input type="text" name="contract_name" />
+            <button type="button" class="btn-mini btn btn-secondary">模糊</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>服務別</label>
+          <select name="service_type">
+            <option>請選擇</option>
+            <option>CATV</option>
+            <option>Internet</option>
+            <option>OTT</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>申請人名稱</label>
+          <div class="inline">
+            <input type="text" name="applicant_name" />
+            <button type="button" class="btn-mini btn btn-secondary">模糊</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>統編/證號</label>
+          <input type="text" name="tax_id" />
+        </div>
+        <div class="form-group">
+          <label>建物型態</label>
+          <select name="building_type">
+            <option>請選擇</option>
+            <option>透天式</option>
+            <option>大樓</option>
+            <option>華廈</option>
+            <option>公寓</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>簽約人員</label>
+          <input type="text" name="contract_staff" />
+        </div>
+        <div class="form-group">
+          <label>現行負責人員</label>
+          <input type="text" name="current_staff" />
+        </div>
+        <div class="form-group">
+          <label>合約簽約日</label>
+          <div class="inline">
+            <input type="date" name="contract_start_date" />
+            <span class="dash">—</span>
+            <input type="date" name="contract_start_date_end" />
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>合約到期日</label>
+          <div class="inline">
+            <input type="date" name="contract_end_date" />
+            <span class="dash">—</span>
+            <input type="date" name="contract_end_date_end" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 地址區塊 -->
+<div class="form-block">
+  <div class="form-block-title">合約洽談地址</div>
+  <div id="address-container"></div>
+  
+  <!-- 查詢按鈕 -->
+  <div class="form-actions">
+    <button type="button" class="btn btn-primary" onclick="performSearch()">查詢</button>
+    <button type="button" class="btn btn-secondary" onclick="clearForm()">清除</button>
+  </div>
+</div>
+
+    <!-- 查詢結果表格 -->
+    <div class="section">
+      <div class="toolbar-right">
+        <button class="btn">子戶批次派單</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>上傳批次派單 Excel 檔案</th>
+            <th>合約編號</th>
+            <th>合約名稱</th>
+            <th>服務別</th>
+            <th>建物名稱</th>
+            <th>負責人員</th>
+            <th>建立時間</th>
+            <th>編輯</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox" checked></td>
+            <td>P-001</td>
+            <td>XXX套房合約 - I</td>
+            <td>Internet</td>
+            <td>國美瑞光</td>
+            <td>王業務</td>
+            <td>2024-12-20</td>
+            <td><a href="contract_edit_step2.html?contractNo=P-001">編輯</a></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" checked></td>
+            <td>P-002</td>
+            <td>XXX套房合約 - C</td>
+            <td>CATV</td>
+            <td>國美瑞光</td>
+            <td>王業務</td>
+            <td>2024-12-20</td>
+            <td><a href="contract_edit_step2.html?contractNo=P-002">編輯</a></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>P-003</td>
+            <td>OOO統收合約 - I</td>
+            <td>Internet</td>
+            <td>自由時報廣場</td>
+            <td>張業務</td>
+            <td>2025-03-15</td>
+            <td><a href="contract_edit_step2.html?contractNo=P-003">編輯</a></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>P-004</td>
+            <td>OOO統收合約 - C</td>
+            <td>CATV</td>
+            <td>自由時報廣場</td>
+            <td>張業務</td>
+            <td>2025-03-15</td>
+            <td><a href="contract_edit_step2.html?contractNo=P-004">編輯</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+  
+  <script src="sidebar.js"></script>
+  <script src="address.js"></script>
+  <script>
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+    
+    document.addEventListener("DOMContentLoaded", function () {
+      loadAddress('address-container');
+    });
+    
+    function performSearch() {
+      try {
+        // 收集查詢條件
+        const searchData = {
+          contract_id: document.querySelector('input[name="contract_id"]').value,
+          contract_name: document.querySelector('input[name="contract_name"]').value,
+          service_type: document.querySelector('select[name="service_type"]').value,
+          applicant_name: document.querySelector('input[name="applicant_name"]').value,
+          tax_id: document.querySelector('input[name="tax_id"]').value,
+          building_type: document.querySelector('select[name="building_type"]').value,
+          contract_staff: document.querySelector('input[name="contract_staff"]').value,
+          current_staff: document.querySelector('input[name="current_staff"]').value,
+          contract_start_date: document.querySelector('input[name="contract_start_date"]').value,
+          contract_start_date_end: document.querySelector('input[name="contract_start_date_end"]').value,
+          contract_end_date: document.querySelector('input[name="contract_end_date"]').value,
+          contract_end_date_end: document.querySelector('input[name="contract_end_date_end"]').value
+        };
+        
+        console.log('查詢條件:', searchData);
+        alert('查詢功能已執行，請查看控制台了解查詢條件');
+        
+        // 這裡可以加入實際的API調用
+        // fetch('/api/contract/search', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify(searchData)
+        // }).then(response => response.json()).then(data => {
+        //   updateTable(data);
+        // });
+        
+      } catch (error) {
+        console.error('查詢時發生錯誤:', error);
+        alert('查詢時發生錯誤，請檢查輸入內容');
+      }
+    }
+    
+    function clearForm() {
+      try {
+        // 清除所有輸入欄位
+        document.querySelectorAll('input[type="text"], input[type="date"]').forEach(input => {
+          input.value = '';
+        });
+        
+        // 重設下拉選單
+        document.querySelectorAll('select').forEach(select => {
+          select.selectedIndex = 0;
+        });
+        
+        console.log('表單已清除');
+        
+      } catch (error) {
+        console.error('清除表單時發生錯誤:', error);
+      }
+    }
+  </script>
+</body>
+</html>

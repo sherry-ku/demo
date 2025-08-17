@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="readonly" lang="zh-TW">
+
+<head>
+  <meta charset="utf-8" />
+  <title>帳務與發票 - 客戶資料查詢結果</title>
+  <link href="common.css" rel="stylesheet" />
+</head>
+
+<body class="detail-page">
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+  <div class="main">
+    <!-- 側邊選單 (Sidebar) -->
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="content">
+      <div id="customerInfoHeaderContainer"></div>
+      <!-- 第一層 Tab -->
+      <div>
+        <div class="tabs" id="mainTabs">
+          <div class="tab">
+            <a href="detail-customer.html" style="text-decoration: none; color: inherit;">客戶與大樓資料</a>
+          </div>
+          <div class="tab">
+            <a href="detail-product.html" style="text-decoration: none; color: inherit;">產品與申辦歷程</a>
+          </div>
+          <div class="tab active">
+            <a href="detail-billing.html" style="text-decoration: none; color: inherit;">帳務與發票</a>
+          </div>
+          <div class="tab">
+            <a href="detail-engineering.html" style="text-decoration: none; color: inherit;">工務與設備</a>
+          </div>
+          <div class="tab">
+            <a href="detail-contact.html" style="text-decoration: none; color: inherit;">客戶聯絡歷程</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 帳務與發票 Tab Content -->
+      <div class="main-tab-content" id="main3">
+        <div class="section">
+          <div class="section-title">帳務資訊查詢</div>
+          <div class="form-grid" style="grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-bottom:15px;">
+            <div class="form-item">
+              <label class="form-label">查詢期間</label>
+              <div class="form-input">
+                <input type="date" value="2025-01-01" />
+              </div>
+            </div>
+            <div class="form-item">
+              <label class="form-label">至</label>
+              <div class="form-input">
+                <input type="date" value="2025-12-31" />
+              </div>
+            </div>
+            <div class="form-item">
+              <label class="form-label">帳單狀態</label>
+              <div class="form-input">
+                <select>
+                  <option>全部</option>
+                  <option>已繳費</option>
+                  <option>未繳費</option>
+                  <option>逾期</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-item">
+              <button class="btn" style="margin-right:5px;">查詢</button>
+              <button class="btn">清除</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">帳務統計</div>
+          <div style="display: flex; justify-content: flex-end; gap: 20px; align-items: center; font-size: 14px; font-weight: bold; margin-bottom: 15px;">
+            <div style="padding: 8px 16px; background-color: #e8f5e8; border: 1px solid #28a745; border-radius: 4px;">
+              <span style="color: #495057;">已繳費總額</span>
+              <span style="color: #28a745; margin-left: 10px;">$12,450</span>
+            </div>
+            <div style="padding: 8px 16px; background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 4px;">
+              <span style="color: #495057;">未繳費總額</span>
+              <span style="color: #ffc107; margin-left: 10px;">$3,567</span>
+            </div>
+            <div style="padding: 8px 16px; background-color: #f8d7da; border: 1px solid #dc3545; border-radius: 4px;">
+              <span style="color: #495057;">逾期總額</span>
+              <span style="color: #dc3545; margin-left: 10px;">$1,780</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">帳單明細</div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>帳單月份</th>
+                  <th>帳單編號</th>
+                  <th>服務項目</th>
+                  <th>費用類型</th>
+                  <th>應繳金額</th>
+                  <th>已繳金額</th>
+                  <th>未繳金額</th>
+                  <th>繳費期限</th>
+                  <th>繳費狀態</th>
+                  <th>繳費日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025/08</td>
+                  <td>B202508001</td>
+                  <td>Internet 1G/500M</td>
+                  <td>月租費</td>
+                  <td>1,199</td>
+                  <td>0</td>
+                  <td>1,199</td>
+                  <td>2025/09/15</td>
+                  <td><span class="badge badge-orange">未繳費</span></td>
+                  <td>-</td>
+                  <td>
+                    <button class="btn-view">查看詳情</button>
+                    <button class="btn-info">線上繳費</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2025/07</td>
+                  <td>B202507001</td>
+                  <td>Internet 1G/500M</td>
+                  <td>月租費</td>
+                  <td>1,199</td>
+                  <td>1,199</td>
+                  <td>0</td>
+                  <td>2025/08/15</td>
+                  <td><span class="badge badge-green">已繳費</span></td>
+                  <td>2025/07/20</td>
+                  <td>
+                    <button class="btn-view">查看詳情</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2025/06</td>
+                  <td>B202506001</td>
+                  <td>CATV 經濟型</td>
+                  <td>月租費</td>
+                  <td>200</td>
+                  <td>200</td>
+                  <td>0</td>
+                  <td>2025/07/15</td>
+                  <td><span class="badge badge-green">已繳費</span></td>
+                  <td>2025/06/18</td>
+                  <td>
+                    <button class="btn-view">查看詳情</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2025/05</td>
+                  <td>B202505001</td>
+                  <td>Friday影音</td>
+                  <td>月租費</td>
+                  <td>149</td>
+                  <td>0</td>
+                  <td>149</td>
+                  <td>2025/06/15</td>
+                  <td><span class="badge badge-red">逾期</span></td>
+                  <td>-</td>
+                  <td>
+                    <button class="btn-view">查看詳情</button>
+                    <button class="btn-info">線上繳費</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2025/04</td>
+                  <td>B202504001</td>
+                  <td>Mesh租賃</td>
+                  <td>月租費</td>
+                  <td>79</td>
+                  <td>79</td>
+                  <td>0</td>
+                  <td>2025/05/15</td>
+                  <td><span class="badge badge-green">已繳費</span></td>
+                  <td>2025/04/22</td>
+                  <td>
+                    <button class="btn-view">查看詳情</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">發票資訊</div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>發票期別</th>
+                  <th>發票號碼</th>
+                  <th>發票日期</th>
+                  <th>發票金額</th>
+                  <th>發票狀態</th>
+                  <th>載具類型</th>
+                  <th>載具號碼</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025/07-08</td>
+                  <td>AB-12345678</td>
+                  <td>2025/08/31</td>
+                  <td>1,199</td>
+                  <td><span class="badge badge-green">已開立</span></td>
+                  <td>會員載具</td>
+                  <td>/1000000265581</td>
+                  <td>
+                    <button class="btn-view">下載發票</button>
+                    <button class="btn-info">重新寄送</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2025/05-06</td>
+                  <td>AB-87654321</td>
+                  <td>2025/06/30</td>
+                  <td>349</td>
+                  <td><span class="badge badge-green">已開立</span></td>
+                  <td>會員載具</td>
+                  <td>/1000000265581</td>
+                  <td>
+                    <button class="btn-view">下載發票</button>
+                    <button class="btn-info">重新寄送</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2025/03-04</td>
+                  <td>AB-11223344</td>
+                  <td>2025/04/30</td>
+                  <td>278</td>
+                  <td><span class="badge badge-green">已開立</span></td>
+                  <td>會員載具</td>
+                  <td>/1000000265581</td>
+                  <td>
+                    <button class="btn-view">下載發票</button>
+                    <button class="btn-info">重新寄送</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">繳費記錄</div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>繳費日期</th>
+                  <th>繳費方式</th>
+                  <th>交易編號</th>
+                  <th>繳費金額</th>
+                  <th>手續費</th>
+                  <th>實繳金額</th>
+                  <th>繳費狀態</th>
+                  <th>備註</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025/07/20</td>
+                  <td>線上刷卡</td>
+                  <td>TX202507200001</td>
+                  <td>1,199</td>
+                  <td>10</td>
+                  <td>1,209</td>
+                  <td><span class="badge badge-green">成功</span></td>
+                  <td>Internet月租費</td>
+                </tr>
+                <tr>
+                  <td>2025/06/18</td>
+                  <td>超商代收</td>
+                  <td>CV202506180001</td>
+                  <td>200</td>
+                  <td>0</td>
+                  <td>200</td>
+                  <td><span class="badge badge-green">成功</span></td>
+                  <td>CATV月租費</td>
+                </tr>
+                <tr>
+                  <td>2025/04/22</td>
+                  <td>ATM轉帳</td>
+                  <td>AT202504220001</td>
+                  <td>79</td>
+                  <td>5</td>
+                  <td>84</td>
+                  <td><span class="badge badge-green">成功</span></td>
+                  <td>Mesh租賃費</td>
+                </tr>
+                <tr>
+                  <td>2025/03/15</td>
+                  <td>線上刷卡</td>
+                  <td>TX202503150001</td>
+                  <td>1,547</td>
+                  <td>15</td>
+                  <td>1,562</td>
+                  <td><span class="badge badge-red">失敗</span></td>
+                  <td>信用卡額度不足</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="customerInfoHeader.js"></script>
+  <script src="sidebar.js"></script>
+  <script>
+    document.getElementById('customerInfoHeaderContainer').innerHTML = customerInfoHeaderHTML;
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+  </script>
+</body>
+
+</html>

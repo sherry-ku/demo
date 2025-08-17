@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<title>客戶標籤管理－查詢與結果</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="common.css" rel="stylesheet"/>
+<style>
+    .form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}
+    .section-title .toggle-btn{margin-left:8px}
+    .tool-row{display:flex;justify-content:flex-end;gap:10px}
+    .text-red{color:#e74c3c;font-weight:bold}
+    .pagination-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin:12px 0}
+    .pages{display:flex;gap:8px}
+    .pages a{color:#007bff;text-decoration:none}
+    .pages a.active{font-weight:bold;text-decoration:underline}
+    .per-page{margin-left:14px;display:flex;align-items:center;gap:6px}
+    .chk{width:18px;height:18px}
+    td.left{text-align:left}
+  
+    .badge {
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:12px;
+      font-size:12px;
+      color:#fff;
+      font-weight:bold;
+    }
+    .badge-green { background-color:#28a745; }
+    .badge-red { background-color:#dc3545; }
+    .btn-mini {
+      padding:2px 6px;
+      font-size:12px;
+      border-radius:4px;
+    }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+<div class="header-left">
+<div>登入者：005566 陳小華</div>
+<div>登入角色：客服人員</div>
+<div>公司別：116 中嘉數位</div>
+<div>登入時間：18:44:11</div>
+</div>
+<div class="header-right">
+<button class="btn">訊息中心</button>
+<button class="btn">暫存訂單</button>
+<button class="btn">登出</button>
+</div>
+</div>
+<div class="main">
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar"></div>
+
+<!-- Content -->
+<div class="content">
+<h2>客戶標籤管理</h2>
+<!-- 查詢條件 -->
+<div class="section">
+<div class="section-title">
+        查詢條件
+        <button class="toggle-btn" id="btnToggle">縮合 ▼</button>
+</div>
+<div id="searchBlock">
+<div class="form-row">
+  <div class="form-group">
+    <label>家戶編號</label>
+    <input class="form-control" id="q_home"  type="text"/>
+    </div>
+    <div class="form-group">
+    <label>申請人姓名</label>
+    <input class="form-control" id="q_applicant"  type="text"/>
+    </div>
+    <div class="form-group">
+    <label>服務別</label>
+    <select class="form-control" id="q_service">
+    <option value="">全選</option>
+    <option>Internet</option>
+    <option>CATV</option>
+    </select>
+    </div>
+    <div class="form-group">
+    <label>客戶服務編號</label>
+    <input class="form-control" id="q_home"  type="text"/>
+    </div>
+  </div>
+
+<div class="form-row">  
+<div class="form-group">
+<label><span style="color:red;">＊</span>標籤類別</label>
+<select class="form-control" id="q_category">
+<option value="">全選</option>
+<option>流失風險標籤</option>
+<option>專案標籤</option>
+</select>
+</div>
+<div class="form-group">
+  <label><span style="color:red;">＊</span>標籤名稱</label>
+  <select class="form-control" id="q_name">
+    <option value="">全選</option>
+    <option>立流A</option>
+    <option>立流B</option>
+    <option>特維A</option>
+    <option>特維B</option>
+  </select>
+</div>
+<div class="form-group">
+  <label>標籤編號</label>
+  <input class="form-control" id="q_home"  type="text"/>
+</div>
+</div>  
+
+<div class="form-row">      
+<div class="form-group">
+  <label><span style="color:red;">＊</span>有效狀態</label>
+  <select class="form-control" id="q_valid">
+    <option value="">全選</option>
+    <option value="Y">有效</option>
+    <option value="N">無效</option>
+  </select>
+</div>
+<div class="form-group">
+<label>有效起日</label>
+<input class="form-control" id="q_start" type="date" />
+</div>
+<div class="form-group">
+<label>有效迄日</label>
+<input class="form-control" id="q_start_end" type="date" />
+</div>
+</div>  
+
+<div class="form-actions">
+<button class="btn btn-secondary" id="btnClear" type="button">清除</button>
+<button class="btn btn-primary" id="btnSearch" type="button">送出</button>
+</div>
+</div>
+</div>
+<!-- 查詢結果工具列 -->
+<div class="section" style="padding:10px;">
+<div class="tool-row">
+<button class="btn" id="btnDisableAll" type="button">全部停用</button>
+</div>
+</div>
+<!-- 查詢結果 -->
+<div class="section">
+<div class="section-title">查詢結果</div>
+<table>
+<thead>
+<tr>
+<th>項次</th>
+<th>家戶編號</th>
+<th>申請人姓名</th>
+<th>客戶服務編號</th>
+<th>服務別</th>
+<th>標籤類別</th>
+<th>標籤代碼</th>
+<th>標籤名稱</th>
+<th>有效起日</th>
+<th>有效迄日</th>
+<th>有效狀態</th>
+<th>停用</th>
+</tr>
+</thead>
+<tbody id="resultBody">
+<tr>
+<td>1</td>
+<td>CA001</td>
+<td>陳小花</td>
+<td>-</td>
+<td>-</td>
+<td>流失風險標籤</td>
+<td>MKT-RT-ANTI-CHURN-01</td>
+<td>立流A</td>
+<td>2025/8/14</td>
+<td>2025/8/30</td>
+<td class="text-red"><span class="badge badge-red">無效</span></td>
+<td><button class="btn btn-mini btn-secondary" onclick="toggleDisable(this)" type="button">停用</button></td>
+</tr>
+<tr>
+<td>2</td>
+<td>CA001</td>
+<td>陳小花</td>
+<td>S0001</td>
+<td>Internet</td>
+<td>專案標籤</td>
+<td>MKT-RT-SB-618</td>
+<td>續-短促SB-C+1G</td>
+<td>2025/8/16</td>
+<td>2025/8/26</td>
+<td><span class="badge badge-green">有效</span></td>
+<td><button class="btn btn-mini btn-secondary" onclick="toggleDisable(this)" type="button">停用</button></td>
+</tr>
+
+</tbody>
+</table>
+<!-- 分頁 -->
+<div class="pagination-bar">
+<button class="btn btn-secondary" id="prevPage">上一頁</button>
+<div class="pages" id="pages">
+<a class="active" href="#">1</a>
+<a href="#">2</a>
+<a href="#">3</a>
+<a href="#">4</a>
+<a href="#">5</a>
+<a href="#">6</a>
+<a href="#">7</a>
+<a href="#">8</a>
+<a href="#">9</a>
+<a href="#">10</a>
+</div>
+<button class="btn btn-secondary" id="nextPage">下一頁</button>
+<div class="per-page">
+<span>每頁顯示數</span>
+<select id="pageSize">
+<option>20</option>
+<option>50</option>
+<option>100</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+// 縮合/展開查詢區
+const btnToggle = document.getElementById('btnToggle');
+const searchBlock = document.getElementById('searchBlock');
+btnToggle.addEventListener('click', () => {
+  const isHidden = getComputedStyle(searchBlock).display === 'none';
+  searchBlock.style.display = isHidden ? 'block' : 'none';
+  btnToggle.textContent = isHidden ? '縮合 ▼' : '展開 ▽';
+});
+
+// 清除
+document.getElementById('btnClear').addEventListener('click', () => {
+  ['q_category','q_name','q_valid','q_start','q_start_end','q_home','q_applicant','q_service','q_service_no'].forEach(id=>{
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+});
+
+// 送出（示意）
+document.getElementById('btnSearch').addEventListener('click', () => {
+  alert('查詢送出（示意）');
+});
+
+// 全部停用（示意：勾選所有停用勾選框）
+document.getElementById('btnDisableAll').addEventListener('click', () => {
+  document.querySelectorAll('#resultBody .chk').forEach(chk => chk.checked = true);
+  alert('已勾選全部停用（示意）。實作時請改為呼叫後端 API。');
+});
+
+// 切換停用狀態（示意）
+function toggleDisable(btn){
+  const statusCell = btn.parentElement.previousElementSibling;
+  const badge = statusCell.querySelector('.badge');
+  if(badge.classList.contains('badge-green')){
+    badge.classList.remove('badge-green');
+    badge.classList.add('badge-red');
+    badge.textContent = '停用';
+    btn.textContent = '啟用';
+  }else{
+    badge.classList.remove('badge-red');
+    badge.classList.add('badge-green');
+    badge.textContent = '有效';
+    btn.textContent = '停用';
+  }
+}
+    </script>
+	<script src="sidebar.js"></script>
+<script>
+  document.getElementById('sidebar').innerHTML = sidebarHTML;
+</script>
+
+</body>
+</html>

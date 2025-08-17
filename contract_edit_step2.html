@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="utf-8" />
+  <title>合約管理－編輯合約（步驟二：編輯合約內容）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    .form-block-title .step {
+      font-weight: normal;
+      color: #666;
+      margin-left: 8px;
+      font-size: 12px;
+    }
+
+    .w-220 {
+      max-width: 220px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      min-width: 220px;
+    }
+
+    label {
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    input,
+    select,
+    textarea {
+      font-size: 13px;
+      padding: 4px 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    /* 合約有效日期資料區塊 margin-bottom 調整 */
+    .form-block-title:has(+ .form-row) {
+      margin-bottom: 6px !important;
+    }
+
+    /* 合約到期日子選項靠右且不會跑版 */
+    .contract-date-group {
+      position: relative;
+    }
+
+    .contract-date-group .auto-extend {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-right: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="content">
+      <h2>編輯合約－步驟二：編輯合約內容</h2>
+
+      <div class="step-tabs">
+        <div class="step-tab active">合約簽約內容</div>
+        <div class="step-tab" onclick="goToStep('contract_parent_project_edit.html')">合約母戶專案內容</div>
+        <div class="step-tab" onclick="goToStep('contract_child_project_edit.html')">合約子戶專案內容</div>
+        <div class="step-tab" onclick="goToStep('contract_address_create.html')">合約涵蓋地址</div>
+        <div class="step-tab" onclick="goToStep('contract_group_list_edit.html')">同綁合約清單</div>
+      </div>
+
+
+      <!-- 合約申請人資料 -->
+      <div class="form-block">
+        <div class="form-block-title">合約申請人資料</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>申請人編號</label>
+            <input type="text" value="C542" />
+          </div>
+          <div class="form-group">
+            <label>姓名</label>
+            <input type="text" value="原果542" />
+          </div>
+          <div class="form-group">
+            <label>聯絡電話</label>
+            <input type="text" value="0910222555" />
+          </div>
+          <div class="form-group">
+            <label>證件編號</label>
+            <input type="text" value="AB1234" />
+          </div>
+        </div>
+      </div>
+
+
+      <!-- 合約建物資料 -->
+      <div class="form-block">
+        <div class="form-block-title">合約建物資料</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>建物名稱</label>
+            <input type="text" value="國光華安中心" />
+          </div>
+          <div class="form-group">
+            <label>建物編號</label>
+            <input type="text" value="A123456" />
+          </div>
+          <div class="form-group">
+            <label>建物型態</label>
+            <select>
+              <option selected>雙線大樓</option>
+              <option>單線大樓</option>
+              <option>透天式</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>建物房數</label>
+            <input type="text" value="10" />
+          </div>
+        </div>
+      </div>
+
+
+      <!-- 合約基本資料 -->
+      <div class="form-block">
+        <div class="form-block-title">合約基本資料</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>合約編號</label>
+            <input id="contractNo" type="text" value="55667788" readonly style="background-color: #f5f5f5;" />
+          </div>
+          <div class="form-group">
+            <label>合約名稱</label>
+            <input type="text" value="國際光纖收視" />
+          </div>
+          <div class="form-group">
+            <label>計費方式</label>
+            <input type="text" value="總價" />
+          </div>
+          <div class="form-group">
+            <label>收費方式</label>
+            <input type="text" value="紙收" />
+          </div>
+          <div class="form-group">
+            <label>合約金額</label>
+            <input type="number" value="5000" />
+          </div>
+          <div class="form-group">
+            <label>通路公司別</label>
+            <input type="text" value="新高公司" />
+          </div>
+          <div class="form-group">
+            <label>服務別</label>
+            <select>
+              <option selected>CATV</option>
+              <option>Internet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>簽約業務</label>
+            <input type="text" value="001234 王大明" />
+          </div>
+          <div class="form-group">
+            <label>負責業務</label>
+            <input type="text" value="001234 王大明" />
+          </div>
+        </div>
+
+        <div class="form-block-title" style="margin-top: 15px;">合約洽談地址</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>縣(市)</label>
+            <input type="text" value="九大合約" />
+          </div>
+          <div class="form-group">
+            <label>行政區</label>
+            <input type="text" value="行政區" />
+          </div>
+          <div class="form-group">
+            <label>里別</label>
+            <input type="text" placeholder="請先選擇行政區" />
+          </div>
+          <div class="form-group">
+            <label>路(街)</label>
+            <input type="text" placeholder="請先選擇行政區" />
+          </div>
+          <div class="form-group">
+            <label>巷</label>
+            <input type="text" />
+          </div>
+          <div class="form-group">
+            <label>弄</label>
+            <input type="text" />
+          </div>
+          <div class="form-group">
+            <label>號</label>
+            <input type="text" />
+          </div>
+          <div class="form-group">
+            <label>樓</label>
+            <input type="text" />
+          </div>
+          <div class="form-group">
+            <label>樓之</label>
+            <input type="text" />
+          </div>
+          <div class="form-group">
+            <label>室</label>
+            <input type="text" />
+          </div>
+        </div>
+      </div>
+
+
+      <!-- 合約內容與備註 -->
+      <div class="form-block">
+        <div class="form-block-title">合約內容與備註</div>
+        <div class="form-row" style="flex-direction: column; gap: 16px;">
+          <div class="form-group" style="min-width: 100%;">
+            <label>合約內容</label>
+            <textarea class="textarea" rows="10"></textarea>
+          </div>
+          <div class="form-group" style="min-width: 100%;">
+            <label>合約備註</label>
+            <textarea class="textarea" rows="10"></textarea>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- 合約有效日期資料 -->
+      <div class="form-block">
+        <div class="form-block-title">合約有效日期資料</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>合約生效</label>
+            <input type="date" value="2025-07-01" />
+          </div>
+          <div class="form-group contract-date-group">
+            <label>合約到期</label>
+            <input type="date" value="2027-06-30" />
+            <div class="auto-extend">
+              <label style="font-size:13px; color:#333; margin-right:8px; margin-bottom:-80px;">
+                <input type="checkbox" checked style="width:16px; height:16px; vertical-align:middle; margin-right:4px;" />
+                自動展延
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>簽約日期</label>
+            <input type="date" value="2025-06-26" />
+          </div>
+          <div class="form-group">
+            <label>展延月數</label>
+            <input type="text" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 合約勾稽資料 -->
+      <div class="form-block">
+        <div class="form-block-title">合約勾稽資料</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>合約總檔</label>
+            <input type="text" value="01" />
+          </div>
+          <div class="form-group">
+            <label>紙本合約編號</label>
+            <input type="text" />
+          </div>
+          <div class="form-group">
+            <label>ECS合約編號</label>
+            <input type="text" />
+          </div>
+          <div class="form-group">
+            <label>EFLOW簽呈編號</label>
+            <input type="text" />
+          </div>
+          <div class="form-group">
+            <label>建立日期</label>
+            <input type="date" value="2025-06-25" readonly style="background-color: #f5f5f5;" />
+          </div>
+          <div class="form-group">
+            <label>建立人員</label>
+            <input type="text" value="001234 王大明" readonly style="background-color: #f5f5f5;" />
+          </div>
+          <div class="form-group">
+            <label>更新日期</label>
+            <input type="date" value="2025-06-25" />
+          </div>
+          <div class="form-group">
+            <label>更新人員</label>
+            <input type="text" value="001234 王大明" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 按鈕區 -->
+      <div class="form-row" style="justify-content: flex-end; gap: 10px; margin-top: 20px;">
+        <button class="btn btn-secondary" type="button" onclick="history.back()">返回</button>
+        <button class="btn btn-primary" type="button" onclick="saveAndNext()">儲存並下一步</button>
+        <button class="btn btn-success" type="button" onclick="saveContract()">儲存</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="sidebar.js"></script>
+  <script>
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+    
+    function goToStep(url) {
+      const contractNo = document.getElementById('contractNo')?.value || '';
+      location.href = contractNo ? `${url}?contractNo=${encodeURIComponent(contractNo)}` : url;
+    }
+    
+    function saveAndNext() {
+      if (saveContract()) {
+        goToStep('contract_parent_project_edit.html');
+      }
+    }
+    
+    function saveContract() {
+      try {
+        // 收集表單資料
+        const formData = {
+          contractNo: document.getElementById('contractNo').value,
+          // 可以在此處加入更多表單欄位驗證和資料收集
+        };
+        
+        console.log('儲存合約資料:', formData);
+        alert('合約資料已儲存');
+        return true;
+      } catch (error) {
+        console.error('儲存失敗:', error);
+        alert('儲存失敗，請檢查輸入內容');
+        return false;
+      }
+    }
+    
+    // 從URL參數載入合約編號
+    const urlParams = new URLSearchParams(window.location.search);
+    const contractNo = urlParams.get('contractNo');
+    if (contractNo) {
+      document.getElementById('contractNo').value = contractNo;
+    }
+  </script>
+</body>
+
+</html>

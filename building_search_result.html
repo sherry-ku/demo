@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="utf-8" />
+  <title>建物主檔查詢結果</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="common.css" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- ===== 頁首區 (Header) ===== -->
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+
+  <!-- ===== 主體區 (Main) ===== -->
+  <div class="main">
+    <!-- 側邊選單 -->
+    <div class="sidebar" id="sidebar"></div>
+
+    <!-- 功能內容 -->
+    <div class="content">
+      <h2>建物主檔查詢</h2>
+
+      <!-- 查詢條件 -->
+      <div class="form-block">
+        <div class="form-block-title">查詢條件</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>建物編號</label>
+            <input type="text" name="building_id" />
+          </div>
+          <div class="form-group">
+            <label>建物名稱</label>
+            <input type="text" name="building_name" placeholder="模糊查詢" />
+          </div>
+          <!-- <div class="form-group">
+              <label>重點建物</label>
+              <input type="checkbox" name="key_building" />
+            </div> -->
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>建物等級</label>
+            <select name="building_level">
+              <option>請選擇</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>建物型態</label>
+            <select name="building_type">
+              <option>請選擇</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>建置進度</label>
+            <select name="building_status">
+              <option>請選擇</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 主要地址 -->
+
+      <!-- 地址 (共用載入) -->
+      <div class="form-block">
+        <div class="form-block-title">主要洽談地址</div>
+        <div class="form-row"></div>
+        <div id="address-container"></div>
+      </div>
+
+      <div class="form-row" style="justify-content: flex-end; gap: 10px;">
+        <button class="btn btn-secondary">清除資料</button>
+        <button class="btn" onclick="location.href='building_create_aio.html'">新增</button>
+        <button class="btn" onclick="location.href='building_search_result.html'">查詢</button>
+      </div>
+
+      <!-- 查詢結果 -->
+      <div class="section">
+        <div class="section-title">查詢結果</div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>業務人員</th>
+                <th>so公司別</th>
+                <th>建物編號</th>
+                <th>建物名稱</th>
+                <th>縣(市)</th>
+                <th>行政區</th>
+                <th>里別</th>
+                <th>主要地址</th>
+                <th>建築型態</th>
+                <th>建物等級</th>
+                <th>競業等級</th>
+                <th>建置進度</th>
+                <th>可提供服務</th>
+                <th>編輯</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>003728 林小明</td>
+                <td>720慶聯</td>
+                <td>MDU1000</td>
+                <td>OOO套房華廈</td>
+                <td>高雄市</td>
+                <td>楠梓區</td>
+                <td>大昌里</td>
+                <td class="address">建楠路223號</td>
+                <td>套房</td>
+                <td>獨家大樓</td>
+                <td>A3</td>
+                <td>建置完成</td>
+                <td>CATV,CM</td>
+                <td><a href="building_edit_aio.html">編輯</a></td>
+              </tr>
+              <tr>
+                <td>003728 林小明</td>
+                <td>720慶聯</td>
+                <td>MDU1001</td>
+                <td>瑞豐大廈</td>
+                <td>高雄市</td>
+                <td>苓雅區</td>
+                <td>加昌里</td>
+                <td class="address">加昌路729巷90弄15號</td>
+                <td>住宅大樓</td>
+                <td>雙線大樓</td>
+                <td></td>
+                <td>洽談中</td>
+                <td>禁裝</td>
+                <td><a href="building_edit_aio.html">編輯</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+
+
+
+
+  <script src="sidebar.js"></script>
+  <script>
+  if (typeof sidebarHTML !== 'undefined') {
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+  }
+  </script>
+  <script src="address.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      loadAddress('address-container');
+    });
+  </script>
+
+</body>
+
+</html>

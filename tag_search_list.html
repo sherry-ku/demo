@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="utf-8" />
+  <title>標籤管理－查詢與結果</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    /* 補丁：讓查詢按鈕一致靠右 */
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    /* 查詢條件區塊標題+縮合鈕 */
+    .section-title .toggle-btn {
+      margin-left: 8px;
+    }
+
+    /* 統一紅字（停用/否） */
+    .text-red {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+
+    /* 分頁列 */
+    .pagination-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .pages {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pages a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .pages a.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .per-page {
+      margin-left: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .link-edit {
+      color: #1a0dab;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div>登入者：005566 陳小華</div>
+      <div>登入角色：客服人員</div>
+      <div>公司別：116 中嘉數位</div>
+      <div>登入時間：18:44:11</div>
+    </div>
+    <div class="header-right">
+      <button class="btn">訊息中心</button>
+      <button class="btn">暫存訂單</button>
+      <button class="btn">登出</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar"></div>
+
+
+    <!-- Content -->
+    <div class="content">
+      <h2>標籤管理</h2>
+
+      <!-- 查詢條件 -->
+      <div class="section">
+        <div class="section-title">
+          查詢條件
+          <button class="toggle-btn" id="btnToggle">縮合 ▼</button>
+        </div>
+
+        <div id="searchBlock">
+          <!-- 一列用 .form-row；欄位用 .form-group（已在 common.css 設定寬度/字體） -->
+          <div class="form-row">
+            <div class="form-group">
+              <label><span style="color:red;">＊</span>標籤類別</label>
+              <select class="form-control" id="q_category">
+                <option value="">請選擇</option>
+                <option>流失風險標籤</option>
+                <option>專案標籤</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label><span style="color:red;">＊</span>標籤狀態</label>
+              <select class="form-control" id="q_status">
+                <option value="">全選</option>
+                <option value="ENABLE">啟用</option>
+                <option value="DISABLE">停用</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>標籤名稱</label>
+              <input type="text" class="form-control" id="q_name" placeholder="輸入關鍵字" />
+            </div>
+            <div class="form-group">
+              <label>標籤代碼</label>
+              <input type="text" class="form-control" id="q_code" placeholder="如 CR-001" />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-secondary" id="btnClear">清除</button>
+            <button class="btn btn-primary" id="btnSearch">查詢</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 結果上方工具 -->
+      <div class="section" style="padding:10px;">
+        <div style="display:flex; justify-content:flex-end; gap:10px;">
+          <button class="btn" id="btnCreate">新增標籤</button>
+          <button class="btn" onclick="location.href='tag_priority_edit.html'">流失風險標籤重要性編輯</button>
+        </div>
+      </div>
+
+      <!-- 查詢結果 -->
+      <div class="section">
+        <div class="section-title">查詢結果</div>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>標籤狀態</th>
+                <th>標籤類別</th>
+                <th>重要性</th>
+                <th>標籤代碼</th>
+                <th>標籤名稱</th>
+                <th>生效天數</th>
+                <th style="min-width:260px;">跳訊內容</th>
+                <th>是否跳訊</th>
+                <th>建立部門</th>
+                <th>編輯人員</th>
+                <th>更新時間</th>
+                <th>編輯</th>
+              </tr>
+            </thead>
+            <tbody id="resultBody">
+              <tr>
+                <td>啟用</td>
+                <td>流失風險標籤</td>
+                <td>1</td>
+                <td>MKT-RT-ANTI-CHURN-01</td>
+                <td>立流A</td>
+                <td>固定當月</td>
+                <td style="text-align:left;">
+                  用戶詢拆請積極防守<br />
+                  *寬頻戶請優先推[拆挽原約續約贈2M]，至R1啟動，接續推010寬頻拆挽案<br />
+                  *單C戶請優先推[單C附掛贈2月]，至R1啟動，接續推003 CATV拆挽案
+                </td>
+                <td>是</td>
+                <td>用戶維繫暨<br />加值服務部</td>
+                <td>001234<br />陳小五</td>
+                <td>2025/1/8 14:02</td>
+                <td><span class="link-edit" onclick="location.href='tag_edit.html'">編輯</span></td>
+              </tr>
+              <tr>
+                <td class="text-red">停用</td>
+                <td>專案標籤</td>
+                <td>-</td>
+                <td>MKT-RT-SB-618</td>
+                <td>續-短促SB-C+1G</td>
+                <td>10天</td>
+                <td style="text-align:left;">*短期促銷續約特案,依行銷公告限定日期區間適用<br />
+                  *符合續約資格：請推009續約指定方案：續約-C+1G $1199搭SoundBox+Disney+標準方案<br />
+                  或 續約-C+1G $1249搭SoundBox+Disney+高級方案。
+                </td>
+                <td>是</td>
+                <td>用戶維繫暨<br />加值服務部</td>
+                <td>001234<br />陳小五</td>
+                <td>2025/1/7 14:02</td>
+                <td><span class="link-edit" onclick="location.href='tag_edit.html'">編輯</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 分頁 -->
+        <div class="pagination-bar">
+          <button class="btn btn-secondary" id="prevPage">上一頁</button>
+          <div class="pages" id="pages">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">7</a>
+            <a href="#">8</a>
+            <a href="#">9</a>
+            <a href="#">10</a>
+          </div>
+          <button class="btn btn-secondary" id="nextPage">下一頁</button>
+          <div class="per-page">
+            <span>每頁顯示數</span>
+            <select id="pageSize">
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 縮合/展開查詢區
+    const btnToggle = document.getElementById('btnToggle');
+    const searchBlock = document.getElementById('searchBlock');
+    btnToggle.addEventListener('click', () => {
+      const isHidden = getComputedStyle(searchBlock).display === 'none';
+      searchBlock.style.display = isHidden ? 'block' : 'none';
+      btnToggle.textContent = isHidden ? '縮合 ▼' : '展開 ▽';
+    });
+
+    // 清除
+    document.getElementById('btnClear').addEventListener('click', () => {
+      ['q_category', 'q_status', 'q_name', 'q_code'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+    });
+
+    // 送出（示意）
+    document.getElementById('btnSearch').addEventListener('click', () => {
+      alert('查詢送出（示意）');
+    });
+
+
+    // 新增：直接開啟新增標籤頁
+    document.getElementById('btnCreate').addEventListener('click', () => {
+      location.href = 'tag_create.html';
+    });
+
+
+  </script>
+  <script src="sidebar.js"></script>
+  <script>
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+  </script>
+
+
+</body>
+
+</html>

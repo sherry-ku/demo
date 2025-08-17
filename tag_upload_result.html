@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<title>標籤管理－上傳結果</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="common.css"/>
+<style>
+  .result-msg {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .result-success { color: #27ae60; }
+  .result-error { color: #e74c3c; }
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+  }
+</style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <div>登入者：005566 陳小華</div>
+    <div>登入角色：客服人員</div>
+    <div>公司別：116 中嘉數位</div>
+    <div>登入時間：18:44:11</div>
+  </div>
+  <div class="header-right">
+    <button class="btn">訊息中心</button>
+    <button class="btn">暫存訂單</button>
+    <button class="btn">登出</button>
+  </div>
+</div>
+
+<div class="main">
+  <!-- Sidebar -->
+ <div class="sidebar" id="sidebar"></div>
+
+  <!-- Content -->
+  <div class="content">
+    <h2>標籤上傳結果</h2>
+
+    <div class="section">
+      <!-- 成功訊息 -->
+      <div class="result-msg result-success">✅ 上傳成功，共匯入 25 筆資料</div>
+
+      <!-- 錯誤訊息 -->
+      <!-- <div class="result-msg result-error">❌ 上傳失敗：檔案格式錯誤</div> -->
+
+      <table>
+        <thead>
+          <tr>
+            <th>標籤類別</th>
+            <th>標籤代碼</th>
+            <th>標籤名稱</th>
+            <th>狀態</th>
+            <th>結果</th>
+            <th>錯誤訊息</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>流失風險等級</td>
+            <td>CR-101</td>
+            <td>立流A</td>
+            <td>啟用</td>
+            <td class="result-success">成功</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>流失風險等級</td>
+            <td>CR-102</td>
+            <td>立流B</td>
+            <td>啟用</td>
+            <td class="result-error">失敗</td>
+            <td>標籤名稱重複</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="form-actions">
+        <button class="btn btn-secondary" onclick="location.href='tag_search_list.html'">返回查詢</button>
+        <button class="btn btn-primary" onclick="location.href='tag_upload.html'">重新上傳</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="sidebar.js"></script>
+<script>
+  document.getElementById('sidebar').innerHTML = sidebarHTML;
+</script>
+
+</body>
+</html>
