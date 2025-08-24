@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>工務與設備 - 客戶資料查詢結果</title>
+  <title>工務與工單 - 客戶資料查詢結果</title>
   <link href="common.css" rel="stylesheet" />
 </head>
 
@@ -41,272 +41,557 @@
             <a href="detail-billing.html" style="text-decoration: none; color: inherit;">帳務與發票</a>
           </div>
           <div class="tab active">
-            <a href="detail-engineering.html" style="text-decoration: none; color: inherit;">工務與設備</a>
+            <a href="detail-engineering.html" style="text-decoration: none; color: inherit;">工單與設備</a>
           </div>
           <div class="tab">
             <a href="detail-contact.html" style="text-decoration: none; color: inherit;">客戶聯絡歷程</a>
           </div>
         </div>
       </div>
-      
-      <!-- 工務與設備 Tab Content -->
+
+      <!-- 工務與工單 Tab Content -->
       <div class="main-tab-content" id="main4">
-        <div class="section">
-          <div class="section-title">工單查詢</div>
-          <div class="form-grid" style="grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-bottom:15px;">
-            <div class="form-item">
-              <label class="form-label">工單日期範圍</label>
-              <div class="form-input">
-                <input type="date" value="2025-01-01" />
+
+        <!-- 工務與設備子選單 -->
+        <div class="sub-tabs">
+          <div class="sub-tab" data-content="networkInfo">網點資訊</div>
+          <div class="sub-tab" data-content="workOrder">派工紀錄</div>
+          <div class="sub-tab" data-content="relocation">移機紀錄</div>
+          <div class="sub-tab active" data-content="networkSettings">目前網路設定</div>
+          <div class="sub-tab" data-content="outage">斷訊紀錄</div>
+        </div>
+
+        <!-- 網點資訊內容 -->
+        <div id="networkInfoContent" style="display: none;">
+          <div class="section">
+            <div class="section-title">網點資訊</div>
+            <p>網點資訊內容待開發...</p>
+          </div>
+        </div>
+
+        <!-- 派工紀錄內容 -->
+        <div id="workOrderContent" style="display: none;">
+          <!-- 查詢條件區 -->
+          <div class="section search-bar">
+            <div class="section-title">派工紀錄查詢</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>預約日期</label>
+                <input type="date" class="form-control" />
               </div>
-            </div>
-            <div class="form-item">
-              <label class="form-label">至</label>
-              <div class="form-input">
-                <input type="date" value="2025-12-31" />
+              <div class="form-group">
+                <label>～</label>
+                <input type="date" class="form-control" />
               </div>
-            </div>
-            <div class="form-item">
-              <label class="form-label">工單狀態</label>
-              <div class="form-input">
-                <select>
-                  <option>全部</option>
+              <div class="form-group">
+                <label>工單狀態</label>
+                <select class="form-control">
+                  <option>請選擇</option>
                   <option>待派工</option>
                   <option>已派工</option>
                   <option>施工中</option>
                   <option>已完成</option>
-                  <option>已取消</option>
                 </select>
               </div>
-            </div>
-            <div class="form-item">
-              <label class="form-label">工單類型</label>
-              <div class="form-input">
-                <select>
-                  <option>全部</option>
+              <div class="form-group">
+                <label>工單編號</label>
+                <input type="text" placeholder="請輸入" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>工單類別</label>
+                <select class="form-control">
+                  <option>請選擇</option>
                   <option>新裝</option>
-                  <option>移機</option>
                   <option>維修</option>
-                  <option>拆除</option>
+                  <option>移機</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>施工項目</label>
+                <select class="form-control">
+                  <option>請選擇</option>
                 </select>
               </div>
             </div>
-            <div class="form-item">
-              <button class="btn" style="margin-right:5px;">查詢</button>
-              <button class="btn">清除</button>
+            <div class="form-actions" style="text-align: right;">
+              <button class="btn btn-secondary">清除</button>
+              <button class="btn btn-primary">查詢</button>
             </div>
           </div>
-        </div>
 
-        <div class="section">
-          <div class="section-title">工單記錄</div>
-          <div class="table-container">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>工單編號</th>
-                  <th>工單類型</th>
-                  <th>建立日期</th>
-                  <th>預約施工日</th>
-                  <th>實際完工日</th>
-                  <th>工單狀態</th>
-                  <th>工程師</th>
-                  <th>聯絡電話</th>
-                  <th>工單內容</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>WO-20250815-001</td>
-                  <td>維修</td>
-                  <td>2025/08/15</td>
-                  <td>2025/08/16</td>
-                  <td>-</td>
-                  <td><span class="badge badge-orange">已派工</span></td>
-                  <td>6543 陳工程</td>
-                  <td>0912345678</td>
-                  <td>網路訊號不穩定</td>
-                  <td>
-                    <button class="btn-view">查看詳情</button>
-                    <button class="btn-info">聯絡工程師</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>WO-20250604-001</td>
-                  <td>新裝</td>
-                  <td>2025/06/01</td>
-                  <td>2025/06/04</td>
-                  <td>2025/06/04</td>
-                  <td><span class="badge badge-green">已完成</span></td>
-                  <td>6543 陳工程</td>
-                  <td>0912345678</td>
-                  <td>Internet+CATV新裝</td>
-                  <td>
-                    <button class="btn-view">查看詳情</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>WO-20250520-001</td>
-                  <td>維修</td>
-                  <td>2025/05/18</td>
-                  <td>2025/05/20</td>
-                  <td>2025/05/20</td>
-                  <td><span class="badge badge-green">已完成</span></td>
-                  <td>7890 王工程</td>
-                  <td>0987654321</td>
-                  <td>機上盒故障更換</td>
-                  <td>
-                    <button class="btn-view">查看詳情</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>WO-20250415-001</td>
-                  <td>移機</td>
-                  <td>2025/04/12</td>
-                  <td>2025/04/15</td>
-                  <td>-</td>
-                  <td><span class="badge badge-red">已取消</span></td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>客戶取消移機申請</td>
-                  <td>
-                    <button class="btn-view">查看詳情</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+          <!-- 工單列表 -->
+          <div class="section">
+            <div class="section-title">派工紀錄列表</div>
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>工單狀態</th>
+                    <th>工單編號</th>
+                    <th>工單類別</th>
+                    <th>施工項目</th>
+                    <th>預約日期</th>
+                    <th>完工日期</th>
+                    <th>工程師</th>
+                    <th>主要聯絡人</th>
+                    <th>次要聯絡人</th>
+                    <th>退單原因</th>
+                    <th>查看</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="badge badge-green">完工</span></td>
+                    <td>WO-20250518-001</td>
+                    <td>新申裝</td>
+                    <td>Internet+CATV新裝</td>
+                    <td>2025-05-05</td>
+                    <td>2025-05-18</td>
+                    <td>6543 陳工程<br><small>0912345678</small></td>
+                    <td>Jacy (女兒)<br><small>0939-123-123</small></td>
+                    <td>Mike (兒子)<br><small>0939-755-123</small></td>
+                    <td>-</td>
+                    <td><button class="btn-view" onclick="toggleWorkOrderDetail('row1')">查看</button></td>
+                  </tr>
+                  <!-- 展開的詳情區域 -->
+                  <tr id="detail-row1" class="detail-row" style="display: none;">
+                    <td colspan="11">
+                      <div class="work-order-detail-panel">
+                        <h4>施工明細 - WO-20250518-001</h4>
 
-        <div class="section">
-          <div class="section-title">設備維護記錄</div>
-          <div class="table-container">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>維護日期</th>
-                  <th>設備編號</th>
-                  <th>設備類型</th>
-                  <th>維護類型</th>
-                  <th>維護項目</th>
-                  <th>維護結果</th>
-                  <th>工程師</th>
-                  <th>備註</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>2025/08/15</td>
-                  <td>DEV-C999</td>
-                  <td>纜線數據機</td>
-                  <td>故障檢修</td>
-                  <td>訊號品質檢測</td>
-                  <td><span class="badge badge-orange">進行中</span></td>
-                  <td>6543 陳工程</td>
-                  <td>客戶反映網路不穩定</td>
-                </tr>
-                <tr>
-                  <td>2025/06/04</td>
-                  <td>DEV-I968</td>
-                  <td>ATV設備</td>
-                  <td>新裝</td>
-                  <td>設備安裝及測試</td>
-                  <td><span class="badge badge-green">完成</span></td>
-                  <td>6543 陳工程</td>
-                  <td>新裝完成，訊號正常</td>
-                </tr>
-                <tr>
-                  <td>2025/05/20</td>
-                  <td>DEV-CM773</td>
-                  <td>數位機上盒</td>
-                  <td>設備更換</td>
-                  <td>故障機上盒更換</td>
-                  <td><span class="badge badge-green">完成</span></td>
-                  <td>7890 王工程</td>
-                  <td>舊機回收，新機正常運作</td>
-                </tr>
-                <tr>
-                  <td>2025/03/10</td>
-                  <td>FN-001</td>
-                  <td>光纖節點</td>
-                  <td>定期保養</td>
-                  <td>光纖節點檢測</td>
-                  <td><span class="badge badge-green">完成</span></td>
-                  <td>5432 李工程</td>
-                  <td>定期維護，各項指標正常</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+                        <!-- 簡化的明細表 -->
+                        <div class="table-container">
+                          <table class="table detail-table">
+                            <thead>
+                              <tr>
+                                <th colspan="5">設備安裝明細</th>
+                                <th colspan="4">收費明細</th>
+                              </tr>
+                              <tr>
+                                <th>設備編號</th>
+                                <th>設備名稱</th>
+                                <th>型號</th>
+                                <th>安裝位置</th>
+                                <th>設備狀態</th>
+                                <th>收費項目</th>
+                                <th>單價</th>
+                                <th>數量</th>
+                                <th>小計</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>D20250518001</td>
+                                <td>數位機上盒</td>
+                                <td>DEV-CM600</td>
+                                <td>客廳</td>
+                                <td>正常運作</td>
+                                <td>安裝費</td>
+                                <td>500</td>
+                                <td>1</td>
+                                <td>500</td>
+                              </tr>
+                              <tr>
+                                <td>D20250518002</td>
+                                <td>數位機上盒</td>
+                                <td>DEV-TV147</td>
+                                <td>臥房</td>
+                                <td>正常運作</td>
+                                <td>設備押金</td>
+                                <td>1000</td>
+                                <td>2</td>
+                                <td>2000</td>
+                              </tr>
+                              <tr>
+                                <td>DEV-I968</td>
+                                <td>ATV設備</td>
+                                <td>ATV機上盒</td>
+                                <td>客廳</td>
+                                <td>正常運作</td>
+                                <td>材料費</td>
+                                <td>200</td>
+                                <td>1</td>
+                                <td>200</td>
+                              </tr>
+                              <tr>
+                                <td>DEV-C999</td>
+                                <td>纜線數據機</td>
+                                <td>CM600</td>
+                                <td>客廳</td>
+                                <td>正常運作</td>
+                                <td>工程費</td>
+                                <td>300</td>
+                                <td>1</td>
+                                <td>300</td>
+                              </tr>
+                              <tr style="background: #f8f9fa; font-weight: bold;">
+                                <td colspan="5">備註：裝機順利完成，客戶滿意度 ★★★★★</td>
+                                <td colspan="3" style="text-align: right;">總計金額：</td>
+                                <td style="color: #1976d2;">NT$ 3,000</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
 
-        <div class="section">
-          <div class="section-title">訊號品質監控</div>
-          <div class="form-grid" style="margin-bottom: 15px;">
-            <div class="form-item">
-              <div class="form-label">上行訊號強度：</div>
-              <div class="form-value" style="color: #28a745; font-weight: bold;">-15 dBmV (正常)</div>
-            </div>
-            <div class="form-item">
-              <div class="form-label">下行訊號強度：</div>
-              <div class="form-value" style="color: #28a745; font-weight: bold;">8 dBmV (正常)</div>
-            </div>
-            <div class="form-item">
-              <div class="form-label">訊噪比 (SNR)：</div>
-              <div class="form-value" style="color: #28a745; font-weight: bold;">38 dB (良好)</div>
-            </div>
-            <div class="form-item">
-              <div class="form-label">錯誤率：</div>
-              <div class="form-value" style="color: #28a745; font-weight: bold;">0.01% (正常)</div>
-            </div>
-            <div class="form-item">
-              <div class="form-label">最後檢測時間：</div>
-              <div class="form-value">2025/08/15 14:30:25</div>
-            </div>
-            <div class="form-item">
-              <div class="form-label">設備在線狀態：</div>
-              <div class="form-value" style="color: #28a745; font-weight: bold;">在線</div>
-            </div>
-          </div>
-          
-          <div style="margin-top: 15px;">
-            <button class="btn" style="margin-right: 10px;">重新檢測</button>
-            <button class="btn-info">查看歷史記錄</button>
-          </div>
-        </div>
+                        <!-- 額外資訊 -->
+                        <div class="work-summary" style="margin-top: 15px;">
+                          <div class="form-grid" style="grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                            <div class="form-item">
+                              <div class="form-label">建立日期</div>
+                              <div class="form-value">2025/05/01</div>
+                            </div>
+                            <div class="form-item">
+                              <div class="form-label">實際開工</div>
+                              <div class="form-value">2025/05/05</div>
+                            </div>
+                            <div class="form-item">
+                              <div class="form-label">保固到期</div>
+                              <div class="form-value">2026/05/18</div>
+                            </div>
+                            <div class="form-item">
+                              <div class="form-label">市話</div>
+                              <div class="form-value">02-12341234</div>
+                            </div>
+                          </div>
+                        </div>
 
-        <div class="section">
-          <div class="section-title">網路拓樸圖</div>
-          <div style="
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 8px;
-            padding: 40px;
-            text-align: center;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;">
-            <div style="font-size: 48px; color: #6c757d; margin-bottom: 15px;">🖧</div>
-            <div style="color: #6c757d; font-size: 16px; margin-bottom: 10px;">網路拓樸圖</div>
-            <div style="color: #868e96; font-size: 14px;">
-              顯示客戶設備連接狀況和網路架構圖
-            </div>
-            <button class="btn" style="margin-top: 15px;">載入拓樸圖</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                      </div>
+                    </td>
+                  </tr>
 
-  <script src="customerInfoHeader.js"></script>
-  <script src="sidebar.js"></script>
-  <script>
-    document.getElementById('customerInfoHeaderContainer').innerHTML = customerInfoHeaderHTML;
-    document.getElementById('sidebar').innerHTML = sidebarHTML;
-  </script>
+                  <!-- 第二筆工單 -->
+                  <tr>
+                    <td><span class="badge badge-orange">已派工</span></td>
+                    <td>WO-20250815-002</td>
+                    <td>維修</td>
+                    <td>網路訊號不穩定</td>
+                    <td>2025-08-16</td>
+                    <td>-</td>
+                    <td>7890 王工程<br><small>0987654321</small></td>
+                    <td>張太太 (本人)<br><small>0921-888-999</small></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><button class="btn-view" onclick="toggleWorkOrderDetail('row2')">查看</button></td>
+                  </tr>
+                  <!-- 第二筆的詳情區域 -->
+                  <tr id="detail-row2" class="detail-row" style="display: none;">
+                    <td colspan="11">
+                      <div class="work-order-detail-panel">
+                        <h4>施工明細 - WO-20250815-002</h4>
+                        <p style="color: #666; text-align: center; padding: 20px;">
+                          此工單尚在進行中，詳細資訊將在完工後更新...
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 移機紀錄內容 -->
+          <div id="relocationContent" style="display: none;">
+            <div class="section">
+              <div class="section-title">移機紀錄</div>
+              <p>移機紀錄內容待開發...</p>
+            </div>
+          </div>
+
+
+
+
+
+
+
+          <div id="outageContent" style="display: none;">
+            <div class="section search-bar">
+              <div class="section-title">斷訊紀錄查詢</div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>斷訊日期範圍</label>
+                  <input type="date" value="2025-01-01" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label>至</label>
+                  <input type="date" value="2025-12-31" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label>故障狀態</label>
+                  <select class="form-control">
+                    <option>全部</option>
+                    <option>待處理</option>
+                    <option>已結案</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-actions" style="text-align: right;">
+                <button class="btn btn-secondary">清除</button>
+                <button class="btn btn-primary">查詢</button>
+              </div>
+            </div>
+
+            <div class="section">
+              <div class="section-title">斷訊事件記錄</div>
+              <div class="table-container">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="width: 50px;">序號</th>
+                      <th style="width: 80px;">狀態</th>
+                      <th style="width: 130px;">故障發生時間</th>
+                      <th style="width: 200px;">故障原因</th>
+                      <th style="width: 150px;">說明</th>
+                      <th style="width: 130px;">公佈故障訊息</th>
+                      <th style="width: 130px;">預定修復時間</th>
+                      <th style="width: 100px;">通報時間</th>
+                      <th style="width: 100px;">恢復時間</th>
+                      <th style="width: 60px;">結案</th>
+                      <th colspan="4" style="width: 200px;">影響服務</th>
+                    </tr>
+                    <tr style="background: #e9ecef;">
+                      <th colspan="10"></th>
+                      <th style="width: 50px;">CATV</th>
+                      <th style="width: 50px;">CM</th>
+                      <th style="width: 50px;">FTTH</th>
+                      <th style="width: 50px;">OTT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td><span class="badge badge-orange">待處理</span></td>
+                      <td>2025/5/1 15:00</td>
+                      <td>XXX路台YYY故障導致網路中斷</td>
+                      <td>影響ZZZ區域服務</td>
+                      <td>2025/5/1 20:00</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>2025/7/1 12:00</td>
+                      <td>-</td>
+                      <td><input type="checkbox" disabled></td>
+                      <td><input type="checkbox" disabled></td>
+                      <td><input type="checkbox" checked disabled></td>
+                      <td><input type="checkbox" disabled></td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td><span class="badge badge-green">已結案</span></td>
+                      <td>2025/7/1 15:00</td>
+                      <td>Netflix服務故障</td>
+                      <td>串流服務異常</td>
+                      <td>2025/7/1 20:00</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>2025/7/1 12:00</td>
+                      <td>✓</td>
+                      <td><input type="checkbox" disabled></td>
+                      <td><input type="checkbox" checked disabled></td>
+                      <td><input type="checkbox" disabled></td>
+                      <td><input type="checkbox" disabled></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- 目前網路設定內容區塊 -->
+          <div id="networkSettingsContent" style="display: none;">
+            <!-- 網路設定 -->
+            <div class="section">
+              <div class="section-title">網路設定</div>
+              <div class="form-grid" style="grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                <div class="form-item">
+                  <div class="form-label">動態IP數</div>
+                  <div class="form-value">DNS</div>
+                </div>
+                <div class="form-item">
+                  <div class="form-label">固定IP數</div>
+                  <div class="form-value">子網遮罩</div>
+                </div>
+                <div class="form-item">
+                  <div class="form-label">固定IP/nn</div>
+                  <div class="form-value">預設閘道</div>
+                </div>
+                <div class="form-item">
+                  <div class="form-label">需固定IP</div>
+                  <div class="form-value"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 網路連線資訊 -->
+            <div class="section">
+              <div class="section-title">網路連線資訊</div>
+              <div class="form-grid" style="grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                <div class="form-item">
+                  <div class="form-label">下行頻寬</div>
+                  <div class="form-value"></div>
+                </div>
+                <div class="form-item">
+                  <div class="form-label">上行頻寬</div>
+                  <div class="form-value"></div>
+                </div>
+                <div class="form-item">
+                  <div class="form-label">接接條號</div>
+                  <div class="form-value"></div>
+                </div>
+                <div class="form-item">
+                  <div class="form-label">接接密碼</div>
+                  <div class="form-value"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 設備設定 -->
+            <div class="section">
+              <div class="section-title">設備設定</div>
+              <div class="form-grid" style="grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                <div class="form-item">
+                  <div class="form-label">設備廠牌</div>
+                  <div class="form-value">Switch ID</div>
+                </div>
+                <div class="form-item">
+                  <div class="form-label">網卡mac</div>
+                  <div class="form-value">Switch埠</div>
+                </div>
+                <div class="form-item">
+                  <div class="form-label">網卡白碼</div>
+                  <div class="form-value"></div>
+                </div>
+                <div class="form-item">
+                  <div class="form-label"></div>
+                  <div class="form-value"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 軟體資訊 -->
+            <div class="section">
+              <div class="section-title">軟體資訊</div>
+              <div class="form-grid" style="grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                <div class="form-item">
+                  <div class="form-label">作業系統</div>
+                  <div class="form-value"></div>
+                </div>
+                <div class="form-item">
+                  <div class="form-label">郵件軟體</div>
+                  <div class="form-value"></div>
+                </div>
+                <div class="form-item">
+                  <div class="form-label"></div>
+                  <div class="form-value"></div>
+                </div>
+                <div class="form-item">
+                  <div class="form-label"></div>
+                  <div class="form-value"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script src="customerInfoHeader.js"></script>
+          <script src="sidebar.js"></script>
+          <script>
+            document.getElementById('customerInfoHeaderContainer').innerHTML = customerInfoHeaderHTML;
+            document.getElementById('sidebar').innerHTML = sidebarHTML;
+
+
+            // ★ 頁面專屬：預設收合（避免影響其他頁）
+            (function () {
+              // 確保元素已注入且目前為展開狀態，再呼叫一次 toggle 讓它收合
+              const content = document.getElementById('customerInfoContent');
+              if (typeof toggleCustomerInfo === 'function' && content && !content.classList.contains('collapsed')) {
+                toggleCustomerInfo(); // 變成收合，icon 也會切成 ▶
+              }
+            })();
+
+          </script>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              // 子選單切換功能
+              const subTabs = document.querySelectorAll('.sub-tab');
+              const contentSections = {
+                'networkInfo': document.getElementById('networkInfoContent'),
+                'workOrder': document.getElementById('workOrderContent'),
+                'relocation': document.getElementById('relocationContent'),
+                'networkSettings': document.getElementById('networkSettingsContent'),
+                'outage': document.getElementById('outageContent')
+              };
+
+              // 初始化：顯示預設選中的內容
+              showContent('workOrder');
+
+              // 為每個子選單添加點擊事件
+              subTabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                  // 移除所有 active 狀態
+                  subTabs.forEach(t => t.classList.remove('active'));
+
+                  // 為點擊的選單添加 active 狀態
+                  this.classList.add('active');
+
+                  // 顯示對應內容
+                  const contentType = this.getAttribute('data-content');
+                  showContent(contentType);
+                });
+              });
+
+              // 顯示指定內容的函數
+              function showContent(contentType) {
+                // 隱藏所有內容區塊
+                Object.values(contentSections).forEach(section => {
+                  if (section) {
+                    section.style.display = 'none';
+                  }
+                });
+
+                // 顯示指定的內容區塊
+                if (contentSections[contentType]) {
+                  contentSections[contentType].style.display = 'block';
+                }
+              }
+            });
+
+            // 工單詳情展開/收合
+            function toggleWorkOrderDetail(rowId) {
+              const detailRow = document.getElementById('detail-' + rowId);
+              const button = event.target;
+
+              if (detailRow.style.display === 'none' || detailRow.style.display === '') {
+                // 展開
+                detailRow.style.display = 'table-row';
+                button.textContent = '收合';
+                button.classList.add('active');
+              } else {
+                // 收合
+                detailRow.style.display = 'none';
+                button.textContent = '查看';
+                button.classList.remove('active');
+              }
+            }
+
+            // 迷你標籤頁切換
+            document.addEventListener('DOMContentLoaded', function () {
+              document.addEventListener('click', function (e) {
+                if (e.target.classList.contains('detail-mini-tab')) {
+                  const target = e.target.getAttribute('data-target');
+                  const container = e.target.closest('.detail-tabs-container');
+
+                  // 移除所有活動狀態
+                  container.querySelectorAll('.detail-mini-tab').forEach(tab => tab.classList.remove('active'));
+                  container.querySelectorAll('.detail-tab-content').forEach(content => content.classList.remove('active'));
+
+                  // 設置新的活動狀態
+                  e.target.classList.add('active');
+                  document.getElementById(target).classList.add('active');
+                }
+              });
+            });
+          </script>
+
 </body>
 
 </html>

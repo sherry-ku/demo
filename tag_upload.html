@@ -1,18 +1,43 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <title>標籤管理－名單上傳</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="common.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="common.css" />
   <style>
-    .form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:12px}
-    .notes{font-size:12px;color:#666;line-height:1.6;margin-top:6px}
-    .notes em{color:#e74c3c;font-style:normal}
-    .file-tip{font-size:12px;color:#444;margin-left:8px}
-    .w-220{max-width:220px}
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 12px
+    }
+
+    .notes {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.6;
+      margin-top: 6px
+    }
+
+    .notes em {
+      color: #e74c3c;
+      font-style: normal
+    }
+
+    .file-tip {
+      font-size: 12px;
+      color: #444;
+      margin-left: 8px
+    }
+
+    .w-220 {
+      max-width: 220px
+    }
   </style>
 </head>
+
 <body>
   <!-- Header -->
   <div class="header">
@@ -30,8 +55,8 @@
   </div>
 
   <div class="main">
-  <!-- Sidebar -->
-<div class="sidebar" id="sidebar"></div>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar"></div>
 
 
     <!-- Content -->
@@ -39,51 +64,47 @@
       <h2>標籤名單上傳</h2>
 
       <div class="section">
-        <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="form-row">
           <!-- 標籤類別 -->
-          <div class="form-item">
-            <div class="form-label"><span style="color:red;">＊</span>標籤類別</div>
-            <div class="form-input">
-              <select id="tagCategory" class="w-220">
-                <option value="">請選擇</option>
-                <option value="流失風險等級">流失風險等級</option>
-                <option value="帳務告警">帳務告警</option>
-                <option value="設備異常">設備異常</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label><span style="color:red;">＊</span>標籤類別</label>
+            <select id="tagCategory" class="form-control">
+              <option value="">請選擇</option>
+              <option value="流失風險標籤">流失風險標籤</option>
+              <option value="專案標籤">專案標籤</option>
+            </select>
           </div>
           <!-- 標籤名稱 -->
-          <div class="form-item">
-            <div class="form-label"><span style="color:red;">＊</span>標籤名稱</div>
-            <div class="form-input">
-              <select id="tagName" class="w-220">
-                <option value="">請選擇</option>
-              </select>
-            </div>
-          </div>
-          <!-- 選擇檔案 -->
-          <div class="form-item" style="grid-column:1 / -1;">
-            <div class="form-label"><span style="color:red;">＊</span>選擇檔案</div>
-            <div class="form-input">
-              <input type="file" id="file" accept=".xls,.xlsx"/>
-              <span class="file-tip">僅接受 .xls、.xlsx</span>
-              <div class="notes">
-                註1：<em>檔案格式限 Excel（.xls／.xlsx）</em>。<br/>
-                註2：匯入後將檢核資料，若有任一筆資料發生錯誤，整份資料皆不會上傳系統，請修正後重新上傳。
-              </div>
-            </div>
-          </div>
+          <div class="form-group">
+            <label><span style="color:red;">＊</span>標籤名稱</label>
+            <select id="tagName" class="form-control">
+              <option value="">請選擇</option>
+              <option value="">MKT-RT-ANTI-CHURN-01 立流A</option>
+              <option value="">MKT-RT-SB-618 續-短促SB-C+1G</option>
+            </select>
+          </div>        
           <!-- 有效起日 -->
-          <div class="form-item">
-            <div class="form-label"><span style="color:red;">＊</span>有效起日</div>
-            <div class="form-input">
-              <input type="date" id="startDate" class="w-220"/>
-            </div>
+          <div class="form-group">
+            <label><span style="color:red;">＊</span>有效起日</label>
+            <input type="date" id="startDate" class="form-control" />
           </div>
-          <!-- 編輯人員（唯讀） -->
-          <div class="form-item">
-            <div class="form-label">編輯人員</div>
-            <div class="form-value">001234 陳小五</div>
+          <!-- 有效天數 -->
+          <div class="form-group">
+            <label>有效天數</label>
+            <input id="start_date" type="text"   disabled/>
+          </div>
+        </div>
+      <br/><br/>
+        <!-- 選擇檔案單獨一行 -->
+        <div class="form-row">
+          <div class="form-group form-group--full">
+            <label><span style="color:red;">＊</span>選擇檔案</label>
+            <input type="file" id="file" accept=".xls,.xlsx" class="form-control" />
+            <span class="file-tip">僅接受 .xls、.xlsx</span>
+            <div class="notes">
+              註1：<em>檔案格式限 Excel（.xls／.xlsx）</em>。<br />
+              註2：匯入後將檢核資料，若有任一筆資料發生錯誤，整份資料皆不會上傳系統，請修正後重新上傳。
+            </div>
           </div>
         </div>
 
@@ -98,9 +119,9 @@
   <script>
     // 依類別載入範例標籤清單（示意，可改成後端帶入）
     const tagOptions = {
-      '流失風險等級': ['立流A','立流B','特維1','特維2','特維3'],
-      '帳務告警': ['連2期欠費','連3期欠費','停復頻繁'],
-      '設備異常': ['機上盒離線','光機斷訊']
+      '流失風險等級': ['立流A', '立流B', '特維1', '特維2', '特維3'],
+      '帳務告警': ['連2期欠費', '連3期欠費', '停復頻繁'],
+      '設備異常': ['機上盒離線', '光機斷訊']
     };
     const tagCategory = document.getElementById('tagCategory');
     const tagName = document.getElementById('tagName');
@@ -128,9 +149,10 @@
     });
   </script>
   <script src="sidebar.js"></script>
-<script>
-  document.getElementById('sidebar').innerHTML = sidebarHTML;
-</script>
+  <script>
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+  </script>
 
 </body>
+
 </html>

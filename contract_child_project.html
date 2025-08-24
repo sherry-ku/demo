@@ -105,118 +105,90 @@
         <div class="form-row">
           <div class="form-group">
             <label>合約編號</label>
-            <input id="contractNo" name="contractNo" type="text" value="55667788" readonly />
-          </div>
-          <div class="form-group">
-            <label>進件公司別</label>
-            <select name="company">
-              <option selected>數位天空</option>
-              <option>新高公司</option>
-            </select>
+            <input id="contractNo" name="contractNo" type="text" value="55667788" disabled />
           </div>
           <div class="form-group">
             <label>專案名稱</label>
-            <input name="projectName" type="text" value="標準收視" />
+            <select name="projectName" type="text">
+            <option selected>PCK001 子戶套房-C</option>
+            <option>PCK002 子戶套房-D</option>      
+            </select>      
           </div>
           <div class="form-group">
             <label>產品名稱</label>
             <select name="productName">
-              <option selected>200M/50M</option>
-              <option>100M/50M</option>
+              <option selected>基本A組</option>
+              <option>基本B組</option>
+              <option>基本C組</option>
+              <option>基本組</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>合約總價</label>
-            <input name="totalPrice" type="number" value="3990" />
-          </div>
-          <div class="form-group">
-            <label>簽約戶數</label>
-            <input name="houseCount" type="number" value="5" />
-          </div>
-          <div class="form-group">
-            <label>簽約月額</label>
-            <input name="monthPrice" type="number" value="799" />
-          </div>
-          <div class="form-group">
-            <label>繳別</label>
-            <input name="cableType" type="text" />
-          </div>
         </div>
-        <div style="margin-top:10px;">
+        <div style="margin-top:10px;display: flex; justify-content: flex-end;">
           <button class="btn-add" type="button" id="btnAdd">新增</button>
         </div>
       </div>
 
-          <!-- 下方表格 -->
-          <table>
-            <thead>
-              <tr>
-                <th>合約編號</th>
-                <th>進件公司別</th>
-                <th>專案名稱</th>
-                <th>產品名稱</th>
-                <th>合約總價</th>
-                <th>簽約戶數</th>
-                <th>簽約月額</th>
-              </tr>
-            </thead>
-            <tbody id="childTableBody">
-              <tr>
-                <td>55667788</td>
-                <td>數位天空</td>
-                <td>標準收視</td>
-                <td>200M/50M</td>
-                <td>3990</td>
-                <td>5</td>
-                <td>799</td>
-              </tr>
-            </tbody>
-          </table>
-          
-          <!-- 按鈕區 -->
-          <div class="form-row" style="justify-content: flex-end; gap: 10px; margin-top: 20px;">
-            <button class="btn btn-secondary" type="button" onclick="goToStep('contract_parent_project.html')">上一步</button>
-            <button class="btn btn-primary" type="button" onclick="goToStep('contract_address_create.html')">下一步</button>
-          </div>
-          </div>
-          </div>
-          
-          <script>
-            function goToStep(url) {
-              const contractNo = document.getElementById('contractNo')?.value || '';
-              location.href = contractNo ? `${url}?contractNo=${encodeURIComponent(contractNo)}` : url;
-            }
+      <!-- 下方表格 -->
+      <table>
+        <thead>
+          <tr>
+            <th>合約編號</th>
+            <th>專案名稱</th>
+            <th>產品名稱</th>
 
-            // 新增資料到表格
-            document.addEventListener("DOMContentLoaded", function () {
-              document.getElementById("btnAdd").addEventListener("click", function () {
-                const contractNo = document.querySelector("[name='contractNo']").value;
-                const company = document.querySelector("[name='company']").value;
-                const projectName = document.querySelector("[name='projectName']").value;
-                const productName = document.querySelector("[name='productName']").value;
-                const totalPrice = document.querySelector("[name='totalPrice']").value;
-                const houseCount = document.querySelector("[name='houseCount']").value;
-                const monthPrice = document.querySelector("[name='monthPrice']").value;
+          </tr>
+        </thead>
+        <tbody id="childTableBody">
+          <tr>
+            <td>55667788</td>
+            <td>PCK001 子戶套房-C</td>
+            <td>基本A組</td>
+          </tr>
+          <tr>
+            <td>55667788</td>
+            <td>PCK002 子戶套房-D</td>
+            <td>闔家頻道</td>
+          </tr>              
+        </tbody>
+      </table>
 
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
+      <!-- 按鈕區 -->
+      <div class="form-row" style="justify-content: flex-end; gap: 10px; margin-top: 20px;">
+        <button class="btn btn-secondary" type="button" onclick="goToStep('contract_parent_project.html')">上一步</button>
+        <button class="btn btn-primary" type="button" onclick="goToStep('contract_address_create.html')">下一步</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function goToStep(url) {
+      const contractNo = document.getElementById('contractNo')?.value || '';
+      location.href = contractNo ? `${url}?contractNo=${encodeURIComponent(contractNo)}` : url;
+    }
+
+    // 新增資料到表格
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("btnAdd").addEventListener("click", function () {
+        const contractNo = document.querySelector("[name='contractNo']").value;
+        const projectName = document.querySelector("[name='projectName']").value;
+        const productName = document.querySelector("[name='productName']").value;
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
                   <td>${contractNo}</td>
-                  <td>${company}</td>
                   <td>${projectName}</td>
                   <td>${productName}</td>
-                  <td>${totalPrice}</td>
-                  <td>${houseCount}</td>
-                  <td>${monthPrice}</td>
                 `;
-                document.getElementById("childTableBody").appendChild(tr);
-              });
-            });
-          </script>
-          <script src="sidebar.js"></script>
-          <script>
-            document.getElementById('sidebar').innerHTML = sidebarHTML;
-          </script>
-          
-          </body>
-          
-          </html>
+        document.getElementById("childTableBody").appendChild(tr);
+      });
+    });
+  </script>
+  <script src="sidebar.js"></script>
+  <script>
+    document.getElementById('sidebar').innerHTML = sidebarHTML;
+  </script>
+
+</body>
+
+</html>

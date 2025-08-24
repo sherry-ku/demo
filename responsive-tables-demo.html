@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>響應式表格示範</title>
+  <link href="common.css" rel="stylesheet" />
+  <script src="responsive-tables.js"></script>
+  <style>
+    .demo-section {
+      margin-bottom: 40px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    
+    .demo-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #0d47a1;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #e3f2fd;
+      padding-bottom: 8px;
+    }
+    
+    .demo-description {
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      font-size: 14px;
+    }
+    
+    .screen-size-indicator {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #007bff;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      z-index: 1000;
+    }
+    
+    .screen-size-indicator.mobile {
+      background: #28a745;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="screen-size-indicator" id="screenIndicator">桌面版</div>
+
+  <div class="header">
+    <div class="header-left">
+      <div>響應式表格示範頁面</div>
+    </div>
+    <div class="header-right">
+      <button class="btn" onclick="toggleScreenSize()">切換螢幕大小</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="content">
+      <h1>響應式表格系統示範</h1>
+      
+      <!-- 客戶查詢表格示例 -->
+      <div class="demo-section">
+        <div class="demo-title">客戶查詢表格 (Customer Table)</div>
+        <div class="demo-description">
+          <strong>特色:</strong> 在手機上轉換為卡片佈局，客戶名稱作為卡片標題，地址資訊群組化顯示。
+          <br><strong>適用場景:</strong> 客戶搜索結果、客戶列表頁面
+        </div>
+        
+        <table class="table" id="customerTable">
+          <thead>
+            <tr>
+              <th>SO公司</th>
+              <th>家戶編號</th>
+              <th>申請人</th>
+              <th>縣市</th>
+              <th>行政區</th>
+              <th>地址</th>
+              <th>有效狀態</th>
+              <th>服務狀態</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>116</td>
+              <td>CA0001</td>
+              <td>李曉明</td>
+              <td>台北市</td>
+              <td>信義區</td>
+              <td>信義路五段150號3樓</td>
+              <td><span class="badge badge-green">有效</span></td>
+              <td><span class="badge badge-green">正常</span></td>
+              <td>
+                <button class="btn btn-sm">查看</button>
+                <button class="btn btn-sm">編輯</button>
+              </td>
+            </tr>
+            <tr>
+              <td>720</td>
+              <td>CA0002</td>
+              <td>王美華</td>
+              <td>新北市</td>
+              <td>板橋區</td>
+              <td>文化路一段268號12樓</td>
+              <td><span class="badge badge-green">有效</span></td>
+              <td><span class="badge badge-orange">待處理</span></td>
+              <td>
+                <button class="btn btn-sm">查看</button>
+                <button class="btn btn-sm">編輯</button>
+              </td>
+            </tr>
+            <tr>
+              <td>116</td>
+              <td>CA0003</td>
+              <td>張志偉</td>
+              <td>台中市</td>
+              <td>西屯區</td>
+              <td>台灣大道三段99號8樓之2</td>
+              <td><span class="badge badge-red">無效</span></td>
+              <td><span class="badge badge-red">停用</span></td>
+              <td>
+                <button class="btn btn-sm">查看</button>
+                <button class="btn btn-sm">編輯</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 產品詳情表格示例 -->
+      <div class="demo-section">
+        <div class="demo-title">產品詳情表格 (Product Table)</div>
+        <div class="demo-description">
+          <strong>特色:</strong> 多狀態欄位在手機上群組化顯示，金額欄位突出顯示，產品名稱作為卡片標題。
+          <br><strong>適用場景:</strong> 產品管理、合約詳情、服務明細
+        </div>
+        
+        <table class="table" id="productTable">
+          <thead>
+            <tr>
+              <th>專案名稱</th>
+              <th>產品名稱</th>
+              <th>服務編號</th>
+              <th>有效狀態</th>
+              <th>使用狀態</th>
+              <th>繳費狀態</th>
+              <th>月租費</th>
+              <th>合約起日</th>
+              <th>合約迄日</th>
+              <th>違約金</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>數位有線電視HD</td>
+              <td>基本頻道套餐</td>
+              <td>DTV001</td>
+              <td><span class="badge badge-green">有效</span></td>
+              <td><span class="badge badge-green">使用中</span></td>
+              <td><span class="badge badge-green">正常</span></td>
+              <td>$500</td>
+              <td>2023/01/15</td>
+              <td>2025/01/14</td>
+              <td>$2,000</td>
+              <td>
+                <button class="btn btn-sm">詳情</button>
+              </td>
+            </tr>
+            <tr>
+              <td>光纖上網100M</td>
+              <td>家庭光纖方案</td>
+              <td>FTTH100</td>
+              <td><span class="badge badge-green">有效</span></td>
+              <td><span class="badge badge-green">使用中</span></td>
+              <td><span class="badge badge-orange">待繳費</span></td>
+              <td>$699</td>
+              <td>2023/03/01</td>
+              <td>2025/02/28</td>
+              <td>$3,500</td>
+              <td>
+                <button class="btn btn-sm">詳情</button>
+              </td>
+            </tr>
+            <tr>
+              <td>MOD影音服務</td>
+              <td>運動娛樂包</td>
+              <td>MOD888</td>
+              <td><span class="badge badge-red">失效</span></td>
+              <td><span class="badge badge-red">停用</span></td>
+              <td><span class="badge badge-red">欠費</span></td>
+              <td>$199</td>
+              <td>2022/06/01</td>
+              <td>2024/05/31</td>
+              <td>$500</td>
+              <td>
+                <button class="btn btn-sm">詳情</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 帳務表格示例 -->
+      <div class="demo-section">
+        <div class="demo-title">帳務記錄表格 (Billing Table)</div>
+        <div class="demo-description">
+          <strong>特色:</strong> 金額欄位特殊樣式，到期日期警示，帳單編號作為卡片標題。
+          <br><strong>適用場景:</strong> 帳單查詢、繳費記錄、財務報表
+        </div>
+        
+        <table class="table" id="billingTable">
+          <thead>
+            <tr>
+              <th>帳單編號</th>
+              <th>出單日期</th>
+              <th>繳費狀態</th>
+              <th>服務名稱</th>
+              <th>出單金額</th>
+              <th>實收金額</th>
+              <th>繳費截止日</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>B202501001</td>
+              <td>2025/01/05</td>
+              <td><span class="badge badge-green">已繳費</span></td>
+              <td>數位電視+光纖上網</td>
+              <td>$1,199</td>
+              <td>$1,199</td>
+              <td>2025/01/25</td>
+              <td>
+                <button class="btn btn-sm">明細</button>
+              </td>
+            </tr>
+            <tr>
+              <td>B202501002</td>
+              <td>2025/01/05</td>
+              <td><span class="badge badge-orange">待繳費</span></td>
+              <td>MOD影音服務</td>
+              <td>$199</td>
+              <td>$0</td>
+              <td>2025/01/25</td>
+              <td>
+                <button class="btn btn-sm">繳費</button>
+              </td>
+            </tr>
+            <tr>
+              <td>B202412001</td>
+              <td>2024/12/05</td>
+              <td><span class="badge badge-red">逾期未繳</span></td>
+              <td>光纖上網</td>
+              <td>$699</td>
+              <td>$0</td>
+              <td>2024/12/25</td>
+              <td>
+                <button class="btn btn-sm">催收</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 合約管理表格示例 -->
+      <div class="demo-section">
+        <div class="demo-title">合約管理表格 (Contract Table)</div>
+        <div class="demo-description">
+          <strong>特色:</strong> 合約編號突出顯示，到期日期特殊樣式，合約名稱作為卡片標題。
+          <br><strong>適用場景:</strong> 合約列表、合約搜索、合約管理
+        </div>
+        
+        <table class="table" id="contractTable">
+          <thead>
+            <tr>
+              <th>合約編號</th>
+              <th>合約名稱</th>
+              <th>服務別</th>
+              <th>客戶名稱</th>
+              <th>合約金額</th>
+              <th>合約起日</th>
+              <th>合約到期日</th>
+              <th>狀態</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CT20230001</td>
+              <td>數位電視HD套餐合約</td>
+              <td>有線電視</td>
+              <td>李曉明</td>
+              <td>$12,000</td>
+              <td>2023/01/15</td>
+              <td>2025/01/14</td>
+              <td><span class="badge badge-green">生效中</span></td>
+              <td>
+                <button class="btn btn-sm">編輯</button>
+                <button class="btn btn-sm">檢視</button>
+              </td>
+            </tr>
+            <tr>
+              <td>CT20230002</td>
+              <td>光纖上網100M方案</td>
+              <td>寬頻網路</td>
+              <td>王美華</td>
+              <td>$16,776</td>
+              <td>2023/03/01</td>
+              <td>2025/02/28</td>
+              <td><span class="badge badge-green">生效中</span></td>
+              <td>
+                <button class="btn btn-sm">編輯</button>
+                <button class="btn btn-sm">檢視</button>
+              </td>
+            </tr>
+            <tr>
+              <td>CT20220015</td>
+              <td>MOD運動娛樂包</td>
+              <td>MOD服務</td>
+              <td>張志偉</td>
+              <td>$4,776</td>
+              <td>2022/06/01</td>
+              <td>2024/05/31</td>
+              <td><span class="badge badge-red">已到期</span></td>
+              <td>
+                <button class="btn btn-sm">續約</button>
+                <button class="btn btn-sm">檢視</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 標籤管理表格示例 -->
+      <div class="demo-section">
+        <div class="demo-title">標籤管理表格 (Tag Management Table)</div>
+        <div class="demo-description">
+          <strong>特色:</strong> 標籤內容區塊化顯示，重要性等級視覺化，標籤名稱作為卡片標題。
+          <br><strong>適用場景:</strong> 標籤管理、跳訊設定、客戶分類
+        </div>
+        
+        <table class="table" id="tagTable">
+          <thead>
+            <tr>
+              <th>標籤代碼</th>
+              <th>標籤名稱</th>
+              <th>標籤類別</th>
+              <th>重要性</th>
+              <th>跳訊內容</th>
+              <th>生效天數</th>
+              <th>建立部門</th>
+              <th>狀態</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>VIP001</td>
+              <td>VIP-社區公關</td>
+              <td>VIP客戶</td>
+              <td><span class="badge badge-red">高</span></td>
+              <td>此客戶為社區公關人員，請優先處理服務需求</td>
+              <td>365</td>
+              <td>客服部</td>
+              <td><span class="badge badge-green">啟用</span></td>
+              <td>
+                <button class="btn btn-sm">編輯</button>
+              </td>
+            </tr>
+            <tr>
+              <td>RISK002</td>
+              <td>信用不良客戶</td>
+              <td>風險管控</td>
+              <td><span class="badge badge-orange">中</span></td>
+              <td>客戶有逾期繳費紀錄，建議先收費後施工</td>
+              <td>180</td>
+              <td>風控部</td>
+              <td><span class="badge badge-green">啟用</span></td>
+              <td>
+                <button class="btn btn-sm">編輯</button>
+              </td>
+            </tr>
+            <tr>
+              <td>QUAL003</td>
+              <td>服務品質待改善</td>
+              <td>服務品質</td>
+              <td><span class="badge badge-green">低</span></td>
+              <td>客戶對服務品質有意見，需特別留意服務態度</td>
+              <td>90</td>
+              <td>品質部</td>
+              <td><span class="badge badge-orange">停用</span></td>
+              <td>
+                <button class="btn btn-sm">編輯</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 螢幕尺寸指示器
+    function updateScreenIndicator() {
+      const indicator = document.getElementById('screenIndicator');
+      if (window.innerWidth <= 768) {
+        indicator.textContent = '手機版 (≤768px)';
+        indicator.classList.add('mobile');
+      } else {
+        indicator.textContent = '桌面版 (>768px)';
+        indicator.classList.remove('mobile');
+      }
+    }
+
+    // 切換螢幕大小模擬
+    function toggleScreenSize() {
+      const body = document.body;
+      if (body.style.maxWidth === '768px') {
+        body.style.maxWidth = '';
+        body.style.margin = '';
+      } else {
+        body.style.maxWidth = '768px';
+        body.style.margin = '0 auto';
+      }
+      setTimeout(updateScreenIndicator, 100);
+    }
+
+    // 監聽視窗大小變化
+    window.addEventListener('resize', updateScreenIndicator);
+    
+    // 初始化
+    updateScreenIndicator();
+    
+    // 初始化響應式表格管理器
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.responsiveTableManager) {
+        // 手動指定表格類型以獲得更好的卡片樣式
+        const customerTable = document.getElementById('customerTable');
+        const productTable = document.getElementById('productTable');
+        const billingTable = document.getElementById('billingTable');
+        const contractTable = document.getElementById('contractTable');
+        const tagTable = document.getElementById('tagTable');
+        
+        // 重新處理表格以套用正確的類型
+        setTimeout(() => {
+          window.responsiveTableManager.addTable(customerTable, { type: 'customer' });
+          window.responsiveTableManager.addTable(productTable, { type: 'product' });
+          window.responsiveTableManager.addTable(billingTable, { type: 'billing' });
+          window.responsiveTableManager.addTable(contractTable, { type: 'contract' });
+          window.responsiveTableManager.addTable(tagTable, { type: 'tag' });
+        }, 500);
+      }
+    });
+  </script>
+</body>
+
+</html>

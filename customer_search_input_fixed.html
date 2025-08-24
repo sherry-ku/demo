@@ -30,10 +30,7 @@
 <div class="content">
 <h2>客戶資料查詢</h2>
 
-<button class="toggle-btn" onclick="toggleForm()">
-  <span class="label">收合查詢條件</span>
-  <span class="arrow">▲</span>
-</button>
+<button class="toggle-btn" onclick="toggleForm()">收合查詢條件 ▲</button>
 
 
 
@@ -44,7 +41,7 @@
 
   <!-- 使用者資料 -->
   <div class="form-row">
-    <div class="form-group"><label>身分證號/統編</label><input class="form-control" type="text" /></div>
+    <div class="form-group form-group--wide"><label>身分證號/統編</label><input class="form-control" type="text" /></div>
     <div class="form-group"><label>客戶姓名</label><input class="form-control" type="text" /></div>
     <div class="form-group"><label>手機號碼</label><input class="form-control" type="text" /></div>
     <div class="form-group"><label>家戶編號</label><input class="form-control" type="text" /></div>
@@ -96,15 +93,12 @@
   function toggleForm() {
     const form = document.getElementById('queryForm');
     const btn = document.querySelector('.toggle-btn');
-    const label = btn.querySelector('.label');
-    const arrow = btn.querySelector('.arrow');
 
     form.classList.toggle('collapsed');
     const isCollapsed = form.classList.contains('collapsed');
 
     form.style.display = isCollapsed ? 'none' : 'block';
-    label.textContent = isCollapsed ? '展開查詢條件' : '收合查詢條件';
-    arrow.textContent = isCollapsed ? '▼' : '▲';
+    btn.textContent = isCollapsed ? '展開查詢條件 ▼' : '收合查詢條件 ▲';
   }
 
   // 地址查詢區塊展開/收合

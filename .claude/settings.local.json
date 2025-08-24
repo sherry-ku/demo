@@ -4,6 +4,9 @@
       "Bash(mkdir:*)"
     ],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "additionalDirectories": [
+      "\\\\nassha\\HomePlus\\nassha\\HomePlus\\資訊事業處\\資訊處\\通路技術部\\客戶模組"
+    ]
   }
 }

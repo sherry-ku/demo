@@ -35,32 +35,32 @@
       <div>
         <div class="tabs" id="mainTabs">
           <div class="tab">
-            <a href="detail-customer.html" style="text-decoration: none; color: inherit;">客戶與大樓資料</a>
+            <a href="detail-customer.html" class="nav-link">客戶與大樓資料</a>
           </div>
           <div class="tab active">
-            <a href="detail-product.html" style="text-decoration: none; color: inherit;">產品與申辦歷程</a>
+            <a href="detail-product.html" class="nav-link">產品與申辦歷程</a>
           </div>
           <div class="tab">
-            <a href="detail-billing.html" style="text-decoration: none; color: inherit;">帳務與發票</a>
+            <a href="detail-billing.html" class="nav-link">帳務與發票</a>
           </div>
           <div class="tab">
-            <a href="detail-engineering.html" style="text-decoration: none; color: inherit;">工務與設備</a>
+            <a href="detail-engineering.html" class="nav-link">工務與工單</a>
           </div>
           <div class="tab">
-            <a href="detail-contact.html" style="text-decoration: none; color: inherit;">客戶聯絡歷程</a>
+            <a href="detail-contact.html" class="nav-link">客戶聯絡歷程</a>
           </div>
         </div>
       </div>
-      
+
       <!-- 產品設備與申辦歷程 Tab Content -->
       <div class="main-tab-content" id="main2">
         <div class="sub-tabs" id="subTabs2">
-          <div class="sub-tab active" data-sub="p1">產品設備與方案</div>
+          <div class="sub-tab active" data-sub="p1">產品與方案</div>
           <div class="sub-tab" data-sub="p2">設備資訊</div>
           <div class="sub-tab" data-sub="p3">訂單紀錄</div>
           <div class="sub-tab" data-sub="p4">使用流量統計</div>
         </div>
-        
+
         <!-- 產品設備與方案 -->
         <div class="sub-content" id="p1Content">
           <!-- 查詢條件列 -->
@@ -90,14 +90,14 @@
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group" style="flex: 2;">
+              <div class="form-group flex-2">
                 <label>組合專案名稱</label>
                 <select class="form-control">
                   <option>全部</option>
                   <option>單I(F)數位+潘朵啦+ Mesh(租用)</option>
                 </select>
               </div>
-              <div class="form-group" style="flex: 2;">
+              <div class="form-group flex-2">
                 <label>專案名稱</label>
                 <select class="form-control">
                   <option>全部</option>
@@ -109,22 +109,22 @@
                 </select>
               </div>
             </div>
-            <div class="form-actions">
+            <div class="form-actions--end">
               <button class="btn btn-secondary">清除</button>
               <button class="btn btn-primary">查詢</button>
             </div>
           </div>
           <!-- 金額總計區域 -->
-          <div class="section" style="margin-bottom: 10px;">
+          <div class="section mb-2">
             <div
-              style="display: flex; justify-content: flex-end; gap: 30px; align-items: center; font-size: 14px; font-weight: bold;">
-              <div style="padding: 8px 16px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px;">
-                <span style="color: #495057;">月租費總計</span>
-                <span style="color: #007bff; margin-left: 10px;">1,726</span>
+              class="product-summary">
+              <div class="product-summary__item">
+                <span class="product-summary__label">月租費總計</span>
+                <span class="product-summary__amount--primary">1,726</span>
               </div>
-              <div style="padding: 8px 16px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px;">
-                <span style="color: #495057;">違約金總計</span>
-                <span style="color: #dc3545; margin-left: 10px;">9,800</span>
+              <div class="product-summary__item">
+                <span class="product-summary__label">違約金總計</span>
+                <span class="product-summary__amount--danger">9,800</span>
               </div>
             </div>
           </div>
@@ -171,13 +171,15 @@
                   <td>2026/5/1</td>
                   <td>200</td>
                   <td>季繳</td>
-                  <td class="link" onclick="toggleSubTable(this)">7400</td>
+                  <td class="link" onclick="toggleSubTable(this)">7,400</td>
                 </tr>
-                <tr class="sub-table-row" style="display:none;">
+                <tr class="sub-table-row hidden">
                   <td class="sub-table" colspan="18">
-                    <table class="table">
+                    <table class="child-table" width="80%">
+                      <div class="notes">案例情境為用戶2025/8/1申請續約(約上約)，原約剩餘5個月，違約金2,400。</div>
                       <thead>
                         <tr>
+                          <th>項次</th>
                           <th>合約起日</th>
                           <th>合約迄日</th>
                           <th>違約金</th>
@@ -185,14 +187,16 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td>2024/5/2</td>
-                          <td>2026/5/1</td>
-                          <td>2400</td>
+                          <td>1</td>
+                          <td>2025/1/1</td>
+                          <td>2025/12/31</td>
+                          <td>2,400</td>
                         </tr>
                         <tr>
-                          <td>2023/5/2</td>
-                          <td>2025/5/1</td>
-                          <td>5000</td>
+                          <td>2</td>
+                          <td>2025/8/1</td>
+                          <td>2026/12/31</td>
+                          <td>5,000</td>
                         </tr>
                       </tbody>
                     </table>
@@ -216,13 +220,15 @@
                   <td>2026/5/1</td>
                   <td>1199</td>
                   <td>季繳</td>
-                  <td class="link" onclick="toggleSubTable(this)">2400</td>
+                  <td class="link" onclick="toggleSubTable(this)">2,400</td>
                 </tr>
-                <tr class="sub-table-row" style="display:none;">
-                  <td class="sub-table" colspan="16">
-                    <table class="table">
+                <tr class="sub-table-row hidden">
+                  <td class="sub-table" colspan="18">
+                    <table class="child-table" width="80%">
+                      <div class="notes">此為第二筆合約的違約金明細。</div>
                       <thead>
                         <tr>
+                          <th>項次</th>
                           <th>合約起日</th>
                           <th>合約迄日</th>
                           <th>違約金</th>
@@ -230,9 +236,10 @@
                       </thead>
                       <tbody>
                         <tr>
+                          <td>1</td>
                           <td>2024/5/2</td>
                           <td>2026/5/1</td>
-                          <td>2400</td>
+                          <td>2,400</td>
                         </tr>
                       </tbody>
                     </table>
@@ -302,9 +309,9 @@
             </table>
           </div>
         </div>
-        
+
         <!-- 設備資訊 -->
-        <div class="sub-content" id="p2Content" style="display:none;">
+        <div class="sub-content hidden" id="p2Content">
           <div class="section equipment-info">
             <!-- 查詢條件列 -->
             <div class="form-row">
@@ -325,275 +332,292 @@
               <div class="form-group">
                 <label>設備狀態</label>
                 <select class="form-control">
-                  <option>全選/啟用/停用</option>
+                  <option>全選</option>
+                  <option>啟用</option>
+                  <option>停用</option>
                 </select>
               </div>
             </div>
+            <div class="form-actions--end">
+              <button class="btn btn-secondary">清除</button>
+              <button class="btn btn-primary">送出</button>
+            </div>
             <!-- 設備資訊表 -->
-            <table border="1" cellpadding="5" cellspacing="0" class="table" width="100%">
-              <thead>
-                <tr>
-                  <th>客戶設備編號</th>
-                  <th>設備機號</th>
-                  <th>設備類型</th>
-                  <th>提供產品項目</th>
-                  <th>停用</th>
-                  <th>設備狀態</th>
-                  <th>設備位置</th>
-                  <th>售別</th>
-                  <th>所屬服務</th>
-                  <th>智慧卡號</th>
-                  <th>裝機工單</th>
-                  <th>安裝日期</th>
-                  <th>安裝人員</th>
-                  <th>備註</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>D0001</td>
-                  <td>DEV-I968</td>
-                  <td>ATV</td>
-                  <td><span class="link" onclick="toggleEquipDetail(this)">1</span></td>
-                  <td>N</td>
-                  <td>啟用</td>
-                  <td>客廳</td>
-                  <td>租</td>
-                  <td>Internet</td>
-                  <td></td>
-                  <td>WO-20250604-001</td>
-                  <td>2024/5/2</td>
-                  <td>6543 陳工程</td>
-                  <td></td>
-                </tr>
-                <tr class="equip-detail-row" style="display:none; background:#d9edf7;">
-                  <td colspan="14">
-                    <table border="1" cellpadding="5" cellspacing="0" style="width:100%; table-layout:fixed;">
-                      <thead>
-                        <tr>
-                          <th>服務別</th>
-                          <th>客戶產品編號</th>
-                          <th>產品名稱</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Internet</td>
-                          <td>N0001</td>
-                          <td>範例產品 1</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-                <tr>
-                  <td>D0002</td>
-                  <td>DEV-C999</td>
-                  <td>03250 纜線數據機</td>
-                  <td><span class="link" onclick="toggleEquipDetail(this)">1</span></td>
-                  <td>N</td>
-                  <td>啟用</td>
-                  <td>客廳</td>
-                  <td>租</td>
-                  <td>Internet</td>
-                  <td></td>
-                  <td>WO-20250604-001</td>
-                  <td>2024/5/2</td>
-                  <td>6543 陳工程</td>
-                  <td>wifi 6</td>
-                </tr>
-                <tr class="equip-detail-row" style="display:none; background:#d9edf7;">
-                  <td colspan="14">
-                    <table border="1" cellpadding="5" cellspacing="0" width="100%">
-                      <thead>
-                        <tr>
-                          <th>服務別</th>
-                          <th>客戶產品編號</th>
-                          <th>產品名稱</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Internet</td>
-                          <td>N0002</td>
-                          <td>範例產品 2</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-                <tr>
-                  <td>D0003</td>
-                  <td></td>
-                  <td>Mesh 6</td>
-                  <td><span class="link" onclick="toggleEquipDetail(this)">1</span></td>
-                  <td>N</td>
-                  <td>啟用</td>
-                  <td>客廳</td>
-                  <td>租</td>
-                  <td>Internet</td>
-                  <td></td>
-                  <td>WO-20250604-001</td>
-                  <td>2024/5/2</td>
-                  <td>6543 陳工程</td>
-                  <td></td>
-                </tr>
-                <tr class="equip-detail-row" style="display:none; background:#d9edf7;">
-                  <td colspan="14">
-                    <table border="1" cellpadding="5" cellspacing="0" width="100%">
-                      <thead>
-                        <tr>
-                          <th>服務別</th>
-                          <th>客戶產品編號</th>
-                          <th>產品名稱</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Internet</td>
-                          <td>N0003</td>
-                          <td>範例產品 3</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-                <tr>
-                  <td>D0004</td>
-                  <td>DEV-CM773</td>
-                  <td>02340 數位機上盒(借)</td>
-                  <td><span class="link" onclick="toggleEquipDetail(this)">1</span></td>
-                  <td>N</td>
-                  <td>啟用</td>
-                  <td>客廳</td>
-                  <td>租</td>
-                  <td>CATV</td>
-                  <td>SC-123ABC</td>
-                  <td>WO-20250604-001</td>
-                  <td>2024/5/2</td>
-                  <td>6543 陳工程</td>
-                  <td>ATV, 雙向</td>
-                </tr>
-                <tr class="equip-detail-row" style="display:none; background:#d9edf7;">
-                  <td colspan="14">
-                    <table border="1" cellpadding="5" cellspacing="0" width="100%">
-                      <thead>
-                        <tr>
-                          <th>服務別</th>
-                          <th>客戶產品編號</th>
-                          <th>產品名稱</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>CATV</td>
-                          <td>N0004</td>
-                          <td>範例產品 4</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-                <tr>
-                  <td>D0005</td>
-                  <td>DEV-CM774</td>
-                  <td>02340 數位機上盒(借)</td>
-                  <td><span class="link" onclick="toggleEquipDetail(this)">1</span></td>
-                  <td>N</td>
-                  <td>啟用</td>
-                  <td>房間</td>
-                  <td>租</td>
-                  <td>CATV</td>
-                  <td>SC-123ABC</td>
-                  <td>WO-20250604-001</td>
-                  <td>2024/5/2</td>
-                  <td>6543 陳工程</td>
-                  <td>ATV, 雙向</td>
-                </tr>
-                <tr class="equip-detail-row" style="display:none; background:#d9edf7;">
-                  <td colspan="14">
-                    <table border="1" cellpadding="5" cellspacing="0" width="100%">
-                      <thead>
-                        <tr>
-                          <th>服務別</th>
-                          <th>客戶產品編號</th>
-                          <th>產品名稱</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>CATV</td>
-                          <td>N0005</td>
-                          <td>範例產品 5</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-                <tr>
-                  <td>D0006</td>
-                  <td></td>
-                  <td>25264 紅外線智慧遙控器(租借)</td>
-                  <td><span class="link" onclick="toggleEquipDetail(this)">1</span></td>
-                  <td>N</td>
-                  <td>啟用</td>
-                  <td></td>
-                  <td>售</td>
-                  <td>CATV</td>
-                  <td></td>
-                  <td></td>
-                  <td>2025/8/4</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr class="equip-detail-row" style="display:none; background:#d9edf7;">
-                  <td colspan="14">
-                    <table border="1" cellpadding="5" cellspacing="0" width="100%">
-                      <thead>
-                        <tr>
-                          <th>服務別</th>
-                          <th>客戶產品編號</th>
-                          <th>產品名稱</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>CATV</td>
-                          <td>N0006</td>
-                          <td>範例產品 6</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="equipment-table-container">
+              <table border="1" cellpadding="5" cellspacing="0" class="table equipment-table" width="100%">
+                <thead>
+                  <tr>
+                    <th>客戶設備編號</th>
+                    <th>設備類型</th>
+                    <th>設備狀態</th>
+                    <th>設備位置</th>
+                    <th>售別</th>
+                    <th>所屬服務</th>
+                    <th>提供產品項目</th>
+                    <th>設備機號</th>
+                    <th>智慧卡號</th>
+                    <th>晶片號碼</th>
+                    <th>裝機工單</th>
+                    <th>安裝日期</th>
+                    <th>拆機工單</th>
+                    <th>拆機日期</th>
+                    <th>備註</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>D0001</td>
+                    <td>ATV</td>
+                    <td>啟用</td>
+                    <td>客廳</td>
+                    <td>租</td>
+                    <td>Internet</td>
+                    <td><span class="link" onclick="toggleEquipDetail(this)">1</span></td>
+                    <td>DEV-I968</td>
+                    <td></td>
+                    <td></td>
+                    <td>WO-20250604-001</td>
+                    <td>2024/5/2</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="equip-detail-row equipment-detail hidden">
+                    <td colspan="15">
+                      <table border="1" cellpadding="5" cellspacing="0" class="equipment-detail__table">
+                        <thead>
+                          <tr>
+                            <th>服務別</th>
+                            <th>客戶產品編號</th>
+                            <th>產品名稱</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Internet</td>
+                            <td>N0001</td>
+                            <td>範例產品 1</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>D0002</td>
+                    <td>03250 纜線數據機</td>
+                    <td>啟用</td>
+                    <td>客廳</td>
+                    <td>租</td>
+                    <td>Internet</td>
+                    <td><span class="link" onclick="toggleEquipDetail(this)">1</span></td>
+                    <td>DEV-C999</td>
+                    <td></td>
+                    <td></td>
+                    <td>WO-20250604-001</td>
+                    <td>2024/5/2</td>
+                    <td></td>
+                    <td></td>
+                    <td>wifi 6</td>
+                  </tr>
+                  <tr class="equip-detail-row equipment-detail hidden">
+                    <td colspan="15">
+                      <table border="1" cellpadding="5" cellspacing="0" width="100%">
+                        <thead>
+                          <tr>
+                            <th>服務別</th>
+                            <th>客戶產品編號</th>
+                            <th>產品名稱</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Internet</td>
+                            <td>N0002</td>
+                            <td>範例產品 2</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>D0003</td>
+                    <td>Mesh 6</td>
+                    <td>啟用</td>
+                    <td>客廳</td>
+                    <td>租</td>
+                    <td>Internet</td>
+                    <td><span class="link" onclick="toggleEquipDetail(this)">1</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>WO-20250604-001</td>
+                    <td>2024/5/2</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="equip-detail-row equipment-detail hidden">
+                    <td colspan="15">
+                      <table border="1" cellpadding="5" cellspacing="0" width="100%">
+                        <thead>
+                          <tr>
+                            <th>服務別</th>
+                            <th>客戶產品編號</th>
+                            <th>產品名稱</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Internet</td>
+                            <td>N0003</td>
+                            <td>範例產品 3</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>D0004</td>
+                    <td>02340 數位機上盒(借)</td>
+                    <td>啟用</td>
+                    <td>客廳</td>
+                    <td>租</td>
+                    <td>CATV</td>
+                    <td><span class="link" onclick="toggleEquipDetail(this)">1</span></td>
+                    <td>DEV-CM773</td>
+                    <td>SC-123ABC</td>
+                    <td>CHIP-789XYZ</td>
+                    <td>WO-20250604-001</td>
+                    <td>2024/5/2</td>
+                    <td></td>
+                    <td></td>
+                    <td>ATV, 雙向</td>
+                  </tr>
+                  <tr class="equip-detail-row equipment-detail hidden">
+                    <td colspan="15">
+                      <table border="1" cellpadding="5" cellspacing="0" width="100%">
+                        <thead>
+                          <tr>
+                            <th>服務別</th>
+                            <th>客戶產品編號</th>
+                            <th>產品名稱</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>CATV</td>
+                            <td>N0004</td>
+                            <td>範例產品 4</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>D0005</td>
+                    <td>02340 數位機上盒(借)</td>
+                    <td>啟用</td>
+                    <td>房間</td>
+                    <td>租</td>
+                    <td>CATV</td>
+                    <td><span class="link" onclick="toggleEquipDetail(this)">1</span></td>
+                    <td>DEV-CM774</td>
+                    <td>SC-123DEF</td>
+                    <td>CHIP-456ABC</td>
+                    <td>WO-20250604-001</td>
+                    <td>2024/5/2</td>
+                    <td>WO-20250820-002</td>
+                    <td>2025/8/20</td>
+                    <td>ATV, 雙向</td>
+                  </tr>
+                  <tr class="equip-detail-row equipment-detail hidden">
+                    <td colspan="15">
+                      <table border="1" cellpadding="5" cellspacing="0" width="100%">
+                        <thead>
+                          <tr>
+                            <th>服務別</th>
+                            <th>客戶產品編號</th>
+                            <th>產品名稱</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>CATV</td>
+                            <td>N0005</td>
+                            <td>範例產品 5</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>D0006</td>
+                    <td>25264 紅外線智慧遙控器(租借)</td>
+                    <td>啟用</td>
+                    <td></td>
+                    <td>售</td>
+                    <td>CATV</td>
+                    <td><span class="link" onclick="toggleEquipDetail(this)">1</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>2025/8/4</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="equip-detail-row equipment-detail hidden">
+                    <td colspan="15">
+                      <table border="1" cellpadding="5" cellspacing="0" width="100%">
+                        <thead>
+                          <tr>
+                            <th>服務別</th>
+                            <th>客戶產品編號</th>
+                            <th>產品名稱</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>CATV</td>
+                            <td>N0006</td>
+                            <td>範例產品 6</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-        
+
         <!-- 訂單紀錄 -->
-        <div class="sub-content" id="p3Content" style="display:none;">
-          <!-- 查詢條件列 -->
-          <div class="form-row">
-            <div class="form-group">
-              <label><span style="color:red;">*</span>查詢訂單日期</label>
-              <input class="form-control" type="date" value="2025-01-01" />
+        <div class="sub-content hidden" id="p3Content">
+          <div class="section equipment-info">
+            <!-- 查詢條件列 -->
+            <div class="form-row">
+              <div class="form-group">
+                <label><span class="required-indicator">*</span>查詢訂單日期</label>
+                <input class="form-control" type="date" value="2025-01-01" />
+              </div>
+              <div class="form-group">
+                <label>至</label>
+                <input class="form-control" type="date" value="2025-07-01" />
+              </div>
+              <div class="form-group">
+                <label>介紹人員編</label>
+                <input class="form-control" type="text" value="0789" />
+              </div>
             </div>
-            <div class="form-group">
-              <label>至</label>
-              <input class="form-control" type="date" value="2025-07-01" />
+            <div class="form-actions--end">
+              <button class="btn btn-secondary">清除</button>
+              <button class="btn btn-primary">送出</button>
             </div>
-            <div class="form-group">
-              <label>介紹人員編</label>
-              <input class="form-control" type="text" value="0789" />
-            </div>
-          </div>
-          <div class="form-actions">
-            <button class="btn btn-secondary">清除</button>
-            <button class="btn btn-primary">送出</button>
-          </div>
-          <!-- 訂單列表 -->
-          <table border="1" cellpadding="5" cellspacing="0" class="data-table" width="100%">
+            <!-- 訂單列表 -->
+            <div class="equipment-table-container">
+              <table border="1" cellpadding="5" cellspacing="0" class="table equipment-table" width="100%">
             <thead>
               <tr>
                 <th>訂單編號</th>
@@ -616,14 +640,14 @@
                 <td>I,C,V,D</td>
                 <td>5</td>
                 <td>1199</td>
-                <td class="highlight">電銷</td>
+                <td>電銷</td>
                 <td>陳小華</td>
                 <td>待施工</td>
                 <td><button class="btn toggle-btn">展開</button></td>
               </tr>
-              <tr class="detail-row" style="display:none;">
-                <td colspan="10">
-                  <table border="1" cellpadding="5" cellspacing="0" width="100%">
+              <tr class="sub-table-row hidden">
+                <td class="sub-table" colspan="10">
+                  <table class="child-table" width="80%">
                     <thead>
                       <tr>
                         <th>組合包代碼</th>
@@ -692,15 +716,17 @@
                 </td>
               </tr>
             </tbody>
-          </table>
+              </table>
+            </div>
+          </div>
         </div>
-        
+
         <!-- 使用流量統計 -->
-        <div class="sub-content" id="p4Content" style="display:none;">
+        <div class="sub-content hidden" id="p4Content">
           <div class="section">
             <div class="section-title">使用流量統計</div>
             <div class="center-content">
-              <p style="color: #666; font-size: 16px;">此功能開發中...</p>
+              <p class="development-notice">此功能開發中...</p>
             </div>
           </div>
         </div>
@@ -714,32 +740,33 @@
       tab.addEventListener('click', () => {
         document.querySelectorAll('#subTabs2 .sub-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
-        document.querySelectorAll('#main2 .sub-content').forEach(c => c.style.display = 'none');
-        document.getElementById(tab.dataset.sub + 'Content').style.display = 'block';
+        document.querySelectorAll('#main2 .sub-content').forEach(c => c.classList.add('hidden'));
+        document.getElementById(tab.dataset.sub + 'Content').classList.remove('hidden');
       });
     });
 
     // 違約金展開/收合
     function toggleSubTable(el) {
       let row = el.closest('tr').nextElementSibling;
-      row.style.display = (row.style.display === 'none' || row.style.display === '') ? 'table-row' : 'none';
+      row.classList.toggle('hidden');
     }
 
     // 設備詳情展開/收合
     function toggleEquipDetail(el) {
       const detailRow = el.closest('tr').nextElementSibling;
-      detailRow.style.display = detailRow.style.display === 'none' ? '' : 'none';
+      detailRow.classList.toggle('hidden');
     }
 
-    // 訂單詳情展開縮合
-    document.querySelectorAll('#p3Content .toggle-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
+    // 訂單詳情展開縮合 - 使用事件委託
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('toggle-btn') && e.target.closest('#p3Content')) {
+        const btn = e.target;
         const mainRow = btn.closest('tr'); // 主列
         const detailRow = mainRow.nextElementSibling; // 明細列
-        const isHidden = detailRow.style.display === 'none';
-
+        const isHidden = detailRow.classList.contains('hidden');
+        
         // 顯示 / 隱藏明細
-        detailRow.style.display = isHidden ? '' : 'none';
+        detailRow.classList.toggle('hidden');
         btn.textContent = isHidden ? '縮合' : '展開';
 
         // 主列加 / 移除底色
@@ -748,28 +775,40 @@
         } else {
           mainRow.classList.remove('active-row');
         }
-      });
+      }
     });
 
     // 確保查詢條件欄位可編輯
     document.addEventListener('DOMContentLoaded', function () {
+      // 確保初始狀態正確 - 只顯示第一個標籤頁內容
+      document.getElementById('p1Content').classList.remove('hidden');
+      
       // 強制移除所有查詢條件的disabled屬性
       document.querySelectorAll('#p2Content select, #p2Content input, #p3Content select, #p3Content input').forEach(el => {
         el.removeAttribute('disabled');
-        el.style.pointerEvents = 'auto';
-        el.style.backgroundColor = '#fff';
-        el.style.color = '#000';
+        el.classList.remove('field--disabled');
+        el.classList.add('field');
       });
     });
 
   </script>
-  
+
   <script src="customerInfoHeader.js"></script>
   <script src="sidebar.js"></script>
   <script>
     document.getElementById('customerInfoHeaderContainer').innerHTML = customerInfoHeaderHTML;
     document.getElementById('sidebar').innerHTML = sidebarHTML;
+    // ★ 頁面專屬：預設收合（避免影響其他頁）
+    (function () {
+      // 確保元素已注入且目前為展開狀態，再呼叫一次 toggle 讓它收合
+      const content = document.getElementById('customerInfoContent');
+      if (typeof toggleCustomerInfo === 'function' && content && !content.classList.contains('collapsed')) {
+        toggleCustomerInfo(); // 變成收合，icon 也會切成 ▶
+      }
+    })();
   </script>
+
+
 </body>
 
 </html>

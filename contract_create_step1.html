@@ -17,6 +17,7 @@
       max-width: 220px;
     }
 
+    /* Legacy button styles - can be removed after full migration */
     .btn-mini {
       padding: 2px 8px;
       font-size: 12px;
@@ -57,9 +58,9 @@
       <div>登入時間：18:44:11</div>
     </div>
     <div class="header-right">
-      <button class="btn">訊息中心</button>
-      <button class="btn">暫存訂單</button>
-      <button class="btn">登出</button>
+      <button class="btn btn--info">訊息中心</button>
+      <button class="btn btn--secondary">暫存訂單</button>
+      <button class="btn btn--outline-danger">登出</button>
     </div>
   </div>
 
@@ -80,7 +81,7 @@
 
       <!-- 簽約人查詢 -->
       <div class="form-block">
-        <div class="form-block-title">一、選擇簽約人</div>
+        <div class="form-block-title">一、選擇簽約人(申請人)</div>
         <div class="form-row">
           <div class="form-group">
             <label>身分證號/統編</label>
@@ -91,7 +92,7 @@
             <input type="text" id="q_name" class="w-220" />
           </div>
           <div class="form-group">
-            <label>手機號碼</label>
+            <label>客戶電話</label>
             <input type="text" id="q_mobile" class="w-220" />
           </div>
           <div class="form-group">
@@ -100,8 +101,8 @@
           </div>
         </div>
         <div class="form-row" style="justify-content: flex-end; gap: 10px;">
-          <button class="btn btn-secondary" type="button" id="btnCustClear">清除</button>
-          <button class="btn btn-primary" type="button" id="btnCustSearch">查詢</button>
+          <button class="btn btn--secondary" type="button" id="btnCustClear">清除</button>
+          <button class="btn btn--primary" type="button" id="btnCustSearch">查詢</button>
         </div>
 
         <!-- 查詢結果：申請人 -->
@@ -111,34 +112,28 @@
               <tr>
                 <th>選取</th>
                 <th>客戶編號</th>
-                <th>申請人</th>
-                <th>手機</th>
-                <th>縣市</th>
-                <th>行政區</th>
-                <th>地址</th>
+                <th>客戶名稱</th>
+                <th>電話(1)</th>
+                <th>客戶類型</th>
                 <th>查看</th>
               </tr>
             </thead>
             <tbody id="custResult">
               <tr>
-                <td><input type="radio" name="custPick" value="CA0001|王曉明" /></td>
+                <td><input type="radio" name="custPick" value="CA0001|李曉明" /></td>
                 <td>CA0001</td>
-                <td>王曉明</td>
+                <td>李曉明</td>
                 <td>0912****89</td>
-                <td>台北市</td>
-                <td>信義區</td>
-                <td class="left">忠孝東路四段12巷1弄5樓101號</td>
-                <td><button class="btn btn-mini" onclick="location.href='detail_final_CA003.html'">查看</button></td>
+                <td>個人戶</td>
+                <td><button class="btn btn--primary btn--xs" onclick="location.href='detail-customer.html'">查看</button></td>
               </tr>
               <tr>
                 <td><input type="radio" name="custPick" value="CA0002|陳小五" /></td>
                 <td>CA0002</td>
                 <td>陳小五</td>
                 <td>0920****11</td>
-                <td>新北市</td>
-                <td>板橋區</td>
-                <td class="left">文化路一段100號10樓</td>
-                <td><button class="btn btn-mini" onclick="location.href='detail_final_CA001.html'">查看</button></td>
+                <td>企業戶</td>
+                <td><button class="btn btn--primary btn--xs" >查看</button></td>
               </tr>
             </tbody>
           </table>
@@ -171,8 +166,8 @@
           </div>
         </div>
         <div class="form-row" style="justify-content: flex-end; gap: 10px;">
-          <button class="btn btn-secondary" type="button" id="btnBldgClear">清除</button>
-          <button class="btn btn-primary" type="button" id="btnBldgSearch">查詢</button>
+          <button class="btn btn--secondary" type="button" id="btnBldgClear">清除</button>
+          <button class="btn btn--primary" type="button" id="btnBldgSearch">查詢</button>
         </div>
 
         <!-- 查詢結果：建物 -->
@@ -187,7 +182,7 @@
                 <th>行政區</th>
                 <th>地址</th>
                 <th>大樓等級</th>
-                <th>競爭狀況</th>
+                <th>建築型態</th>
               </tr>
             </thead>
             <tbody id="bldgResult">
@@ -199,7 +194,7 @@
                 <td>大安區</td>
                 <td class="left">和平東路三段</td>
                 <td>雙線大樓</td>
-                <td>中競爭</td>
+                <td>住宅大樓</td>
               </tr>
               <tr>
                 <td><input type="radio" name="bldgPick" value="MDU256|新光名人巷" /></td>
@@ -208,8 +203,8 @@
                 <td>台北市</td>
                 <td>信義區</td>
                 <td class="left">松仁路199號</td>
-                <td>單線大樓</td>
-                <td>低競爭</td>
+                <td>三線大樓</td>
+                <td>套房</td>
               </tr>
             </tbody>
           </table>
@@ -218,8 +213,8 @@
 
       <!-- 進行下一步 -->
       <div class="form-row" style="justify-content: flex-end; gap: 10px; margin-top: 10px;">
-        <button class="btn btn-secondary" type="button" onclick="location.href='contract_search.html'">取消返回</button>
-        <button class="btn btn-primary" type="button" id="btnNext">下一步：填寫合約內容</button>
+        <button class="btn btn--back" type="button" onclick="location.href='contract_search.html'">取消返回</button>
+        <button class="btn btn--primary" type="button" id="btnNext">下一步：填寫合約內容</button>
       </div>
     </div>
   </div>

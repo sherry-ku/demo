@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>按鈕組件系統示範</title>
+  <link href="common.css" rel="stylesheet" />
+  <style>
+    .demo-section {
+      margin-bottom: 40px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    
+    .demo-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #0d47a1;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #e3f2fd;
+      padding-bottom: 8px;
+    }
+    
+    .demo-description {
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      font-size: 14px;
+    }
+    
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .button-example {
+      padding: 15px;
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+    }
+    
+    .button-example h4 {
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      color: #495057;
+    }
+    
+    .code-example {
+      background: #f1f3f4;
+      padding: 8px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #333;
+      margin-top: 8px;
+    }
+    
+    .usage-stats {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      font-size: 12px;
+      max-width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="usage-stats">
+    <h4>系統統計</h4>
+    <p>HTML 文件: 39 個</p>
+    <p>按鈕實例: 200+ 個</p>
+    <p>按鈕類型: 15+ 種</p>
+  </div>
+
+  <div class="header">
+    <div class="header-left">
+      <div>按鈕組件系統示範</div>
+    </div>
+    <div class="header-right">
+      <button class="btn btn--info">訊息中心</button>
+      <button class="btn btn--secondary">暫存訂單</button>
+      <button class="btn btn--outline-danger">登出</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="content">
+      <h1>統一按鈕組件系統</h1>
+      
+      <!-- 基礎按鈕變體 -->
+      <div class="demo-section">
+        <div class="demo-title">基礎按鈕變體 (Base Button Variants)</div>
+        <div class="demo-description">
+          <strong>用途：</strong>根據視覺層級和重要性選擇合適的按鈕變體
+          <br><strong>場景：</strong>所有需要用戶操作的界面元素
+        </div>
+        
+        <div class="button-grid">
+          <div class="button-example">
+            <h4>主要操作 (Primary)</h4>
+            <button class="btn btn--primary">主要按鈕</button>
+            <div class="code-example">class="btn btn--primary"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>次要操作 (Secondary)</h4>
+            <button class="btn btn--secondary">次要按鈕</button>
+            <div class="code-example">class="btn btn--secondary"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>成功操作 (Success)</h4>
+            <button class="btn btn--success">成功按鈕</button>
+            <div class="code-example">class="btn btn--success"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>危險操作 (Danger)</h4>
+            <button class="btn btn--danger">危險按鈕</button>
+            <div class="code-example">class="btn btn--danger"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>警告操作 (Warning)</h4>
+            <button class="btn btn--warning">警告按鈕</button>
+            <div class="code-example">class="btn btn--warning"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>資訊操作 (Info)</h4>
+            <button class="btn btn--info">資訊按鈕</button>
+            <div class="code-example">class="btn btn--info"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 語義化按鈕 -->
+      <div class="demo-section">
+        <div class="demo-title">語義化按鈕 (Semantic Action Buttons)</div>
+        <div class="demo-description">
+          <strong>用途：</strong>根據動作含義自動應用合適的顏色和樣式
+          <br><strong>優勢：</strong>保持一致性，減少選擇困擾，語義明確
+        </div>
+        
+        <div class="button-grid">
+          <div class="button-example">
+            <h4>儲存動作</h4>
+            <button class="btn btn--save">儲存</button>
+            <div class="code-example">class="btn btn--save"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>取消動作</h4>
+            <button class="btn btn--cancel">取消</button>
+            <div class="code-example">class="btn btn--cancel"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>新增動作</h4>
+            <button class="btn btn--add">新增</button>
+            <div class="code-example">class="btn btn--add"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>編輯動作</h4>
+            <button class="btn btn--edit">編輯</button>
+            <div class="code-example">class="btn btn--edit"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>刪除動作</h4>
+            <button class="btn btn--delete">刪除</button>
+            <div class="code-example">class="btn btn--delete"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>查看動作</h4>
+            <button class="btn btn--view">查看</button>
+            <div class="code-example">class="btn btn--view"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>搜尋動作</h4>
+            <button class="btn btn--search">查詢</button>
+            <div class="code-example">class="btn btn--search"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>清除動作</h4>
+            <button class="btn btn--clear">清除資料</button>
+            <div class="code-example">class="btn btn--clear"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>返回動作</h4>
+            <button class="btn btn--back">返回</button>
+            <div class="code-example">class="btn btn--back"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 按鈕尺寸 -->
+      <div class="demo-section">
+        <div class="demo-title">按鈕尺寸 (Button Sizes)</div>
+        <div class="demo-description">
+          <strong>用途：</strong>根據界面空間和重要性選擇合適的按鈕大小
+          <br><strong>建議：</strong>表格內使用小尺寸，表單使用標準尺寸，CTA 使用大尺寸
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+          <div>
+            <button class="btn btn--primary btn--xs">極小 (XS)</button>
+            <div class="code-example">btn--xs</div>
+          </div>
+          <div>
+            <button class="btn btn--primary btn--sm">小 (SM)</button>
+            <div class="code-example">btn--sm</div>
+          </div>
+          <div>
+            <button class="btn btn--primary">標準 (Default)</button>
+            <div class="code-example">btn</div>
+          </div>
+          <div>
+            <button class="btn btn--primary btn--lg">大 (LG)</button>
+            <div class="code-example">btn--lg</div>
+          </div>
+          <div>
+            <button class="btn btn--primary btn--xl">極大 (XL)</button>
+            <div class="code-example">btn--xl</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 輪廓按鈕 -->
+      <div class="demo-section">
+        <div class="demo-title">輪廓按鈕 (Outline Buttons)</div>
+        <div class="demo-description">
+          <strong>用途：</strong>次要操作、需要降低視覺權重的按鈕
+          <br><strong>場景：</strong>登出按鈕、取消操作、輔助功能
+        </div>
+        
+        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+          <button class="btn btn--outline-primary">主要輪廓</button>
+          <button class="btn btn--outline-secondary">次要輪廓</button>
+          <button class="btn btn--outline-success">成功輪廓</button>
+          <button class="btn btn--outline-danger">危險輪廓</button>
+        </div>
+        
+        <div class="code-example" style="margin-top: 15px;">
+          class="btn btn--outline-primary"<br>
+          class="btn btn--outline-secondary"<br>
+          class="btn btn--outline-success"<br>
+          class="btn btn--outline-danger"
+        </div>
+      </div>
+
+      <!-- 按鈕群組 -->
+      <div class="demo-section">
+        <div class="demo-title">按鈕群組 (Button Groups)</div>
+        <div class="demo-description">
+          <strong>用途：</strong>相關操作的按鈕組合，減少空間佔用
+          <br><strong>場景：</strong>編輯/刪除組合、狀態切換、工具列
+        </div>
+        
+        <h4>水平群組</h4>
+        <div class="btn-group">
+          <button class="btn btn--primary">編輯</button>
+          <button class="btn btn--warning">設定</button>
+          <button class="btn btn--danger">刪除</button>
+        </div>
+        
+        <h4 style="margin-top: 20px;">垂直群組</h4>
+        <div class="btn-group btn-group--vertical" style="width: 200px;">
+          <button class="btn btn--primary">選項一</button>
+          <button class="btn btn--primary">選項二</button>
+          <button class="btn btn--primary">選項三</button>
+        </div>
+        
+        <div class="code-example" style="margin-top: 15px;">
+          &lt;div class="btn-group"&gt;<br>
+          &nbsp;&nbsp;&lt;button class="btn btn--primary"&gt;編輯&lt;/button&gt;<br>
+          &nbsp;&nbsp;&lt;button class="btn btn--warning"&gt;設定&lt;/button&gt;<br>
+          &nbsp;&nbsp;&lt;button class="btn btn--danger"&gt;刪除&lt;/button&gt;<br>
+          &lt;/div&gt;
+        </div>
+      </div>
+
+      <!-- 特殊按鈕 -->
+      <div class="demo-section">
+        <div class="demo-title">特殊按鈕類型 (Special Button Types)</div>
+        <div class="demo-description">
+          <strong>用途：</strong>特殊場景下的按鈕變體
+          <br><strong>包含：</strong>圖示按鈕、載入狀態、區塊按鈕、連結按鈕
+        </div>
+        
+        <div class="button-grid">
+          <div class="button-example">
+            <h4>僅圖示按鈕</h4>
+            <button class="btn btn--primary btn--icon-only">⚙</button>
+            <button class="btn btn--danger btn--icon-only btn--sm">×</button>
+            <div class="code-example">class="btn btn--icon-only"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>載入狀態</h4>
+            <button class="btn btn--primary btn--loading">處理中...</button>
+            <div class="code-example">class="btn btn--loading"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>停用狀態</h4>
+            <button class="btn btn--primary" disabled>停用按鈕</button>
+            <div class="code-example">disabled</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>連結樣式</h4>
+            <button class="btn btn--link">連結按鈕</button>
+            <div class="code-example">class="btn btn--link"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>區塊按鈕</h4>
+            <button class="btn btn--primary btn--block">全寬按鈕</button>
+            <div class="code-example">class="btn btn--block"</div>
+          </div>
+          
+          <div class="button-example">
+            <h4>切換按鈕</h4>
+            <button class="btn btn--secondary btn--toggle">展開選項 <span class="btn__icon">▼</span></button>
+            <div class="code-example">class="btn btn--toggle"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 實際應用場景 -->
+      <div class="demo-section">
+        <div class="demo-title">實際應用場景 (Real-world Examples)</div>
+        <div class="demo-description">
+          <strong>展示：</strong>在實際系統界面中的按鈕應用範例
+        </div>
+        
+        <h4>表單操作區</h4>
+        <div class="form-actions">
+          <button class="btn btn--back">返回</button>
+          <button class="btn btn--clear">清除資料</button>
+          <button class="btn btn--save">儲存</button>
+        </div>
+        
+        <h4 style="margin-top: 25px;">搜尋表單</h4>
+        <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #dee2e6;">
+          <div class="form-row">
+            <div class="form-group">
+              <label>客戶編號</label>
+              <input type="text" placeholder="請輸入客戶編號">
+            </div>
+            <div class="form-group">
+              <label>客戶姓名</label>
+              <input type="text" placeholder="請輸入客戶姓名">
+            </div>
+          </div>
+          <div class="form-actions form-actions--left">
+            <button class="btn btn--search">查詢</button>
+            <button class="btn btn--clear">清除</button>
+            <button class="btn btn--add">新增客戶</button>
+          </div>
+        </div>
+        
+        <h4 style="margin-top: 25px;">表格操作按鈕</h4>
+        <table class="table" style="background: white;">
+          <thead>
+            <tr>
+              <th>客戶編號</th>
+              <th>客戶姓名</th>
+              <th>狀態</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CA0001</td>
+              <td>李曉明</td>
+              <td><span class="badge badge-green">正常</span></td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn--view btn--sm">查看</button>
+                  <button class="btn btn--edit btn--sm">編輯</button>
+                  <button class="btn btn--delete btn--sm">刪除</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>CA0002</td>
+              <td>王美華</td>
+              <td><span class="badge badge-orange">待處理</span></td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn--view btn--sm">查看</button>
+                  <button class="btn btn--edit btn--sm">編輯</button>
+                  <button class="btn btn--delete btn--sm">刪除</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 最佳實踐指南 -->
+      <div class="demo-section">
+        <div class="demo-title">最佳實踐指南 (Best Practices)</div>
+        <div class="demo-description">
+          <strong>指導原則：</strong>如何正確使用按鈕組件系統
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <h4 style="color: #28a745;">✅ 建議做法</h4>
+            <ul style="font-size: 14px; line-height: 1.6;">
+              <li>使用語義化按鈕類別（如 btn--save, btn--delete）</li>
+              <li>在表格中使用小尺寸按鈕（btn--sm）</li>
+              <li>重要操作使用 btn--primary</li>
+              <li>危險操作使用 btn--danger</li>
+              <li>相關操作使用按鈕群組</li>
+              <li>保持按鈕文字簡潔明確</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 style="color: #dc3545;">❌ 避免做法</h4>
+            <ul style="font-size: 14px; line-height: 1.6;">
+              <li>不要使用過多的 btn--primary</li>
+              <li>不要在小空間使用大按鈕</li>
+              <li>不要混合使用舊的按鈕類別</li>
+              <li>不要使用內聯樣式覆蓋按鈕顏色</li>
+              <li>不要忽略按鈕的 disabled 狀態</li>
+              <li>不要使用模糊的按鈕文字</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 切換按鈕示例
+    document.querySelectorAll('.btn--toggle').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.classList.toggle('collapsed');
+        const icon = this.querySelector('.btn__icon');
+        if (icon) {
+          icon.textContent = this.classList.contains('collapsed') ? '▶' : '▼';
+        }
+      });
+    });
+    
+    // 載入按鈕示例
+    document.querySelectorAll('.btn--loading').forEach(btn => {
+      // 這些按鈕已經有載入樣式，這裡只是示例
+    });
+  </script>
+</body>
+
+</html>

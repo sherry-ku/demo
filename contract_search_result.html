@@ -40,83 +40,107 @@
   <div class="content">
     <h2>合約查詢</h2>
 
-    <!-- 查詢條件 -->
-    <div class="form-block">
-      <div class="form-block-title">查詢條件</div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>合約編號</label>
-          <input type="text" name="contract_id" />
+      <!-- 查詢條件 -->
+      <div class="form-block">
+        <div class="form-block-title">查詢條件</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>合約編號</label>
+            <input type="text" name="contract_id" />
+          </div>
+          <div class="form-group">
+            <label>合約名稱</label>
+            <div class="inline">
+              <input type="text" name="contract_name" placeholder="模糊查詢"/>
+              <!--<button type="button" class="btn-mini btn btn-secondary">查詢</button>-->
+            </div>
+          </div>
+          <div class="form-group">
+            <label>計費方式</label>
+            <select name="service_type">
+              <option>總價</option>
+            </select>
+          </div>   
+          <div class="form-group">
+            <label>收費方式</label>
+            <select name="service_type">
+              <option>統收</option>
+              <option>各收</option>
+            </select>
+          </div>                       
         </div>
-        <div class="form-group">
-          <label>合約名稱</label>
-          <div class="inline">
-            <input type="text" name="contract_name" />
-            <button type="button" class="btn-mini btn btn-secondary">模糊</button>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>申請人名稱</label>
+            <div class="inline">
+              <input type="text" name="applicant_name" />
+              <!--<button type="button" class="btn-mini btn btn-secondary">查詢</button>-->
+            </div>
+          </div>
+          <div class="form-group">
+            <label>申請人統編/證號</label>
+            <input type="text" name="tax_id" />
+          </div>
+          <div class="form-group">
+            <label>建物編號</label>
+            <input type="text" name="mdu_id" />
+          </div>
+          <div class="form-group">
+            <label>建築型態</label>
+            <select name="building_type">
+              <option>請選擇</option>
+              <option>套房</option>
+              <option>住宅大樓</option>
+            </select>
           </div>
         </div>
-        <div class="form-group">
-          <label>服務別</label>
-          <select name="service_type">
-            <option>請選擇</option>
-            <option>CATV</option>
-            <option>Internet</option>
-            <option>OTT</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>申請人名稱</label>
-          <div class="inline">
-            <input type="text" name="applicant_name" />
-            <button type="button" class="btn-mini btn btn-secondary">模糊</button>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>服務別</label>
+            <select name="service_type">
+              <option>請選擇</option>
+              <option>CATV</option>
+              <option>Internet</option>
+            </select>
+          </div>          
+          <div class="form-group">
+            <label>進件公司別</label>
+            <select name="service_type">
+              <option>請選擇</option>
+            </select>
+          </div>          
+          <div class="form-group">
+            <label>簽約人員</label>
+            <input type="text" name="contract_staff" />
+          </div>
+          <div class="form-group">
+            <label>負責人員</label>
+            <input type="text" name="current_staff" />
           </div>
         </div>
-        <div class="form-group">
-          <label>統編/證號</label>
-          <input type="text" name="tax_id" />
-        </div>
-        <div class="form-group">
-          <label>建物型態</label>
-          <select name="building_type">
-            <option>請選擇</option>
-            <option>透天式</option>
-            <option>大樓</option>
-            <option>華廈</option>
-            <option>公寓</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>簽約人員</label>
-          <input type="text" name="contract_staff" />
-        </div>
-        <div class="form-group">
-          <label>現行負責人員</label>
-          <input type="text" name="current_staff" />
-        </div>
-        <div class="form-group">
-          <label>合約簽約日</label>
-          <div class="inline">
-            <input type="date" name="contract_start_date" />
-            <span class="dash">—</span>
-            <input type="date" name="contract_start_date_end" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>合約簽約日</label>
+            <div class="inline">
+              <input type="date" name="contract_start_date" />
+              <span class="dash">—</span>
+              <input type="date" name="contract_start_date_end" />
+            </div>
+          </div>          
+          <div class="form-group">
+            <label>合約到期日</label>
+            <div class="inline">
+              <input type="date" name="contract_end_date" />
+              <span class="dash">—</span>
+              <input type="date" name="contract_end_date_end" />
+            </div>
           </div>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>合約到期日</label>
-          <div class="inline">
-            <input type="date" name="contract_end_date" />
-            <span class="dash">—</span>
-            <input type="date" name="contract_end_date_end" />
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- 地址區塊 -->
 <div class="form-block">
@@ -138,20 +162,24 @@
       <table>
         <thead>
           <tr>
-            <th>上傳批次派單 Excel 檔案</th>
+            <th>上傳批次派單</th>
+            <th>進件公司別</th>
             <th>合約編號</th>
+            <th>版次</th>
             <th>合約名稱</th>
             <th>服務別</th>
             <th>建物名稱</th>
             <th>負責人員</th>
-            <th>建立時間</th>
+            <th>合約到期日</th>
             <th>編輯</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><input type="checkbox" checked></td>
+            <td>720慶聯</td>
             <td>P-001</td>
+            <td>1</td>
             <td>XXX套房合約 - I</td>
             <td>Internet</td>
             <td>國美瑞光</td>
@@ -161,7 +189,9 @@
           </tr>
           <tr>
             <td><input type="checkbox" checked></td>
+            <td>720慶聯</td>
             <td>P-002</td>
+            <td>1</td>
             <td>XXX套房合約 - C</td>
             <td>CATV</td>
             <td>國美瑞光</td>
@@ -171,7 +201,9 @@
           </tr>
           <tr>
             <td><input type="checkbox"></td>
+            <td>720慶聯</td>
             <td>P-003</td>
+            <td>1</td>
             <td>OOO統收合約 - I</td>
             <td>Internet</td>
             <td>自由時報廣場</td>
@@ -181,7 +213,9 @@
           </tr>
           <tr>
             <td><input type="checkbox"></td>
+            <td>720慶聯</td>
             <td>P-004</td>
+            <td>1</td>
             <td>OOO統收合約 - C</td>
             <td>CATV</td>
             <td>自由時報廣場</td>

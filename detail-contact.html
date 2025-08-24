@@ -22,18 +22,6 @@
       <button class="btn">登出</button>
     </div>
   </div>
-  <!-- 新增：家戶編號 + 姓名 + 地址 -->
-  <div class="customer-info-bar" style="
-    padding: 8px 15px;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #ddd;
-    font-size: 16px;
-    font-weight: bold;
-    color: #000;">
-    家戶編號：<span style="color:#007bff;">CA0001</span>
-    &emsp; 申請人姓名：<span style="color:#007bff;">李曉明</span>
-    &emsp; 裝機地址：<span style="color:#dc3545;">忠孝東路四段12巷1弄5樓101號</span>
-  </div>
 
   <div class="main">
     <!-- 側邊選單 (Sidebar) -->
@@ -55,156 +43,65 @@
             <a href="detail-billing.html" style="text-decoration: none; color: inherit;">帳務與發票</a>
           </div>
           <div class="tab">
-            <a href="detail-engineering.html" style="text-decoration: none; color: inherit;">工務與設備</a>
+            <a href="detail-engineering.html" style="text-decoration: none; color: inherit;">工務與工單</a>
           </div>
           <div class="tab active">
             <a href="detail-contact.html" style="text-decoration: none; color: inherit;">客戶聯絡歷程</a>
           </div>
         </div>
       </div>
-      
+
       <!-- 客戶聯絡歷程 Tab Content -->
       <div class="main-tab-content" id="main5">
-        <div class="section">
-          <div class="section-title">新增聯絡記錄</div>
-          <div class="form-grid" style="margin-bottom: 15px;">
-            <div class="form-item">
-              <label class="form-label">聯絡日期</label>
-              <div class="form-input">
-                <input type="date" value="2025-08-16" />
-              </div>
+        
+        <div class="section search-bar">
+          <div class="section-title">聯絡記錄查詢</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>查詢期間</label>
+              <input type="date" value="2025-01-01" class="form-control" />
             </div>
-            <div class="form-item">
-              <label class="form-label">聯絡時間</label>
-              <div class="form-input">
-                <input type="time" value="14:30" />
-              </div>
+            <div class="form-group">
+              <label>至</label>
+              <input type="date" value="2025-12-31" class="form-control" />
             </div>
-            <div class="form-item">
-              <label class="form-label">聯絡方式</label>
-              <div class="form-input">
-                <select>
-                  <option>電話</option>
-                  <option>Email</option>
-                  <option>現場</option>
-                  <option>線上客服</option>
-                  <option>簡訊</option>
-                </select>
-              </div>
+            <div class="form-group">
+              <label>聯絡方式</label>
+              <select class="form-control">
+                <option>全部</option>
+                <option>電話</option>
+                <option>Email</option>
+                <option>現場</option>
+                <option>線上客服</option>
+                <option>簡訊</option>
+              </select>
             </div>
-            <div class="form-item">
-              <label class="form-label">聯絡類型</label>
-              <div class="form-input">
-                <select>
-                  <option>客戶來電</option>
-                  <option>客服外撥</option>
-                  <option>技術支援</option>
-                  <option>帳務諮詢</option>
-                  <option>申訴處理</option>
-                  <option>行銷推廣</option>
-                </select>
-              </div>
+            <div class="form-group">
+              <label>聯絡類型</label>
+              <select class="form-control">
+                <option>全部</option>
+                <option>客戶來電</option>
+                <option>客服外撥</option>
+                <option>技術支援</option>
+                <option>帳務諮詢</option>
+                <option>申訴處理</option>
+                <option>行銷推廣</option>
+              </select>
             </div>
-            <div class="form-item">
-              <label class="form-label">處理人員</label>
-              <div class="form-input">
-                <input type="text" value="005566 陳小華" />
-              </div>
-            </div>
-            <div class="form-item">
-              <label class="form-label">處理狀態</label>
-              <div class="form-input">
-                <select>
-                  <option>已解決</option>
-                  <option>處理中</option>
-                  <option>待後續追蹤</option>
-                  <option>轉介其他部門</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-item" style="grid-column: span 3;">
-              <label class="form-label">聯絡主題</label>
-              <div class="form-input">
-                <input type="text" placeholder="請輸入聯絡主題..." />
-              </div>
-            </div>
-            <div class="form-item" style="grid-column: span 3;">
-              <label class="form-label">聯絡內容</label>
-              <div class="form-input">
-                <textarea placeholder="請詳細描述聯絡內容..." style="min-height: 100px;"></textarea>
-              </div>
-            </div>
-            <div class="form-item" style="grid-column: span 3;">
-              <label class="form-label">處理結果</label>
-              <div class="form-input">
-                <textarea placeholder="請描述處理結果..." style="min-height: 100px;"></textarea>
-              </div>
-            </div>
-            <div class="form-item" style="grid-column: span 3;">
-              <button class="btn" style="margin-right: 10px;">儲存記錄</button>
-              <button class="btn-secondary">清除內容</button>
+            <div class="form-group">
+              <label>處理狀態</label>
+              <select class="form-control">
+                <option>全部</option>
+                <option>已解決</option>
+                <option>處理中</option>
+                <option>待後續追蹤</option>
+                <option>轉介其他部門</option>
+              </select>
             </div>
           </div>
-        </div>
-
-        <div class="section">
-          <div class="section-title">聯絡記錄查詢</div>
-          <div class="form-grid" style="grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-bottom:15px;">
-            <div class="form-item">
-              <label class="form-label">查詢期間</label>
-              <div class="form-input">
-                <input type="date" value="2025-01-01" />
-              </div>
-            </div>
-            <div class="form-item">
-              <label class="form-label">至</label>
-              <div class="form-input">
-                <input type="date" value="2025-12-31" />
-              </div>
-            </div>
-            <div class="form-item">
-              <label class="form-label">聯絡方式</label>
-              <div class="form-input">
-                <select>
-                  <option>全部</option>
-                  <option>電話</option>
-                  <option>Email</option>
-                  <option>現場</option>
-                  <option>線上客服</option>
-                  <option>簡訊</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-item">
-              <label class="form-label">聯絡類型</label>
-              <div class="form-input">
-                <select>
-                  <option>全部</option>
-                  <option>客戶來電</option>
-                  <option>客服外撥</option>
-                  <option>技術支援</option>
-                  <option>帳務諮詢</option>
-                  <option>申訴處理</option>
-                  <option>行銷推廣</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-item">
-              <label class="form-label">處理狀態</label>
-              <div class="form-input">
-                <select>
-                  <option>全部</option>
-                  <option>已解決</option>
-                  <option>處理中</option>
-                  <option>待後續追蹤</option>
-                  <option>轉介其他部門</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-item">
-              <button class="btn" style="margin-right:5px;">查詢</button>
-              <button class="btn">清除</button>
-            </div>
+          <div class="form-actions">
+            <button class="btn btn-secondary">清除</button>
+            <button class="btn btn-primary">查詢</button>
           </div>
         </div>
 
@@ -516,6 +413,15 @@
   <script>
     document.getElementById('customerInfoHeaderContainer').innerHTML = customerInfoHeaderHTML;
     document.getElementById('sidebar').innerHTML = sidebarHTML;
+
+     // ★ 頁面專屬：預設收合（避免影響其他頁）
+      (function () {
+        // 確保元素已注入且目前為展開狀態，再呼叫一次 toggle 讓它收合
+        const content = document.getElementById('customerInfoContent');
+        if (typeof toggleCustomerInfo === 'function' && content && !content.classList.contains('collapsed')) {
+          toggleCustomerInfo(); // 變成收合，icon 也會切成 ▶
+        }
+      })();
   </script>
 </body>
 

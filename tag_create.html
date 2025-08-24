@@ -34,9 +34,9 @@
     <div>登入時間：18:44:11</div>
   </div>
   <div class="header-right">
-    <button class="btn">訊息中心</button>
-    <button class="btn">暫存訂單</button>
-    <button class="btn">登出</button>
+    <button class="btn btn--info">訊息中心</button>
+    <button class="btn btn--secondary">暫存訂單</button>
+    <button class="btn btn--outline-danger">登出</button>
   </div>
 </div>
 
@@ -55,13 +55,13 @@
       <div class="form-group">
         <label><span style="color:red;">＊</span>標籤類別</label>
         <select>
-          <option>流失風險標籤</option>
           <option>專案標籤</option>
+          <option>流失風險標籤</option>
         </select>
       </div>
       <div class="form-group">
         <label><span style="color:red;">＊</span>標籤名稱</label>
-        <input type="text" maxlength="10"/>
+        <input type="text" maxlength="10" />
       </div>
       <div class="form-group">
         <label>標籤代碼</label>
@@ -69,7 +69,7 @@
       </div>
       <div class="form-group">
         <label><span style="color:red;">＊</span>標籤生效天數</label>
-        <input type="text" maxlength="10"/>
+        <input type="text" maxlength="10" />
       </div>
       <div class="form-group">
         <label><span style="color:red;">＊</span>標籤狀態</label>
@@ -78,21 +78,39 @@
           <option value="DISABLE">停用</option>
         </select>
       </div>
-      <div class="form-group">
-        <label><span style="color:red;">＊</span>是否跳訊</label>
-        <select id="popupSelect">
-          <option value="Y">是</option>
-          <option value="N">否</option>
-        </select>
-      </div>
-      <div class="form-group" style="flex: 1 1 100%;">
+    </div>       
+      <div class="form-row">    
+        <!-- 是否跳訊 -->
+        <div class="form-group">
+          <label><span style="color:red;">＊</span>是否跳訊</label>
+          <select id="popupSelect">
+            <option value="Y">是</option>
+            <option value="N">否</option>
+          </select>
+        </div>
+        <!-- 跳訊名稱 -->
+        <div class="form-group">
+          <label>跳訊名稱</label>
+          <input id="start_date" type="text" />
+        </div>
+        <!-- 跳訊代碼 -->
+        <div class="form-group">
+          <label>跳訊代碼</label>
+          <input id="code" type="text" value="系統自動產生" disabled/>
+        </div>                     
+        <!-- 跳訊標題（固定） -->
+        <div class="form-group">
+          <label>跳訊標題</label>
+          <input id="name" type="text" value="銷售溝通重點" disabled/>
+        </div>         
+      <div class="form-group form-group--full">
         <label><span style="color:red;">＊</span>跳訊內容</label>
         <textarea id="popupContent" maxlength="50"></textarea>
       </div>
     </div>
     <div class="form-actions">
-      <button class="btn btn-secondary" onclick="location.href='tag_search_list.html'">取消</button>
-      <button class="btn btn-primary" onclick="location.href='tag_search_list.html'">儲存並返回</button>
+      <button class="btn btn--cancel" onclick="location.href='tag_search_list.html'">取消</button>
+      <button class="btn btn--save" onclick="location.href='tag_search_list.html'">儲存並返回</button>
     </div>
   </div>
 </div>

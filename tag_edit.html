@@ -27,9 +27,9 @@
     <div>登入時間：18:44:11</div>
   </div>
   <div class="header-right">
-    <button class="btn">訊息中心</button>
-    <button class="btn">暫存訂單</button>
-    <button class="btn">登出</button>
+    <button class="btn btn--info">訊息中心</button>
+    <button class="btn btn--secondary">暫存訂單</button>
+    <button class="btn btn--outline-danger">登出</button>
   </div>
 </div>
 
@@ -76,6 +76,8 @@
           <option value="DISABLE">停用</option>
         </select>
       </div>
+    </div>
+    <div class="form-row">    
       <!-- 是否跳訊 -->
       <div class="form-group">
         <label><span style="color:red;">＊</span>是否跳訊</label>
@@ -84,8 +86,23 @@
           <option value="N">否</option>
         </select>
       </div>
+      <!-- 跳訊代碼 -->
+      <div class="form-group">
+        <label>跳訊代碼</label>
+        <input id="code" type="text" value="JJPP00003" disabled/>
+      </div>
+      <!-- 跳訊名稱 -->
+      <div class="form-group">
+        <label>跳訊名稱</label>
+        <input id="start_date" type="text"  value="短促SB標籤跳訊" disabled/>
+      </div>             
+      <!-- 跳訊標題（固定） -->
+      <div class="form-group">
+        <label>跳訊標題</label>
+        <input id="name" type="text" value="銷售溝通重點" disabled/>
+      </div>         
       <!-- 跳訊內容（可編輯） -->
-      <div class="form-group" style="flex: 1 1 100%;">
+      <div class="form-group form-group--full">
         <label>跳訊內容</label>
         <textarea id="popup_content">*短期促銷續約特案,依行銷公告限定日期區間適用
 *符合續約資格：請推009續約指定方案：續約-C+1G $1199搭SoundBox+Disney+標準方案
@@ -93,6 +110,7 @@
         </textarea>
         <div class="hint">僅供內容調整；不影響「是否跳訊」設定。</div>
       </div>
+    </div>      
       <!-- 編輯人員（唯讀） -->
       <div class="form-group">
         <label>編輯人員</label>
@@ -100,8 +118,8 @@
       </div>
     </div>
     <div class="form-actions">
-      <button class="btn btn-secondary" type="button" onclick="location.href='tag_search_list.html'">取消</button>
-      <button class="btn btn-primary" id="btnSubmit" type="button" onclick="location.href='tag_search_list.html'">送出</button>
+      <button class="btn btn--cancel" type="button" onclick="location.href='tag_search_list.html'">取消</button>
+      <button class="btn btn--save" id="btnSubmit" type="button" onclick="location.href='tag_search_list.html'">送出</button>
     </div>
   </div>
 </div>

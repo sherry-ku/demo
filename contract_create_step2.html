@@ -89,9 +89,9 @@
       <div>登入時間：18:44:11</div>
     </div>
     <div class="header-right">
-      <button class="btn">訊息中心</button>
-      <button class="btn">暫存訂單</button>
-      <button class="btn">登出</button>
+      <button class="btn btn--info">訊息中心</button>
+      <button class="btn btn--secondary">暫存訂單</button>
+      <button class="btn btn--outline-danger">登出</button>
     </div>
   </div>
 
@@ -112,23 +112,23 @@
 
       <!-- 合約申請人資料 -->
       <div class="form-block">
-        <div class="form-block-title">合約申請人資料</div>
+        <div class="form-block-title">合約簽約人(申請人)</div>
         <div class="form-row">
           <div class="form-group">
-            <label>申請人編號</label>
-            <input type="text" value="C542" />
+            <label>客戶編號</label>
+            <input type="text" value="C542" disabled />
           </div>
           <div class="form-group">
-            <label>姓名</label>
-            <input type="text" value="原果542" />
+            <label>客戶姓名</label>
+            <input type="text" value="李曉明" disabled />
           </div>
           <div class="form-group">
-            <label>聯絡電話</label>
-            <input type="text" value="0910222555" />
+            <label>電話(1)</label>
+            <input type="text" value="0910***555" disabled />
           </div>
           <div class="form-group">
-            <label>證件編號</label>
-            <input type="text" value="AB1234" />
+            <label>客戶類型</label>
+            <input type="text" value="個人戶" disabled />
           </div>
         </div>
       </div>
@@ -136,27 +136,23 @@
 
       <!-- 合約建物資料 -->
       <div class="form-block">
-        <div class="form-block-title">合約建物資料</div>
+        <div class="form-block-title">合約建物</div>
         <div class="form-row">
           <div class="form-group">
             <label>建物名稱</label>
-            <input type="text" value="國光華安中心" />
+            <input type="text" value="國光華安中心" disabled />
           </div>
           <div class="form-group">
             <label>建物編號</label>
-            <input type="text" value="A123456" />
+            <input type="text" value="A123456" disabled />
+          </div>
+          <div class="form-group">
+            <label>建物等級</label>
+            <input type="text" value="雙線大樓" disabled />
           </div>
           <div class="form-group">
             <label>建物型態</label>
-            <select>
-              <option selected>雙線大樓</option>
-              <option>單線大樓</option>
-              <option>透天式</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>建物房數</label>
-            <input type="text" value="10" />
+            <input type="text" value="套房" disabled />
           </div>
         </div>
       </div>
@@ -167,36 +163,56 @@
         <div class="form-block-title">合約基本資料</div>
         <div class="form-row">
           <div class="form-group">
-            <label>合約編號</label>
-            <input id="contractNo" type="text" value="55667788" />
+            <label><span style="color:red;">＊</span>大樓統收合約</label>
+            <select>
+              <option selected>套房合約</option>
+              <option>統收合約</option>
+              <option>企業合約</option>
+              <option>九太合約</option>
+            </select>
           </div>
           <div class="form-group">
-            <label>合約名稱</label>
+            <label>合約編號</label>
+            <input id="contractNo" type="text" value="A55667788" readonly style="background-color: #f5f5f5;" />
+          </div>
+          <div class="form-group">
+            <label><span style="color:red;">＊</span>合約名稱</label>
             <input type="text" value="國際光纖收視" />
           </div>
+
           <div class="form-group">
-            <label>計費方式</label>
-            <input type="text" value="總價" />
-          </div>
-          <div class="form-group">
-            <label>收費方式</label>
-            <input type="text" value="紙收" />
-          </div>
-          <div class="form-group">
-            <label>合約金額</label>
-            <input type="number" value="5000" />
-          </div>
-          <div class="form-group">
-            <label>通路公司別</label>
-            <input type="text" value="新高公司" />
-          </div>
-          <div class="form-group">
-            <label>服務別</label>
+            <label><span style="color:red;">＊</span>服務別</label>
             <select>
               <option selected>CATV</option>
               <option>Internet</option>
             </select>
           </div>
+          <div class="form-group">
+            <label><span style="color:red;">＊</span>計費方式</label>
+            <select readonly style="background-color: #f5f5f5;">
+              <option selected>總價</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label><span style="color:red;">＊</span>收費方式</label>
+            <select>
+              <option selected>統收</option>
+              <option>各收</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>合約總額</label>
+            <input id="contractNo" type="text" value="(系統加總母戶金額)" disabled />
+          </div>
+          <div class="form-group">
+            <label>違約金</label>
+            <input id="contractNo2" type="text" value="20,000" />
+          </div>
+          <div class="form-group">
+            <label><span style="color:red;">＊</span>進件公司別</label>
+            <input type="text" value="720 慶聯" />
+          </div>
+
           <div class="form-group">
             <label>簽約業務</label>
             <input type="text" value="001234 王大明" />
@@ -211,7 +227,7 @@
         <div class="form-row">
           <div class="form-group">
             <label>縣(市)</label>
-            <input type="text" value="九大合約" />
+            <input type="text" value="" />
           </div>
           <div class="form-group">
             <label>行政區</label>
@@ -256,16 +272,16 @@
       <!-- 合約內容與備註 -->
       <div class="form-block">
         <div class="form-block-title">合約內容與備註</div>
-        <div class="form-row" style="flex-direction: column; gap: 16px;">
-          <div class="form-group" style="min-width: 100%;">
-            <label>合約內容</label>
-            <textarea class="textarea" rows="10"></textarea>
-          </div>
-          <div class="form-group" style="min-width: 100%;">
-            <label>合約備註</label>
-            <textarea class="textarea" rows="10"></textarea>
-          </div>
+
+        <div class="form-group" style="min-width: 100%;">
+          <label>合約內容</label>
+          <textarea class="textarea" rows="3"></textarea>
         </div>
+        <div class="form-group" style="min-width: 100%;">
+          <label>合約備註</label>
+          <textarea class="textarea" rows="3"></textarea>
+        </div>
+
       </div>
 
 
@@ -276,23 +292,25 @@
         <div class="form-block-title">合約有效日期資料</div>
         <div class="form-row">
           <div class="form-group">
-            <label>合約生效</label>
+            <label>簽約日期</label>
+            <input type="date" value="2025-06-26" />
+          </div>
+          <div class="form-group">
+            <label>合約生效起日</label>
             <input type="date" value="2025-07-01" />
           </div>
           <div class="form-group contract-date-group">
-            <label>合約到期</label>
+            <label>合約到期日</label>
             <input type="date" value="2027-06-30" />
             <div class="auto-extend">
               <label style="font-size:13px; color:#333; margin-right:8px; margin-bottom:-80px;">
-                <input type="checkbox" checked style="width:16px; height:16px; vertical-align:middle; margin-right:4px;" />
+                <input type="checkbox" checked
+                  style="width:16px; height:16px; vertical-align:middle; margin-right:4px;" />
                 自動展延
               </label>
             </div>
           </div>
-          <div class="form-group">
-            <label>簽約日期</label>
-            <input type="date" value="2025-06-26" />
-          </div>
+
           <div class="form-group">
             <label>展延月數</label>
             <input type="text" />
@@ -305,8 +323,12 @@
         <div class="form-block-title">合約勾稽資料</div>
         <div class="form-row">
           <div class="form-group">
+            <label>合約群編號</label>
+            <input id="contractNo" type="text" value="A5566" disabled />
+          </div>
+          <div class="form-group">
             <label>合約總檔</label>
-            <input type="text" value="01" />
+            <input type="text" value="1" disabled />
           </div>
           <div class="form-group">
             <label>紙本合約編號</label>
@@ -320,29 +342,14 @@
             <label>EFLOW簽呈編號</label>
             <input type="text" />
           </div>
-          <div class="form-group">
-            <label>建立日期</label>
-            <input type="date" value="2025-06-25" />
-          </div>
-          <div class="form-group">
-            <label>建立人員</label>
-            <input type="text" value="001234 王大明" />
-          </div>
-          <div class="form-group">
-            <label>更新日期</label>
-            <input type="date" value="2025-06-25" />
-          </div>
-          <div class="form-group">
-            <label>更新人員</label>
-            <input type="text" value="001234 王大明" />
-          </div>
+
         </div>
       </div>
 
       <!-- 按鈕區 -->
       <div class="form-row" style="justify-content: flex-end; gap: 10px; margin-top: 20px;">
-        <button class="btn btn-secondary" type="button" onclick="history.back()">返回</button>
-        <button class="btn btn-primary" type="button" onclick="goToStep('contract_parent_project.html')">下一步</button>
+        <button class="btn btn--back" type="button" onclick="history.back()">返回</button>
+        <button class="btn btn--primary" type="button" onclick="goToStep('contract_parent_project.html')">下一步</button>
       </div>
     </div>
   </div>
@@ -352,6 +359,63 @@
       const contractNo = document.getElementById('contractNo')?.value || '';
       location.href = contractNo ? `${url}?contractNo=${encodeURIComponent(contractNo)}` : url;
     }
+
+    // 千分位符號格式化函數
+    function formatWithCommas(value) {
+      // 移除非數字字符（除了小數點）
+      const numericValue = value.replace(/[^\d.]/g, '');
+      
+      // 分離整數和小數部分
+      const parts = numericValue.split('.');
+      const integerPart = parts[0];
+      const decimalPart = parts[1];
+      
+      // 為整數部分添加千分位符號
+      const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      
+      // 重新組合
+      return decimalPart ? `${formattedInteger}.${decimalPart}` : formattedInteger;
+    }
+
+    // 移除千分位符號，獲取純數字值
+    function removeCommas(value) {
+      return value.replace(/,/g, '');
+    }
+
+    // 初始化金額欄位的千分位符號功能
+    function initializeAmountFields() {
+      const amountFields = document.querySelectorAll('#contractNo2');
+      
+      amountFields.forEach(field => {
+        // 設定初始值的千分位符號
+        if (field.value) {
+          field.value = formatWithCommas(field.value);
+        }
+        
+        // 監聽輸入事件
+        field.addEventListener('input', function() {
+          const cursorPosition = this.selectionStart;
+          const oldValue = this.value;
+          const newValue = formatWithCommas(this.value);
+          
+          this.value = newValue;
+          
+          // 調整光標位置
+          const diff = newValue.length - oldValue.length;
+          this.setSelectionRange(cursorPosition + diff, cursorPosition + diff);
+        });
+        
+        // 監聽失去焦點事件，確保格式正確
+        field.addEventListener('blur', function() {
+          if (this.value) {
+            this.value = formatWithCommas(this.value);
+          }
+        });
+      });
+    }
+
+    // 頁面載入完成後初始化
+    document.addEventListener('DOMContentLoaded', initializeAmountFields);
   </script>
   <script src="sidebar.js"></script>
   <script>

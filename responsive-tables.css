@@ -1,0 +1,396 @@
+/* ===== Responsive Table Styles ===== */
+
+/* Base responsive table wrapper */
+.responsive-table-wrapper {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Base responsive table */
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-white, #ffffff);
+  box-shadow: var(--shadow-md, 0 1px 3px rgba(0,0,0,0.05));
+  font-family: var(--font-family, 'Segoe UI', sans-serif);
+  font-size: var(--font-size-md, 14px);
+}
+
+/* Desktop table styles - preserve existing appearance */
+@media (min-width: 769px) {
+  .responsive-table th,
+  .responsive-table td {
+    border: 1px solid var(--color-border, #ddd);
+    padding: var(--spacing-md, 8px) var(--spacing-md, 10px);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  
+  .responsive-table th {
+    background-color: var(--color-table-header, #1976d2);
+    color: var(--color-table-header-text, #ffffff);
+    font-weight: var(--font-weight-bold, 700);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .responsive-table tbody tr:nth-child(even) {
+    background-color: var(--color-table-stripe, #f9f9f9);
+  }
+  
+  .responsive-table tbody tr:hover {
+    background-color: var(--color-table-hover, #f5f5f5);
+  }
+}
+
+/* Mobile card layout - transforms tables into cards */
+@media (max-width: 768px) {
+  /* Hide the table headers on mobile */
+  .responsive-table thead {
+    display: none;
+  }
+  
+  /* Make table body display as block */
+  .responsive-table tbody {
+    display: block;
+  }
+  
+  /* Each table row becomes a card */
+  .responsive-table tr {
+    display: block;
+    margin-bottom: var(--spacing-xl, 16px);
+    background: var(--color-white, #ffffff);
+    border: 1px solid var(--color-border-light, #e5e7eb);
+    border-radius: var(--radius-md, 6px);
+    box-shadow: var(--shadow-md, 0 1px 3px rgba(0,0,0,0.1));
+    padding: var(--spacing-lg, 12px);
+    position: relative;
+  }
+  
+  /* Each table cell becomes a block element with label */
+  .responsive-table td {
+    display: block;
+    border: none;
+    padding: var(--spacing-sm, 4px) 0;
+    text-align: left;
+    white-space: normal;
+    word-wrap: break-word;
+    position: relative;
+    padding-left: 140px; /* Space for the label */
+    min-height: 20px;
+  }
+  
+  /* Add labels before each cell using data attributes */
+  .responsive-table td:before {
+    content: attr(data-label) ": ";
+    position: absolute;
+    left: 0;
+    top: var(--spacing-sm, 4px);
+    font-weight: var(--font-weight-semibold, 600);
+    color: var(--color-text-secondary, #495057);
+    font-size: var(--font-size-sm, 12px);
+    white-space: nowrap;
+    width: 130px;
+    text-align: left;
+  }
+  
+  /* Special styling for different cell types */
+  .responsive-table td.cell-status {
+    padding-left: 140px;
+  }
+  
+  .responsive-table td.cell-amount {
+    font-weight: var(--font-weight-semibold, 600);
+    color: var(--color-primary, #007bff);
+  }
+  
+  .responsive-table td.cell-date {
+    font-family: monospace;
+    font-size: var(--font-size-sm, 12px);
+  }
+  
+  .responsive-table td.cell-actions {
+    padding-top: var(--spacing-lg, 12px);
+    border-top: 1px solid var(--color-border-light, #e5e7eb);
+    margin-top: var(--spacing-md, 8px);
+    padding-left: 0;
+    text-align: center;
+  }
+  
+  .responsive-table td.cell-actions:before {
+    display: none;
+  }
+  
+  /* Card header for important information */
+  .responsive-table tr:before {
+    content: attr(data-card-title);
+    display: block;
+    font-weight: var(--font-weight-bold, 700);
+    font-size: var(--font-size-lg, 15px);
+    color: var(--color-primary, #007bff);
+    border-bottom: 1px solid var(--color-border-light, #e5e7eb);
+    padding-bottom: var(--spacing-sm, 4px);
+    margin-bottom: var(--spacing-md, 8px);
+  }
+  
+  /* Hide empty cards */
+  .responsive-table tr:empty {
+    display: none;
+  }
+}
+
+/* ===== Specialized Responsive Table Variants ===== */
+
+/* Customer Search Tables */
+.responsive-table--customer {
+  /* Specific styling for customer data tables */
+}
+
+@media (max-width: 768px) {
+  .responsive-table--customer tr:before {
+    background: linear-gradient(135deg, var(--color-info-bg, #e3f2fd) 0%, var(--color-primary-light, #e3f2fd) 100%);
+    margin: calc(-1 * var(--spacing-lg, 12px)) calc(-1 * var(--spacing-lg, 12px)) var(--spacing-md, 8px) calc(-1 * var(--spacing-lg, 12px));
+    padding: var(--spacing-md, 8px) var(--spacing-lg, 12px);
+    border-radius: var(--radius-md, 6px) var(--radius-md, 6px) 0 0;
+    border-bottom: none;
+  }
+  
+  .responsive-table--customer .cell-customer-id {
+    font-family: monospace;
+    font-weight: var(--font-weight-bold, 700);
+    background: var(--color-gray-50, #f9fafb);
+    margin: 0 calc(-1 * var(--spacing-lg, 12px));
+    padding: var(--spacing-sm, 4px) var(--spacing-lg, 12px);
+  }
+  
+  .responsive-table--customer .cell-address {
+    background: var(--color-gray-50, #f9fafb);
+    margin: var(--spacing-sm, 4px) calc(-1 * var(--spacing-lg, 12px));
+    padding: var(--spacing-md, 8px) var(--spacing-lg, 12px);
+    border-radius: var(--radius-sm, 4px);
+  }
+}
+
+/* Product Detail Tables */
+.responsive-table--product {
+  /* Specific styling for product data tables */
+}
+
+@media (max-width: 768px) {
+  .responsive-table--product tr:before {
+    background: linear-gradient(135deg, var(--color-success-bg, #d4edda) 0%, var(--color-success, #28a745) 100%);
+    color: var(--color-success-text, #155724);
+    margin: calc(-1 * var(--spacing-lg, 12px)) calc(-1 * var(--spacing-lg, 12px)) var(--spacing-md, 8px) calc(-1 * var(--spacing-lg, 12px));
+    padding: var(--spacing-md, 8px) var(--spacing-lg, 12px);
+    border-radius: var(--radius-md, 6px) var(--radius-md, 6px) 0 0;
+  }
+  
+  .responsive-table--product .cell-status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 4px);
+  }
+  
+  .responsive-table--product .cell-status .badge,
+  .responsive-table--product .cell-status .tag {
+    margin-right: var(--spacing-xs, 2px);
+  }
+}
+
+/* Contract Tables */
+.responsive-table--contract {
+  /* Specific styling for contract tables */
+}
+
+@media (max-width: 768px) {
+  .responsive-table--contract tr:before {
+    background: linear-gradient(135deg, var(--color-warning-bg, #fff3cd) 0%, var(--color-warning, #ffa726) 100%);
+    color: var(--color-warning-text, #856404);
+  }
+  
+  .responsive-table--contract .cell-contract-no {
+    font-family: monospace;
+    font-size: var(--font-size-lg, 15px);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-primary, #007bff);
+  }
+}
+
+/* Tag Management Tables */
+.responsive-table--tag {
+  /* Specific styling for tag management tables */
+}
+
+@media (max-width: 768px) {
+  .responsive-table--tag tr:before {
+    background: linear-gradient(135deg, #f3e5f5 0%, #9c27b0 100%);
+    color: #4a148c;
+  }
+  
+  .responsive-table--tag .cell-tag-content {
+    background: var(--color-gray-50, #f9fafb);
+    padding: var(--spacing-md, 8px);
+    border-radius: var(--radius-sm, 4px);
+    font-style: italic;
+    margin-left: 0;
+    padding-left: var(--spacing-lg, 12px);
+  }
+}
+
+/* Billing Tables */
+.responsive-table--billing {
+  /* Specific styling for billing tables */
+}
+
+@media (max-width: 768px) {
+  .responsive-table--billing tr:before {
+    background: linear-gradient(135deg, #e8f5e8 0%, #4caf50 100%);
+    color: #1b5e20;
+  }
+  
+  .responsive-table--billing .cell-amount {
+    font-size: var(--font-size-xl, 16px);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-success, #28a745);
+  }
+  
+  .responsive-table--billing .cell-due-date {
+    color: var(--color-danger, #dc3545);
+    font-weight: var(--font-weight-semibold, 600);
+  }
+}
+
+/* ===== Child/Nested Table Styles ===== */
+
+/* Child tables remain as tables but with simpler styling */
+.responsive-table .child-row {
+  background-color: var(--color-gray-50, #f9fafb);
+}
+
+@media (max-width: 768px) {
+  .responsive-table .child-row {
+    margin-top: var(--spacing-md, 8px);
+    padding: var(--spacing-lg, 12px);
+    background: var(--color-info-bg, #e3f2fd);
+    border-radius: var(--radius-sm, 4px);
+  }
+  
+  .responsive-table .child-table {
+    width: 100%;
+    margin: var(--spacing-md, 8px) 0;
+  }
+  
+  .responsive-table .child-table thead {
+    display: table-header-group; /* Keep headers for nested tables */
+    background: var(--color-info, #2196f3);
+  }
+  
+  .responsive-table .child-table th {
+    background: var(--color-info, #2196f3);
+    color: var(--color-white, #ffffff);
+    padding: var(--spacing-sm, 4px);
+    font-size: var(--font-size-sm, 12px);
+  }
+  
+  .responsive-table .child-table td {
+    padding: var(--spacing-xs, 2px) var(--spacing-sm, 4px);
+    font-size: var(--font-size-sm, 12px);
+    display: table-cell; /* Reset to table cell for nested tables */
+    border: 1px solid var(--color-border-light, #e5e7eb);
+  }
+  
+  .responsive-table .child-table td:before {
+    display: none; /* No labels for nested table cells */
+  }
+}
+
+/* ===== Action Button Responsive Styles ===== */
+
+@media (max-width: 768px) {
+  .responsive-table .btn {
+    display: block;
+    width: 100%;
+    margin: var(--spacing-xs, 2px) 0;
+    padding: var(--spacing-sm, 4px);
+    font-size: var(--font-size-sm, 12px);
+  }
+  
+  .responsive-table .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs, 2px);
+  }
+  
+  .responsive-table .btn-group .btn {
+    flex: 1;
+  }
+}
+
+/* ===== Loading and Empty States ===== */
+
+.responsive-table--loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.responsive-table--loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.responsive-table--empty {
+  text-align: center;
+  padding: var(--spacing-3xl, 24px);
+  color: var(--color-text-muted, #6c757d);
+  font-style: italic;
+}
+
+/* ===== Print Styles ===== */
+
+@media print {
+  .responsive-table-wrapper {
+    overflow: visible;
+  }
+  
+  .responsive-table {
+    font-size: var(--font-size-sm, 12px);
+    page-break-inside: avoid;
+  }
+  
+  .responsive-table tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  
+  .responsive-table thead {
+    display: table-header-group;
+  }
+  
+  .responsive-table tbody tr {
+    display: table-row;
+  }
+  
+  .responsive-table td {
+    display: table-cell;
+    padding: 2px 4px;
+  }
+  
+  .responsive-table td:before {
+    display: none;
+  }
+}

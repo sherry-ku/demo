@@ -61,13 +61,25 @@
     }
 
     .btn-add {
-      background-color: #2c9caf;
+      background-color: #007bff;
       color: #fff;
       border: none;
-      padding: 6px 12px;
+      padding: 4px 10px;
       cursor: pointer;
       border-radius: 4px;
       font-size: 13px;
+      font-family: 'Segoe UI', system-ui, -apple-system, Arial, 'Microsoft JhengHei', sans-serif;
+    }
+
+    .btn-add:hover:not(:disabled) {
+      background-color: #0056b3;
+    }
+
+    .btn-add:disabled {
+      background-color: #6c757d;
+      color: #fff;
+      cursor: not-allowed;
+      opacity: 0.8;
     }
   </style>
 </head>
@@ -105,44 +117,54 @@
         <div class="form-row">
           <div class="form-group">
             <label>合約編號</label>
-            <input id="contractNo" name="contractNo" type="text" value="55667788" readonly />
+            <input id="contractNo" name="contractNo" type="text" value="55667788" disabled />
           </div>
           <div class="form-group">
-            <label>進件公司別</label>
+            <label>出單公司別</label>
             <select name="company">
-              <option selected>數位天空</option>
-              <option>新高公司</option>
+              <option selected>720 慶聯</option>
+              <option>730 港都</option>
             </select>
           </div>
           <div class="form-group">
             <label>專案名稱</label>
-            <input name="projectName" type="text" value="統收合約" />
-          </div>
-          <div class="form-group">
-            <label>產品名稱</label>
-            <select name="productName">
-              <option selected>1G/50M</option>
+            <select name="projectName">
+              <option selected>PCM001 母戶套房-C</option>
               <option>500M/50M</option>
             </select>
           </div>
           <div class="form-group">
+            <label>產品名稱</label>
+            <select name="productName">
+              <option selected>基本A組</option>
+              <option>基本B組</option>
+              <option>基本C組</option>
+              <option>基本組</option>
+            </select>
+          </div>
+          </div>
+          <div class="form-row">
+          <div class="form-group">
             <label>合約總價</label>
-            <input name="totalPrice" type="number" value="9990" />
+            <input name="totalPrice" type="text" value="9990" />
           </div>
           <div class="form-group">
             <label>簽約戶數</label>
-            <input name="houseCount" type="number" value="10" />
+            <input name="houseCount" type="text" value="10" />
           </div>
           <div class="form-group">
             <label>簽約月額</label>
-            <input name="monthPrice" type="number" value="999" />
+            <input name="monthPrice" type="text" value="999" disabled/>
           </div>
           <div class="form-group">
             <label>繳別</label>
-            <input name="cableType" type="text" />
+            <select name="paymentType">
+              <option>月繳</option>
+              <option>季繳</option>
+            </select>
           </div>
         </div>
-        <div style="margin-top:10px;">
+        <div style="margin-top:10px;display: flex; justify-content: flex-end;">
           <button class="btn-add" type="button" id="btnAdd">新增</button>
         </div>
       </div>
@@ -152,23 +174,25 @@
         <thead>
           <tr>
             <th>合約編號</th>
-            <th>進件公司別</th>
+            <th>出單公司別</th>
             <th>專案名稱</th>
             <th>產品名稱</th>
             <th>合約總價</th>
             <th>簽約戶數</th>
             <th>簽約月額</th>
+            <th>繳別</th>
           </tr>
         </thead>
         <tbody id="parentTableBody">
           <tr>
             <td>55667788</td>
-            <td>數位天空</td>
-            <td>統收合約</td>
-            <td>1G/50M</td>
-            <td>9990</td>
+            <td>720 慶聯</td>
+            <td>PCM001 母戶套房-C</td>
+            <td>基本A組</td>
+            <td>$9,990</td>
             <td>10</td>
-            <td>999</td>
+            <td>$999</td>
+            <td>月繳</td>
           </tr>
         </tbody>
       </table>
@@ -187,8 +211,100 @@
           location.href = contractNo ? `${url}?contractNo=${encodeURIComponent(contractNo)}` : url;
         }
 
+        // 千分位符號格式化函數（輸入欄位用）
+        function formatWithCommas(value) {
+          // 移除非數字字符（除了小數點）
+          const numericValue = value.replace(/[^\d.]/g, '');
+          
+          // 分離整數和小數部分
+          const parts = numericValue.split('.');
+          const integerPart = parts[0];
+          const decimalPart = parts[1];
+          
+          // 為整數部分添加千分位符號
+          const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          
+          // 重新組合
+          return decimalPart ? `${formattedInteger}.${decimalPart}` : formattedInteger;
+        }
+
+        // 移除千分位符號，獲取純數字值
+        function removeCommas(value) {
+          return value.replace(/,/g, '');
+        }
+
+        // 格式化金額，加上千分位符號（表格顯示用）
+        function formatPrice(price) {
+          const cleanPrice = removeCommas(price.toString());
+          const num = parseFloat(cleanPrice);
+          if (isNaN(num)) return price;
+          return '$' + num.toLocaleString();
+        }
+
+        // 初始化金額欄位的千分位符號功能
+        function initializeAmountFields() {
+          const amountFields = document.querySelectorAll('[name="totalPrice"], [name="monthPrice"]');
+          
+          amountFields.forEach(field => {
+            // 設定初始值的千分位符號
+            if (field.value) {
+              field.value = formatWithCommas(field.value);
+            }
+            
+            // 監聽輸入事件
+            field.addEventListener('input', function() {
+              const cursorPosition = this.selectionStart;
+              const oldValue = this.value;
+              const newValue = formatWithCommas(this.value);
+              
+              this.value = newValue;
+              
+              // 調整光標位置
+              const diff = newValue.length - oldValue.length;
+              this.setSelectionRange(cursorPosition + diff, cursorPosition + diff);
+              
+              // 如果是合約總價變動，自動計算簽約月額
+              if (this.name === 'totalPrice') {
+                updateMonthPrice();
+              }
+            });
+            
+            // 監聽失去焦點事件，確保格式正確
+            field.addEventListener('blur', function() {
+              if (this.value) {
+                this.value = formatWithCommas(this.value);
+              }
+            });
+          });
+
+          // 為簽約戶數欄位添加監聽
+          const houseCountField = document.querySelector('[name="houseCount"]');
+          if (houseCountField) {
+            houseCountField.addEventListener('input', updateMonthPrice);
+            houseCountField.addEventListener('blur', updateMonthPrice);
+          }
+        }
+
+        // 自動計算簽約月額
+        function updateMonthPrice() {
+          const totalPriceField = document.querySelector('[name="totalPrice"]');
+          const houseCountField = document.querySelector('[name="houseCount"]');
+          const monthPriceField = document.querySelector('[name="monthPrice"]');
+          
+          const totalPrice = parseFloat(removeCommas(totalPriceField.value || '0'));
+          const houseCount = parseInt(houseCountField.value || '1');
+          
+          if (totalPrice > 0 && houseCount > 0) {
+            const monthPrice = Math.round(totalPrice / houseCount);
+            monthPriceField.value = formatWithCommas(monthPrice.toString());
+          }
+        }
+
         // 新增資料到表格
         document.addEventListener("DOMContentLoaded", function () {
+          // 初始化金額欄位
+          initializeAmountFields();
+          
           document.getElementById("btnAdd").addEventListener("click", function () {
             const contractNo = document.querySelector("[name='contractNo']").value;
             const company = document.querySelector("[name='company']").value;
@@ -197,6 +313,7 @@
             const totalPrice = document.querySelector("[name='totalPrice']").value;
             const houseCount = document.querySelector("[name='houseCount']").value;
             const monthPrice = document.querySelector("[name='monthPrice']").value;
+            const paymentType = document.querySelector("[name='paymentType']").value;
 
             const tr = document.createElement("tr");
             tr.innerHTML = `
@@ -204,9 +321,10 @@
               <td>${company}</td>
               <td>${projectName}</td>
               <td>${productName}</td>
-              <td>${totalPrice}</td>
+              <td>${formatPrice(totalPrice)}</td>
               <td>${houseCount}</td>
-              <td>${monthPrice}</td>
+              <td>${formatPrice(monthPrice)}</td>
+              <td>${paymentType}</td>
             `;
             document.getElementById("parentTableBody").appendChild(tr);
           });

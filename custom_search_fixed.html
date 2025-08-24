@@ -7,6 +7,7 @@
   <title>客戶資料查詢</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <link href="common.css" rel="stylesheet" />
+  <script src="responsive-tables.js"></script>
   <style>
     /* 只針對公告資訊的表格 */
     #announcementModal table tbody tr:nth-child(odd) {
@@ -20,7 +21,7 @@
     }
 
 
-    /* 產品明細按鈕樣式 */
+    /* Legacy button styles - can be removed after full migration */
     .btn-product {
       background-color: #28a745;
       color: white;
@@ -69,9 +70,9 @@
       <div>登入時間：18:44:11</div>
     </div>
     <div class="header-right">
-      <button class="btn">訊息中心</button>
-      <button class="btn">暫存訂單</button>
-      <button class="btn">登出</button>
+      <button class="btn btn--info">訊息中心</button>
+      <button class="btn btn--secondary">暫存訂單</button>
+      <button class="btn btn--outline-danger">登出</button>
     </div>
   </div>
   <!-- ===== Main Content ===== -->
@@ -79,9 +80,9 @@
   <div id="announcementModal">
     <div id="overlay" onclick="closeAnnouncement()"></div>
     <div id="popup">
-      <div style="text-align:right;"><a href="#" onclick="closeAnnouncement()" style="color:red;">✕ 關閉</a></div>
-      <h3 style="color:#0066cc; margin-bottom:10px;">公告資訊</h3>
-      <table border="1" style="border-collapse:collapse;" width="100%">
+      <div class="announcement__header"><a href="#" onclick="closeAnnouncement()" class="announcement__close">✕ 關閉</a></div>
+      <h3 class="announcement__title">公告資訊</h3>
+      <table border="1" class="announcement__table" width="100%">
         <thead>
           <!-- <tr style="background:#ffe0b2;"> -->
           <th>分類 / 名稱</th>
@@ -97,7 +98,7 @@
           <td rowspan="3">通路溝通事項​</td>
 
           <td>銷售溝通重點</td>
-          <td style="text-align: left;">
+          <td class="announcement__cell--left">
             [警報]此為大大競爭區用戶！請立刻依公司規定積極進行[大大專案<br>探詢]及[必要之防退]！
           </td>
           <td>2025-09-30</td>
@@ -105,13 +106,13 @@
           </tr>
 
           <td>特殊身分提醒</td>
-          <td style="text-align: left;">VIP-社區公關​</td>
+          <td class="announcement__cell--left">VIP-社區公關​</td>
           <td>-</td>
           <td>營管</td>
           </tr>
 
           <td>其他提醒事項</td>
-          <td style="text-align: left;">用戶資料不完全需修正：連絡人電話</td>
+          <td class="announcement__cell--left">用戶資料不完全需修正：連絡人電話</td>
           <td>2025-10-10</td>
           <td>營管</td>
           </tr>
@@ -120,19 +121,19 @@
           <td rowspan="3">大樓重點事項</td>
 
           <td>指定大樓提醒</td>
-          <td style="text-align: left;">這是指定大樓跳訊說明​</td>
+          <td class="announcement__cell--left">這是指定大樓跳訊說明​</td>
           <td>-</td>
           <td>通路</td>
           </tr>
 
           <td>大樓等級提醒</td>
-          <td style="text-align: left;">僅中嘉進線，競業無進線，此為HFC大樓，僅可銷售CM​</td>
+          <td class="announcement__cell--left">僅中嘉進線，競業無進線，此為HFC大樓，僅可銷售CM​</td>
           <td>-</td>
           <td>行銷</td>
           </tr>
 
           <td>競業風險提醒</td>
-          <td style="text-align: left;">A3競業進線已納入管委會議程​</td>
+          <td class="announcement__cell--left">A3 (跳訊內容待行銷規劃)​</td>
           <td>-</td>
           <td>行銷</td>
           </tr>
@@ -151,7 +152,11 @@
     }
     function toggleRow(id) {
       const row = document.getElementById(id);
-      row.style.display = (row.style.display === 'table-row') ? 'none' : 'table-row';
+      if (row.style.display === 'table-row') {
+        row.style.display = 'none';
+      } else {
+        row.style.display = 'table-row';
+      }
     }
 
     function toggleProductDetail(id) {
@@ -163,7 +168,7 @@
         btn.textContent = '產品明細';
       } else {
         row.style.display = 'table-row';
-        btn.textContent = '收合';
+        btn.textContent = '產品明細';
       }
     }
 
@@ -171,22 +176,18 @@
     function toggleForm() {
       const form = document.getElementById('queryForm');
       const btn = document.querySelector('.toggle-btn');
-      const label = btn.querySelector('.label');
-      const arrow = btn.querySelector('.arrow');
 
       form.classList.toggle('collapsed');
       const isCollapsed = form.classList.contains('collapsed');
 
       form.style.display = isCollapsed ? 'none' : 'block';
-      label.textContent = isCollapsed ? '展開查詢條件' : '收合查詢條件';
-      arrow.textContent = isCollapsed ? '▼' : '▲';
+      btn.textContent = isCollapsed ? '展開查詢條件 ▼' : '收合查詢條件 ▲';
     }
     // 頁面載入時預設收合
     document.addEventListener("DOMContentLoaded", function () {
       document.getElementById('queryForm').classList.add('collapsed');
       document.getElementById('queryForm').style.display = 'none';
-      document.querySelector('.toggle-btn .label').textContent = '展開查詢條件';
-      document.querySelector('.toggle-btn .arrow').textContent = '▼';
+      document.querySelector('.toggle-btn').textContent = '展開查詢條件 ▼';
       document.getElementById('sidebar').innerHTML = sidebarHTML;
       loadAddress('address-container');
 
@@ -207,10 +208,7 @@
     <div class="content">
       <h2>客戶資料查詢</h2>
 
-      <button class="toggle-btn" onclick="toggleForm()">
-        <span class="label">展開查詢條件</span>
-        <span class="arrow">▼</span>
-      </button>
+      <button class="toggle-btn" onclick="toggleForm()">展開查詢條件 ▼</button>
 
       <div class="form-section" id="queryForm" style="display:none;">
         <!-- 基本查詢 -->
@@ -219,7 +217,7 @@
 
           <!-- 使用者資料 -->
           <div class="form-row">
-            <div class="form-group"><label>身分證號/統編</label><input class="form-control" type="text" /></div>
+            <div class="form-group form-group--wide"><label>身分證號/統編</label><input class="form-control" type="text" /></div>
             <div class="form-group"><label>客戶姓名</label><input class="form-control" type="text" /></div>
             <div class="form-group"><label>手機號碼</label><input class="form-control" type="text" /></div>
             <div class="form-group"><label>家戶編號</label><input class="form-control" type="text" /></div>
@@ -230,10 +228,10 @@
             <div class="form-group"><label>建物名稱</label><input class="form-control" type="text" /></div>
           </div>
           <!-- 地址查詢區塊（預設縮合） -->
-          <div class="form-block" id="addressSearchBlock" style="margin-top:10px;">
-            <div class="form-block-title" style="display:flex;align-items:center;justify-content:space-between;">
+          <div class="form-block mt-2" id="addressSearchBlock">
+            <div class="form-block-title flex items-center justify-between">
               地址查詢
-              <button class="toggle-btn" id="toggleAddressBtn" type="button" style="font-size:13px;">展開查詢條件 ▼</button>
+              <button class="toggle-btn text-sm" id="toggleAddressBtn" type="button">展開查詢條件 ▼</button>
             </div>
             <div id="address-container" style="display:none;"></div>
           </div>
@@ -242,7 +240,7 @@
         <div class="form-block">
           <div class="form-block-title">進階查詢</div>
           <div class="form-row">
-            <div class="form-group" style="width: 160px;">
+            <div class="form-group form-group--fixed-narrow">
               <label>選擇條件</label>
               <select class="form-control">
                 <option value="AcctId">帳戶編號</option>
@@ -252,7 +250,7 @@
                 <option value="billId">帳單編號</option>
               </select>
             </div>
-            <div class="form-group" style="width: 200px;">
+            <div class="form-group form-group--fixed-medium">
               <label>輸入編號</label>
               <input class="form-control" placeholder="請輸入對應編號" type="text" />
             </div>
@@ -261,8 +259,8 @@
 
         <!-- 查詢按鈕 -->
         <div class="form-actions">
-          <button class="btn btn-secondary" type="reset">清除資料</button>
-          <button class="btn btn-primary" onclick="location.href='custom_search_fixed.html'" type="button">查詢</button>
+          <button class="btn btn--secondary" type="reset">清除資料</button>
+          <button class="btn btn--primary" onclick="location.href='custom_search_fixed.html'" type="button">查詢</button>
         </div>
       </div> <!-- /#queryForm -->
 
@@ -280,10 +278,10 @@
             <th>地址</th>
             <th>所屬大樓</th>
             <th>有效主服務</th>
+            <th>產品明細</th>            
             <th>進行中事項</th>
             <th>查看</th>
             <th>公告資訊</th>
-            <th>產品明細</th>
           </tr>
         </thead>
         <tbody>
@@ -298,20 +296,21 @@
             <td class="address">松壽路3號2樓</td>
             <td>永春大樓</td>
             <td>CATV<br>Internet</td>
+            <td><button class="btn btn--success btn--sm" onclick="toggleProductDetail('product-CA0001')">產品明細</button></td>
             <td>
               <span class="badge badge-red" onclick="toggleRow('row-bill-CA0001')">欠費中</span>
               <span class="badge badge-orange" onclick="toggleRow('row-work-CA0001')">派工中</span>
             </td>
-            <td><button class="btn-view" onclick="location.href='detail-customer.html'">查看</button></td>
-            <td><button class="btn-info" onclick="openAnnouncement('CA0001')">公告資訊</button></td>
-            <td><button class="btn-product" onclick="toggleProductDetail('product-CA0001')">產品明細</button></td>
+            <td><button class="btn btn--primary btn--sm" onclick="location.href='detail-customer.html'">查看</button></td>
+            <td><button class="btn btn--info btn--sm" onclick="openAnnouncement('CA0001')">公告</button></td>
+
 
           </tr>
 
           <!-- CA0001 李曉明的產品明細 -->
-          <tr class="child-row" id="product-CA0001" style="display: none;">
-            <td colspan="13">
-              <div style="background-color: #f8f9fa; padding: 10px; margin: 5px 0;">
+          <tr class="child-row" id="product-CA0001">
+            <td colspan="15">
+              <div class="product-detail">
                 <!-- <h4 style="color: #495057; margin-bottom: 10px;">產品明細 - 李曉明 (CA0001)</h4> -->
                 <table class="product-table">
                   <thead>
@@ -320,74 +319,92 @@
                       <th>專案名稱</th>
                       <th>服務編號</th>
                       <th>服務別</th>
-                      <th>客戶產品編號</th>
+                      <th>產品分類</th>
+                      <th>產品編號</th>
                       <th>產品名稱</th>
                       <th>有效狀態</th>
                       <th>使用狀態</th>
                       <th>繳費狀態</th>
                       <th>訊號狀態</th>
+                      <th>申裝大分類</th>
+                      <th>申裝小分類</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>單I(F)數位+潘朵啦+Mesh(租用)</td>
-                      <td>富豪數據傳送服務</td>
+                      <td>麗冠預繳電視頻道</td>
                       <td>S0001</td>
                       <td>CATV</td>
+                      <td>C</td>
                       <td>N0001</td>
                       <td>00395 C-經濟型</td>
                       <td>有效</td>
                       <td>正常</td>
                       <td>已繳費</td>
                       <td>發送中</td>
+                      <td>優待戶</td>
+                      <td>員工戶</td>
                     </tr>
                     <tr>
                       <td>單I(F)數位+潘朵啦+Mesh(租用)</td>
                       <td>連一固-10002</td>
                       <td>S0002</td>
                       <td>Internet</td>
+                      <td>I</td>
                       <td>N0002</td>
                       <td>20296 連線1G/500M</td>
-                      <td>無效</td>
-                      <td>取消</td>
-                      <td>待退費</td>
-                      <td>已關訊</td>
+                      <td class="status-text--invalid">無效</td>
+                      <td class="status-text--invalid">取消</td>
+                      <td class="status-text--error">待退費</td>
+                      <td class="status-text--error">已關訊</td>
+                                            <td>優待戶</td>
+                                            <td>員工戶</td>
                     </tr>
                     <tr>
                       <td>單I(F)數位+潘朵啦+Mesh(租用)</td>
                       <td>FRIDAY影音月租套</td>
                       <td>S0001</td>
                       <td>CATV</td>
+                      <td>V</td>
                       <td>N0003</td>
                       <td>Friday影音</td>
                       <td>有效</td>
                       <td>正常</td>
-                      <td>欠費中</td>
+                      <td class="status-text--error">欠費中</td>
                       <td>發送中</td>
+                                            <td>優待戶</td>
+                                            <td>員工戶</td>
                     </tr>
                     <tr>
                       <td>單I(F)數位+潘朵啦+Mesh(租用)</td>
                       <td>2年-BL_MESH_WIFI-6_2台組</td>
                       <td>S0002</td>
                       <td>Internet</td>
+                      <td>H</td>
                       <td>N0004</td>
                       <td>Mesh(租賃)</td>
                       <td>有效</td>
                       <td>正常</td>
-                      <td>欠費中</td>
+                      <td class="status-text--error">欠費中</td>
                       <td>發送中</td>
+                      <td>一般戶</td>
+                      <td></td>
                     </tr>
                     <tr>
                       <td>單I(F)數位+潘朵啦+Mesh(租用)</td>
                       <td>潘朵啦套餐</td>
                       <td>S0001</td>
                       <td>CATV</td>
+                      <td>D</td>
                       <td>N0005</td>
                       <td>潘朵啦</td>
                       <td>有效</td>
                       <td>正常</td>
-                      <td>欠費中</td>
+                      <td class="status-text--error">欠費中</td>
                       <td>發送中</td>
+                      <td>優待戶</td>
+                      <td>員工戶</td>
                     </tr>
                   </tbody>
                 </table>
@@ -397,8 +414,8 @@
 
 
           <!-- CA0001 李曉明的欠費明細 -->
-          <tr class="child-row" id="row-bill-CA0001" style="display: none;">
-            <td colspan="12">
+          <tr class="child-row" id="row-bill-CA0001">
+            <td colspan="13">
               <table class="child-table" width="100%">
                 <thead>
                   <tr>
@@ -585,8 +602,8 @@
                     <td>1</td>
                     <td>-1,000</td>
                   </tr>
-                  <tr style="font-weight: bold; background-color: #f0f8ff;">
-                    <td colspan="10" style="text-align: right;">總金額</td>
+                  <tr class="table-total-row">
+                    <td colspan="10" class="table-total-cell">總金額</td>
                     <td>4,797</td>
                   </tr>
                 </tbody>
@@ -595,8 +612,8 @@
           </tr>
 
           <!-- CA0001 李曉明的派工明細 -->
-          <tr class="child-row" id="row-work-CA0001" style="display: none;">
-            <td colspan="12">
+          <tr class="child-row" id="row-work-CA0001">
+            <td colspan="13">
               <table class="child-table" width="100%">
                 <thead>
                   <tr>
@@ -707,19 +724,20 @@
             <td>富貴里</td>
             <td class="address">高雄路四段3巷247號2樓</td>
             <td></td>
-            <td style="color:red; font-weight:bold;">CATV</td>
+            <td class="status-text--error font-bold">CATV</td>
+            <td><button class="btn btn--success btn--sm" onclick="toggleProductDetail('product-CA0003')">產品明細</button></td>            
             <td>
               <!-- 如果有進行中事項，可以加入相關的badge -->
             </td>
-            <td><button class="btn-view" onclick="location.href='detail-customer.html'">查看</button></td>
-            <td><button class="btn-info" onclick="openAnnouncement('CA0002')">公告資訊</button></td>
-            <td><button class="btn-product" onclick="toggleProductDetail('product-CA0003')">產品明細</button></td>
+            <td><button class="btn btn--primary btn--sm" onclick="location.href='detail-customer.html'">查看</button></td>
+            <td><button class="btn btn--info btn--sm" onclick="openAnnouncement('CA0002')">公告</button></td>
+
 
           </tr>
           <!-- CA0003 李曉明的產品明細 -->
-          <tr class="child-row" id="product-CA0003" style="display: none;">
+          <tr class="child-row" id="product-CA0003">
             <td colspan="13">
-              <div style="background-color: #f8f9fa; padding: 10px; margin: 5px 0;">
+              <div class="product-detail">
 
                 <table class="product-table">
                   <thead>
@@ -728,12 +746,15 @@
                       <th>專案名稱</th>
                       <th>服務編號</th>
                       <th>服務別</th>
-                      <th>客戶產品編號</th>
+                      <th>產品分類</th>
+                      <th>產品編號</th>
                       <th>產品名稱</th>
                       <th>有效狀態</th>
                       <th>使用狀態</th>
                       <th>繳費狀態</th>
                       <th>訊號狀態</th>
+                      <th>申裝大分類</th>
+                      <th>申裝小分類</th>                      
                     </tr>
                   </thead>
                   <tbody>
@@ -742,12 +763,15 @@
                       <td>標準有線電視服務</td>
                       <td>S0010</td>
                       <td>CATV</td>
+                      <td>C</td>
                       <td>N0010</td>
                       <td>基本頻道套餐</td>
-                      <td>無效</td>
-                      <td>待裝機</td>
+                      <td class="status-text--invalid">無效</td>
+                      <td style="color:gray">待裝機</td>
                       <td>待繳費</td>
                       <td>待發送</td>
+                      <td>一般戶</td>
+                      <td></td>                      
                     </tr>
                   </tbody>
                 </table>

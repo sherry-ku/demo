@@ -125,26 +125,24 @@
         <div class="form-row">
           <div class="form-group">
             <label>合約編號</label>
-            <input id="contractNo" name="contractNo" type="text" value="55667788" readonly style="background-color: #f5f5f5;" />
+            <input id="contractNo" name="contractNo" type="text" value="55667788" disabled/>
           </div>
-          <div class="form-group">
-            <label>進件公司別</label>
-            <select name="company">
-              <option selected>數位天空</option>
-              <option>新高公司</option>
-            </select>
-          </div>
+
           <div class="form-group">
             <label>專案名稱</label>
-            <input name="projectName" type="text" value="標準收視" />
+            <select name="projectName">
+              <option selected>PCK001 子戶套房-C</option>
+              <option>PCK002 子戶套房-D</option>
+            </select>
           </div>
           <div class="form-group">
             <label>產品名稱</label>
             <select name="productName">
-              <option selected>200M/50M</option>
-              <option>100M/50M</option>
+              <option selected>基本A組</option>
+              <option>闔家頻道</option>
             </select>
           </div>
+          <!-- 
           <div class="form-group">
             <label>合約總價</label>
             <input name="totalPrice" type="number" value="3990" />
@@ -161,6 +159,7 @@
             <label>繳別</label>
             <input name="cableType" type="text" />
           </div>
+        -->
         </div>
         <div style="margin-top:10px;">
           <button class="btn-add" type="button" id="btnAdd">新增</button>
@@ -173,24 +172,18 @@
         <thead>
           <tr>
             <th>合約編號</th>
-            <th>進件公司別</th>
             <th>專案名稱</th>
             <th>產品名稱</th>
-            <th>合約總價</th>
-            <th>簽約戶數</th>
-            <th>簽約月額</th>
+
             <th>操作</th>
           </tr>
         </thead>
         <tbody id="childTableBody">
           <tr>
             <td>55667788</td>
-            <td>數位天空</td>
-            <td>標準收視</td>
+            <td>P124 套房子戶專案</td>
             <td>200M/50M</td>
-            <td>3990</td>
-            <td>5</td>
-            <td>799</td>
+
             <td>
               <button class="btn-edit" onclick="editRow(this)">編輯</button>
               <button class="btn-delete" onclick="deleteRow(this)">刪除</button>

@@ -17,7 +17,7 @@ const customerInfoHeaderHTML = `
           <span class="info-label">裝機地址：</span>
           <span class="info-value">忠孝東路四段12巷1弄5樓101號</span>
         </span>
-          <span class="service-dot blacklist">6M欠費</span>
+          <span class="tag tag-warning">黑名單-合約內M6欠費拆</span>
           <span class="tag tag-warning">立流A</span>
   <span class="tag tag-success">有效</span>
       </div>
@@ -39,7 +39,7 @@ const customerInfoHeaderHTML = `
   <div class="status-card">
     <div class="customer-identity">
       <div class="customer-name">
-        <span class="section-label">用戶身分與標籤</span>
+        <span class="section-label">家戶特殊身分</span>
       </div>
       <div class="customer-tags">
         <span class="tag tag-vip">VIP-里長</span>
@@ -53,23 +53,23 @@ const customerInfoHeaderHTML = `
 
   <div class="status-card">
     <div class="services-section">
-      <span class="section-label">服務狀態與標籤</span>
+      <span class="section-label">有效服務與標籤</span>
       <div class="service-indicators">
         <div class="service-with-projects">
           <span class="service-dot active">INTERNET</span>
           <div class="project-tags">
-            <span class="tag tag-project mini" onclick="event.stopPropagation(); openTagModal('CP-001')" title="MKT促案">促案</span>
+            <span class="tag tag-project mini" onclick="event.stopPropagation(); openTagModal('CP-001')" title="MKT促案">升速</span>
           </div>
         </div>
         <div class="service-with-projects">
-          <span class="service-dot blacklist">CATV</span>
+          <span class="service-dot active">CATV</span>
           <div class="project-tags">
-            <span class="tag tag-risk mini" onclick="event.stopPropagation(); openTagModal('CP-002')" title="高風險">風險</span>
-            <span class="tag tag-quality mini" onclick="event.stopPropagation(); openTagModal('CP-003')" title="品質不滿">品質</span>
+            <span class="tag tag-project mini" onclick="event.stopPropagation(); openTagModal('CP-002')" title="高風險">不滿</span>
+            <span class="tag tag-project mini" onclick="event.stopPropagation(); openTagModal('CP-003')" title="品質不滿">品質</span>
           </div>
         </div>
         <div class="service-with-projects">
-          <span class="service-dot warning">OTT</span>
+          <span class="service-dot active">OTT</span>
         </div>
       </div>
     </div>
